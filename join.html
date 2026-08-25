@@ -186,8 +186,9 @@
   點這裡開完整版（建議用電腦或平板橫式）
 </a>
 
+<script src="vendor/supabase.umd.js"></script>
 <script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+const { createClient } = window.supabase;   // 本地載入，不依賴 CDN
 
 const SUPABASE_URL  = 'https://xxbjykdheracbfmwpxwm.supabase.co';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh4Ymp5a2RoZXJhY2JmbXdweHdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5NjU0ODEsImV4cCI6MjA5MTU0MTQ4MX0.b6YJX3ztLHR0ImUuC1jbfCXH8si2eRulu39KNAb5Ves';
@@ -218,6 +219,10 @@ function latestPerParticipant(rows) {
   rows.forEach(r => m.set(r.participant, r));
   return [...m.values()];
 }
+// 使用者輸入一律轉義後才進 innerHTML
+const esc = t => String(t).replace(/[&<>"']/g, c =>
+  ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
 function setState(id, text, color) {
   const el = document.getElementById(id);
   if (el) { el.textContent = text; el.style.color = color; }
@@ -239,7 +244,7 @@ function setState(id, text, color) {
       document.getElementById('wc-list').innerHTML = data.length
         ? '<div class="row" style="color:#8c96a0;border:none;padding-bottom:2px;">' +
           '<span>目前全場（前 10）</span><span>' + rows.length + ' 則</span></div>' +
-          data.map(([w, c]) => '<div class="row"><span>' + w + '</span><b>' + c + '</b></div>').join('')
+          data.map(([w, c]) => '<div class="row"><span>' + esc(w) + '</span><b>' + c + '</b></div>').join('')
         : '';
       setState('wc-state', '雲端同步', '#a8cf9a');
     } catch (e) {

@@ -4,14 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>數學科數位教學與 AI Agent ｜ 臺中場</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css" />
+  <link rel="stylesheet" href="vendor/reset.css" />
+  <link rel="stylesheet" href="vendor/reveal.css" />
+  <link rel="stylesheet" href="vendor/night.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="vendor/wordcloud2.min.js"></script>
+  <script src="vendor/qrcode.min.js"></script>
+  <script src="vendor/supabase.umd.js"></script>
   <style>
     /* === 全域變數 === */
     :root {
@@ -2067,7 +2068,7 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="vendor/reveal.js"></script>
 <script>
   Reveal.initialize({
     hash: true,
@@ -2078,6 +2079,9 @@
     progress: true,
     controls: true,
     slideNumber: 'c/t',
+    // 4K 觸控大屏要能填滿：預設 maxScale 2 會讓畫面只佔中間一塊、周圍留黑邊
+    maxScale: 3.2,
+    minScale: 0.2,
     plugins: []
   });
 
@@ -2191,7 +2195,7 @@
 
 <!-- === Supabase：研習互動（文字雲／複選投票／數位力自評）=== -->
 <script type="module">
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+  const { createClient } = window.supabase;   // 由 vendor/supabase.umd.js 提供，不依賴 CDN
 
   // anon key 設計上就是要放前端，實際權限完全由 RLS 控制
   const SUPABASE_URL  = 'https://xxbjykdheracbfmwpxwm.supabase.co';
@@ -2257,6 +2261,11 @@
     let local = false;
     let fallbackTimer = null;
 
+    // 使用者輸入一律轉義後才進 innerHTML
+    const esc = t => String(t).replace(/[&<>"']/g, c =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+
     const localWords = () => { try { return JSON.parse(localStorage.getItem(LS) || '[]'); } catch (e) { return []; } };
     const setMode = (t, c) => { const el = document.getElementById('wc-mode'); if (el) { el.textContent = t; el.style.color = c; } };
 
@@ -2284,7 +2293,7 @@
       if (listEl) {
         listEl.innerHTML = data.slice(0, 12).map(([w, c]) =>
           '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.028);">' +
-          '<span>' + w + '</span><span style="color:var(--accent);font-weight:700;">' + c + '</span></div>'
+          '<span>' + esc(w) + '</span><span style="color:var(--accent);font-weight:700;">' + c + '</span></div>'
         ).join('') || '<div style="color:#555;padding:8px 0;">尚無資料</div>';
       }
       const empty = document.getElementById('wc-empty');
