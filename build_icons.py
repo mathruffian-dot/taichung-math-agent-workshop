@@ -19,6 +19,9 @@ SHEETS = {
     "icon_samr":    ["icon_s", "icon_a", "icon_m", "icon_r"],
     "icon_lit":     ["icon_lit1", "icon_lit2", "icon_lit3", "icon_lit4"],
     "icon_vis":     ["icon_v1", "icon_v2", "icon_v3"],
+    # 第三批（v3 修訂）
+    "icon_flow4":   ["icon_say", "icon_write", "icon_git", "icon_live"],
+    "icon_check2":  ["icon_detach", "icon_embed"],
 }
 
 DARK_THRESHOLD = 45
