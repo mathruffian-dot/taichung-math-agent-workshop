@@ -2594,18 +2594,22 @@
         if (cnt[k] !== undefined) cnt[k]++;
       }));
       const rates = ITEM_ORDER.map(k => ({ k: k, pct: n ? Math.round(cnt[k] / n * 100) : 0 }));
-      const weakest = rates.reduce((m, r) => r.pct < m.pct ? r : m, rates[0]);
+      // 並列最低的要全部標出來，不能只標第一個
+      const minPct = Math.min.apply(null, rates.map(r => r.pct));
+      const weakest = rates.filter(r => r.pct === minPct);
+      const weakSet = new Set(weakest.map(r => r.k));
       document.getElementById('scp-items').innerHTML = rates.map(r =>
-        '<div class="scp-row' + (r.k === weakest.k && n ? ' weak' : '') + '">' +
+        '<div class="scp-row' + (weakSet.has(r.k) && n ? ' weak' : '') + '">' +
         '<span>' + ITEM_LABEL[r.k] + '</span>' +
         '<span class="scp-track"><span class="scp-fill" style="width:' + r.pct + '%"></span></span>' +
         '<b>' + r.pct + '%</b></div>').join('');
 
       const note = document.getElementById('scp-note');
+      const names = weakest.map(r => ITEM_LABEL[r.k]).join('、');
       note.innerHTML = n === 0
         ? '還沒有人送出。請大家先在上一個畫面勾選並按「送出自評」。'
-        : '全場最空的一格是 <b>' + ITEM_LABEL[weakest.k] + '</b>（只有 ' + weakest.pct +
-          '% 的人勾）—— 今天可以多花一點時間在這裡。';
+        : '全場最空的' + (weakest.length > 1 ? '有 ' + weakest.length + ' 格' : '一格') +
+          '是 <b>' + names + '</b>（只有 ' + minPct + '% 的人勾）—— 今天可以多花一點時間在這裡。';
     }
 
     viewBtn.addEventListener('click', async () => {
