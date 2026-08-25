@@ -55,6 +55,26 @@ selfcheck  digital-power  {"items": ["t1","t2","m2"], "score": 3}
 投票會寫多筆（每次點擊一筆完整選擇），讀取時取每人最新一筆 —— 這是刻意的設計，
 `responses` 沒有 update/delete 權限，資料只進不改。
 
+### 學員怎麼參與 —— 用 join.html，不要用簡報
+
+**簡報頁在手機上無法操作。** Reveal.js 是固定畫布 960×700，手機 375px 寬時整體縮到 39%，
+文字雲輸入框只剩 83×13px，手指點不到（程式上送得出去，但實際不可用）。
+
+所以另外做了 **`join.html`** 給學員：
+
+| | 簡報 `index.html` | 投稿頁 `join.html` |
+|---|---|---|
+| 給誰 | 講者，投影幕 | 學員，手機 |
+| 版面 | 固定 960×700 | 響應式，觸控目標 ≥50px |
+| 內容 | 43 頁完整簡報 | 只有三個互動 |
+
+**第 2 頁的 QR 指向 join.html**，學員掃碼就能參與。
+join.html 底部也附完整簡報連結，想自己翻的人可以開。
+
+兩邊寫進同一個 Supabase 場次，學員在手機投稿，投影幕上的簡報即時看得到。
+
+網址：`https://mathruffian-dot.github.io/taichung-math-agent-workshop/join.html`
+
 ### 現場怎麼看自評的全場結果
 
 自評那頁（第 11 頁）有一顆 **「看全場結果」**，點了會蓋出統計面板：
@@ -117,7 +137,8 @@ DNS 直接解析不到）。當天先開一次簡報，看文字雲那頁是否�
 
 ```
 taichung-math-agent-workshop/
-├── index.html          # 簡報本體（43 頁，單檔，含 Supabase 互動）
+├── index.html          # 簡報本體（43 頁，講者用，投影幕）
+├── join.html           # 學員手機投稿頁（響應式，三個互動）
 ├── build_icons.py      # 圖標總表裁切去背腳本（已執行完，留作紀錄）
 ├── DEPLOY.md           # 本檔
 └── images/             # 6 張底圖 + 3 張遊戲橫幅 + 課本圖 + TPACK 圖 + 25 個扁平化圖示
