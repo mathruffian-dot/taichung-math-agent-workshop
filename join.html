@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>參與互動 ｜ 數學科數位教學 × AI Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --board:   #1b222b;
+    --ink:     #f2efe2;
+    --muted:   #a8b2ba;
+    --accent:  #f2a37c;
+    --accent2: #8fcdea;
+    --success: #a8cf9a;
+    --warn:    #f2dfa0;
+    --wob1: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    --wob2: 15px 225px 15px 255px / 255px 15px 225px 15px;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.05), transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 0.94 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"),
+      linear-gradient(170deg, #1e2630, #1a212a 55%, #171d25);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: 'Inter', 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    padding: 20px 16px calc(40px + env(safe-area-inset-bottom));
+    max-width: 640px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  header { margin-bottom: 22px; }
+  .eyebrow {
+    color: var(--accent); font-size: 13px; font-weight: 700;
+    letter-spacing: 0.14em; margin: 0 0 6px;
+  }
+  h1 {
+    font-size: 26px; font-weight: 800; letter-spacing: -0.02em;
+    margin: 0 0 6px; line-height: 1.25;
+  }
+  .sub { color: var(--muted); font-size: 14px; margin: 0; }
+
+  section {
+    background: rgba(255,255,255,.035);
+    border: 1px solid rgba(242,239,226,.14);
+    border-radius: var(--wob1);
+    padding: 20px 18px;
+    margin-bottom: 18px;
+  }
+  section:nth-of-type(even) { border-radius: var(--wob2); }
+  h2 {
+    font-size: 19px; font-weight: 800; margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .hint { color: var(--muted); font-size: 13.5px; margin: 0 0 14px; }
+  .state { font-size: 12.5px; font-weight: 700; float: right; color: #6b7680; }
+
+  input[type=text] {
+    width: 100%; padding: 15px 16px; font-size: 17px;
+    border-radius: 3px; border: 1px solid rgba(143,205,234,.35);
+    background: rgba(255,255,255,.08); color: var(--ink);
+    font-family: inherit; outline: none;
+  }
+  input[type=text]:focus { border-color: var(--accent2); background: rgba(255,255,255,.12); }
+
+  button.primary {
+    width: 100%; margin-top: 10px; padding: 15px;
+    background: var(--accent2); color: #16202a;
+    border: none; border-radius: var(--wob2);
+    font-weight: 800; font-size: 17px; font-family: inherit; cursor: pointer;
+    min-height: 52px;
+  }
+  button.primary:disabled { opacity: .5; }
+
+  .opt {
+    display: flex; align-items: center; gap: 12px;
+    width: 100%; padding: 14px 15px; margin-bottom: 9px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(242,239,226,.14);
+    border-radius: 3px; color: var(--ink);
+    font-size: 16px; font-family: inherit; text-align: left;
+    cursor: pointer; min-height: 54px; line-height: 1.4;
+  }
+  .opt .box {
+    flex: 0 0 24px; height: 24px; border-radius: 4px;
+    border: 2px solid rgba(242,239,226,.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 900; color: #16202a;
+  }
+  .opt.on { border-color: var(--accent2); background: rgba(143,205,234,.14); }
+  .opt.on .box { background: var(--accent2); border-color: var(--accent2); }
+
+  .sc-cat { font-size: 13px; color: var(--accent2); font-weight: 700; margin: 14px 0 7px; }
+  .sc-cat:first-of-type { margin-top: 4px; }
+  .sc-item {
+    display: flex; align-items: center; gap: 12px;
+    width: 100%; padding: 13px 15px; margin-bottom: 8px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(242,239,226,.14);
+    border-radius: 3px; color: var(--ink);
+    font-size: 15.5px; font-family: inherit; text-align: left;
+    cursor: pointer; min-height: 50px; line-height: 1.35;
+  }
+  .sc-item .box {
+    flex: 0 0 22px; height: 22px; border-radius: 4px;
+    border: 2px solid rgba(242,239,226,.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 900; color: #16202a;
+  }
+  .sc-item.on { border-color: var(--accent2); background: rgba(143,205,234,.14); }
+  .sc-item.on .box { background: var(--accent2); border-color: var(--accent2); }
+  .sc-item small { display: block; color: #8c96a0; font-size: 12.5px; margin-top: 2px; }
+
+  .score-row {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin: 16px 0 4px; font-size: 15px; color: var(--muted);
+  }
+  .score-row b { color: var(--accent); font-size: 26px; font-weight: 800; }
+  .advice { font-size: 13.5px; color: var(--muted); text-align: center; margin: 8px 0 0; line-height: 1.6; }
+
+  .msg { font-size: 14px; margin-top: 10px; text-align: center; min-height: 20px; }
+  .cloud-list { margin-top: 14px; font-size: 14px; }
+  .cloud-list .row {
+    display: flex; justify-content: space-between; padding: 7px 0;
+    border-bottom: 1px solid rgba(242,239,226,.08);
+  }
+  .cloud-list .row b { color: var(--accent); }
+  .deck-link {
+    display: block; text-align: center; margin-top: 26px;
+    color: var(--accent2); font-size: 14px; text-decoration: none;
+    border-top: 2px dashed rgba(242,239,226,.18); padding-top: 18px;
+  }
+  .deck-link b { display: block; color: var(--ink); font-size: 15px; margin-bottom: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">2026.08.26 ｜ 臺中 · 數學科研習</p>
+  <h1>參與今天的互動</h1>
+  <p class="sub">三個地方，講到哪裡就填哪裡。填完不用關，畫面會留著。</p>
+</header>
+
+<!-- 一、文字雲 -->
+<section>
+  <span class="state" id="wc-state">連線中…</span>
+  <h2>① 你的數學課最常用什麼？</h2>
+  <p class="hint">輸入一個工具名稱，會即時長成全場的文字雲。可以送出多個。</p>
+  <input id="wc-input" type="text" maxlength="20" placeholder="例：GeoGebra、康軒電子書">
+  <button class="primary" id="wc-btn">送出</button>
+  <div class="msg" id="wc-msg"></div>
+  <div class="cloud-list" id="wc-list"></div>
+</section>
+
+<!-- 二、複選投票 -->
+<section>
+  <span class="state" id="poll-state">連線中…</span>
+  <h2>② 回去以後打算做哪些？</h2>
+  <p class="hint">可以複選，再點一次取消。</p>
+  <div id="poll-options"></div>
+  <div class="msg" id="poll-msg"></div>
+</section>
+
+<!-- 三、數位力自評 -->
+<section>
+  <span class="state" id="sc-state">連線中…</span>
+  <h2>③ 數位力自評</h2>
+  <p class="hint">做得到的就點一下，九個項目。</p>
+  <div id="sc-items"></div>
+  <div class="score-row">你的數位力：<b id="sc-score">0</b><span>/ 9</span></div>
+  <p class="advice" id="sc-advice">先看看自己空著的是哪一格。</p>
+  <button class="primary" id="sc-submit">送出自評</button>
+  <div class="msg" id="sc-msg"></div>
+</section>
+
+<a class="deck-link" href="./" target="_blank" rel="noopener">
+  <b>想自己翻簡報？</b>
+  點這裡開完整版（建議用電腦或平板橫式）
+</a>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const SUPABASE_URL  = 'https://xxbjykdheracbfmwpxwm.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh4Ymp5a2RoZXJhY2JmbXdweHdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5NjU0ODEsImV4cCI6MjA5MTU0MTQ4MX0.b6YJX3ztLHR0ImUuC1jbfCXH8si2eRulu39KNAb5Ves';
+const WORKSHOP_CODE = 'math-20260826';
+
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+const PID_KEY = 'tcmath_pid';
+let pid = localStorage.getItem(PID_KEY);
+if (!pid) { pid = 'p_' + Math.random().toString(36).slice(2, 10); localStorage.setItem(PID_KEY, pid); }
+
+async function send(kind, slideId, payload) {
+  const { error } = await sb.from('responses').insert({
+    workshop_code: WORKSHOP_CODE, kind, slide_id: slideId, participant: pid, payload
+  });
+  if (error) throw error;
+}
+async function fetchAll(kind, slideId) {
+  const { data, error } = await sb.from('responses')
+    .select('participant,payload,created_at')
+    .eq('workshop_code', WORKSHOP_CODE).eq('kind', kind).eq('slide_id', slideId)
+    .order('created_at', { ascending: true });
+  if (error) throw error;
+  return data || [];
+}
+function latestPerParticipant(rows) {
+  const m = new Map();
+  rows.forEach(r => m.set(r.participant, r));
+  return [...m.values()];
+}
+function setState(id, text, color) {
+  const el = document.getElementById(id);
+  if (el) { el.textContent = text; el.style.color = color; }
+}
+
+/* ---- ① 文字雲 ---- */
+(function () {
+  const SLIDE = 'intro';
+  const input = document.getElementById('wc-input');
+  const btn = document.getElementById('wc-btn');
+  const msg = document.getElementById('wc-msg');
+
+  async function refresh() {
+    try {
+      const rows = await fetchAll('wordcloud', SLIDE);
+      const counts = {};
+      rows.forEach(r => { const w = r.payload && r.payload.word; if (w) counts[w] = (counts[w] || 0) + 1; });
+      const data = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
+      document.getElementById('wc-list').innerHTML = data.length
+        ? '<div class="row" style="color:#8c96a0;border:none;padding-bottom:2px;">' +
+          '<span>目前全場（前 10）</span><span>' + rows.length + ' 則</span></div>' +
+          data.map(([w, c]) => '<div class="row"><span>' + w + '</span><b>' + c + '</b></div>').join('')
+        : '';
+      setState('wc-state', '雲端同步', '#a8cf9a');
+    } catch (e) {
+      setState('wc-state', '連線異常', '#f2dfa0');
+    }
+  }
+
+  async function submit() {
+    const word = input.value.trim();
+    if (!word) return;
+    btn.disabled = true; btn.textContent = '送出中…';
+    try {
+      await send('wordcloud', SLIDE, { word });
+      input.value = '';
+      msg.textContent = '已送出，謝謝！'; msg.style.color = '#a8cf9a';
+      await refresh();
+    } catch (e) {
+      msg.textContent = '送不出去，請確認網路後再試一次'; msg.style.color = '#f2dfa0';
+    } finally { btn.disabled = false; btn.textContent = '送出'; }
+  }
+  btn.addEventListener('click', submit);
+  input.addEventListener('keypress', e => { if (e.key === 'Enter') submit(); });
+  refresh();
+})();
+
+/* ---- ② 複選投票 ---- */
+(function () {
+  const SLIDE = 'plan';
+  const OPTIONS = [
+    { id: 'a', label: '做一頁滑桿／拖拉的動態教材' },
+    { id: 'b', label: '把一個單元做成課堂遊戲' },
+    { id: 'c', label: '用 AI 出一份非選題與評分規準' },
+    { id: 'd', label: '把現有講義做成 A／B／C 分級版' },
+    { id: 'e', label: '用 IRS 收一次全班的迷思' },
+    { id: 'f', label: '先把教室的大屏和平板摸熟' }
+  ];
+  const wrap = document.getElementById('poll-options');
+  const msg = document.getElementById('poll-msg');
+  const mine = new Set();
+
+  OPTIONS.forEach(o => {
+    const b = document.createElement('button');
+    b.className = 'opt'; b.id = 'opt-' + o.id;
+    b.innerHTML = '<span class="box"></span><span>' + o.label + '</span>';
+    b.onclick = () => toggle(o.id);
+    wrap.appendChild(b);
+  });
+
+  function paint() {
+    OPTIONS.forEach(o => {
+      const el = document.getElementById('opt-' + o.id);
+      const on = mine.has(o.id);
+      el.classList.toggle('on', on);
+      el.querySelector('.box').textContent = on ? '✓' : '';
+    });
+  }
+
+  async function toggle(id) {
+    mine.has(id) ? mine.delete(id) : mine.add(id);
+    paint();
+    try {
+      await send('poll', SLIDE, { options: [...mine] });
+      msg.textContent = '已記錄（' + mine.size + ' 項）'; msg.style.color = '#a8cf9a';
+      setState('poll-state', '雲端同步', '#a8cf9a');
+    } catch (e) {
+      msg.textContent = '送不出去，請確認網路'; msg.style.color = '#f2dfa0';
+      setState('poll-state', '連線異常', '#f2dfa0');
+    }
+  }
+
+  (async () => {
+    try {
+      const rows = latestPerParticipant(await fetchAll('poll', SLIDE));
+      const me = rows.find(r => r.participant === pid);
+      ((me && me.payload && me.payload.options) || []).forEach(id => mine.add(id));
+      paint();
+      setState('poll-state', '雲端同步', '#a8cf9a');
+    } catch (e) { setState('poll-state', '連線異常', '#f2dfa0'); }
+  })();
+})();
+
+/* ---- ③ 數位力自評 ---- */
+(function () {
+  const SLIDE = 'digital-power';
+  const GROUPS = [
+    { cat: '工具運用', items: [
+      { k: 't1', t: '基礎操作', d: '大屏／平板開得起來、接得上' },
+      { k: 't2', t: '工具整合', d: '軟硬體串得起來用' },
+      { k: 't3', t: '技術排除', d: '連線／設備出問題能自己救' }]},
+    { cat: '教材設計', items: [
+      { k: 'm1', t: '教材數位轉化', d: '講義變簡報、變動畫' },
+      { k: 'm2', t: '多媒體整合', d: '影音、圖表、互動素材混用' },
+      { k: 'm3', t: '創新教學設計', d: '依自己班的特性改過' }]},
+    { cat: '數據反饋', items: [
+      { k: 'd1', t: '即時反饋應用', d: '課堂投票／即時測驗' },
+      { k: 'd2', t: '學習數據分析', d: '看得懂後台數據在說什麼' },
+      { k: 'd3', t: '個性化調整', d: '依數據調整下一節課' }]}
+  ];
+  const ADVICE = [
+    '先從「工具運用」那三格開始 —— 硬體熟了，其他才推得動。',
+    '先從「工具運用」那三格開始 —— 硬體熟了，其他才推得動。',
+    '先從「工具運用」那三格開始 —— 硬體熟了，其他才推得動。',
+    '地基有了。下一步把「教材設計」那排補起來。',
+    '地基有了。下一步把「教材設計」那排補起來。',
+    '地基有了。下一步把「教材設計」那排補起來。',
+    '已經很穩。今天重點看「數據反饋」那排。',
+    '已經很穩。今天重點看「數據反饋」那排。',
+    '已經很穩。今天重點看「數據反饋」那排。',
+    '九格全滿 —— 今天麻煩你多給旁邊的夥伴一些建議。'
+  ];
+  const wrap = document.getElementById('sc-items');
+  const mine = new Set();
+
+  GROUPS.forEach(g => {
+    const h = document.createElement('div');
+    h.className = 'sc-cat'; h.textContent = g.cat;
+    wrap.appendChild(h);
+    g.items.forEach(it => {
+      const b = document.createElement('button');
+      b.className = 'sc-item'; b.id = 'sc-' + it.k;
+      b.innerHTML = '<span class="box"></span><span>' + it.t + '<small>' + it.d + '</small></span>';
+      b.onclick = () => {
+        mine.has(it.k) ? mine.delete(it.k) : mine.add(it.k);
+        paint();
+      };
+      wrap.appendChild(b);
+    });
+  });
+
+  function paint() {
+    GROUPS.forEach(g => g.items.forEach(it => {
+      const el = document.getElementById('sc-' + it.k);
+      const on = mine.has(it.k);
+      el.classList.toggle('on', on);
+      el.querySelector('.box').textContent = on ? '✓' : '';
+    }));
+    document.getElementById('sc-score').textContent = mine.size;
+    document.getElementById('sc-advice').textContent = ADVICE[mine.size];
+  }
+  paint();
+  setState('sc-state', '雲端同步', '#a8cf9a');
+
+  const btn = document.getElementById('sc-submit');
+  const msg = document.getElementById('sc-msg');
+  btn.addEventListener('click', async () => {
+    btn.disabled = true; btn.textContent = '送出中…';
+    try {
+      await send('selfcheck', SLIDE, { score: mine.size, items: [...mine] });
+      btn.textContent = '已送出 ✓';
+      msg.textContent = '收到了，謝謝！'; msg.style.color = '#a8cf9a';
+      setTimeout(() => { btn.disabled = false; btn.textContent = '再送一次'; }, 1600);
+    } catch (e) {
+      btn.disabled = false; btn.textContent = '送出自評';
+      msg.textContent = '送不出去，請確認網路'; msg.style.color = '#f2dfa0';
+      setState('sc-state', '連線異常', '#f2dfa0');
+    }
+  });
+})();
+</script>
+</body>
+</html>
