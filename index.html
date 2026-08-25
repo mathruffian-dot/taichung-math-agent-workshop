@@ -2623,11 +2623,13 @@
         '<b>' + r.pct + '%</b></div>').join('');
 
       const note = document.getElementById('scp-note');
-      const names = weakest.map(r => ITEM_LABEL[r.k]).join('、');
+      const shown = weakest.slice(0, 3).map(r => ITEM_LABEL[r.k]).join('、');
+      const names = weakest.length > 3 ? shown + ' 等 ' + weakest.length + ' 格' : shown;
       note.innerHTML = n === 0
         ? '還沒有人送出。請大家先在上一個畫面勾選並按「送出自評」。'
-        : '全場最空的' + (weakest.length > 1 ? '有 ' + weakest.length + ' 格' : '一格') +
-          '是 <b>' + names + '</b>（只有 ' + minPct + '% 的人勾）—— 今天可以多花一點時間在這裡。';
+        : (weakest.length === 1
+            ? '全場最空的一格是 <b>' + names + '</b>（只有 ' + minPct + '% 的人勾）—— 今天可以多花一點時間在這裡。'
+            : '全場最空的是 <b>' + names + '</b>，都只有 ' + minPct + '% 的人勾 —— 今天可以多花一點時間在這幾塊。');
     }
 
     viewBtn.addEventListener('click', async () => {
