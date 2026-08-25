@@ -492,6 +492,48 @@
     /* 數字強調用等寬，排起來才齊 */
     .stat-card .num, .code-block, .d-url, .qr-label { font-variant-numeric: tabular-nums; }
 
+    /* === 自評全場統計 === */
+    .btn-ghost {
+      background: transparent; color: var(--accent2);
+      border: 2px dashed rgba(143,205,234,.45); border-radius: var(--wob2);
+      padding: 7px 16px; font-weight: 700; font-size: 0.34em; cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-ghost:hover { border-color: var(--accent2); color: var(--ink); }
+
+    #sc-panel {
+      display: none; position: absolute; inset: 0; z-index: 50;
+      background: linear-gradient(160deg, #1e2630, #1a212a 55%, #171d25);
+      border: 2px dashed rgba(242,239,226,.22); border-radius: var(--wob1);
+      padding: 22px 26px; flex-direction: column;
+    }
+    #sc-panel.on { display: flex; }
+    .scp-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+    .scp-sub { font-size: 0.34em; color: var(--muted); }
+    .scp-sub b { color: var(--accent); font-size: 1.25em; }
+    .scp-body { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 14px; flex: 1; min-height: 0; }
+    .scp-title { font-size: 0.32em; color: var(--accent2); font-weight: 700; margin-bottom: 8px; letter-spacing: 0.05em; }
+
+    .scp-hist { display: flex; align-items: flex-end; gap: 5px; height: 190px; }
+    .scp-hist .hb { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+    .scp-hist .hb i {
+      display: block; width: 100%; background: repeating-linear-gradient(-55deg, #f2a37c 0 6px, #e8b394 6px 11px);
+      border-radius: 2px 3px 2px 3px; min-height: 2px;
+    }
+    .scp-hist .hb u { font-style: normal; text-decoration: none; font-size: 0.26em; color: #8c96a0; margin-top: 5px; }
+    .scp-hist .hb em { font-style: normal; font-size: 0.26em; color: var(--ink); margin-bottom: 3px; }
+
+    .scp-items { display: grid; gap: 5px; }
+    .scp-row { display: grid; grid-template-columns: 96px 1fr 40px; align-items: center; gap: 8px; font-size: 0.29em; }
+    .scp-row span:first-child { color: #b7c0c8; }
+    .scp-track { height: 11px; background: rgba(242,239,226,.09); border: 1px solid rgba(242,239,226,.14); border-radius: 6px; overflow: hidden; }
+    .scp-fill { height: 100%; background: #8fcdea; }
+    .scp-row b { text-align: right; color: var(--accent); }
+    .scp-row.weak span:first-child { color: var(--warn); }
+    .scp-row.weak .scp-fill { background: var(--warn); }
+    .scp-note { font-size: 0.3em; color: var(--muted); margin: 12px 0 0; line-height: 1.6; }
+    .scp-note b { color: var(--accent); }
+
     /* === LIVE 動畫 === */
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
   </style>
@@ -825,9 +867,32 @@
           <span style="color:#666;"> / 9</span>
         </div>
         <button id="sc-submit" class="btn-primary">送出自評</button>
+        <button id="sc-view" class="btn-ghost">看全場結果</button>
         <span id="sc-msg" style="font-size:0.32em;color:#777;"></span>
       </div>
       <p id="sc-advice" class="note-sm" style="text-align:center;min-height:1.4em;">先看看自己空著的是哪一格 —— 今天的內容就從那裡開始用。</p>
+
+      <!-- 全場統計覆蓋層 -->
+      <div id="sc-panel">
+        <div class="scp-head">
+          <div>
+            <p class="eyebrow" style="margin-bottom:0.2em;">全場數位力盤點</p>
+            <span class="scp-sub">已作答 <b id="scp-n">0</b> 人　平均 <b id="scp-avg">0</b> / 9</span>
+          </div>
+          <button id="sc-close" class="btn-ghost">關閉</button>
+        </div>
+        <div class="scp-body">
+          <div>
+            <div class="scp-title">分數分布</div>
+            <div id="scp-hist" class="scp-hist"></div>
+          </div>
+          <div>
+            <div class="scp-title">哪幾格全場最空</div>
+            <div id="scp-items" class="scp-items"></div>
+          </div>
+        </div>
+        <p id="scp-note" class="scp-note"></p>
+      </div>
     </section>
 
     <!-- ============ 11. SAMR ============ -->
@@ -2488,6 +2553,73 @@
       }
     });
     refresh();
+
+    /* ---- 全場統計 ---- */
+    const ITEM_LABEL = {
+      t1: '基礎操作', t2: '工具整合', t3: '技術排除',
+      m1: '教材數位轉化', m2: '多媒體整合', m3: '創新教學設計',
+      d1: '即時反饋應用', d2: '學習數據分析', d3: '個性化調整'
+    };
+    const ITEM_ORDER = ['t1','t2','t3','m1','m2','m3','d1','d2','d3'];
+    const panel = document.getElementById('sc-panel');
+    const viewBtn = document.getElementById('sc-view');
+    const closeBtn = document.getElementById('sc-close');
+
+    async function renderStats() {
+      let rows = [];
+      try {
+        rows = latestPerParticipant(await fetchAll('selfcheck', SLIDE));
+      } catch (e) {
+        console.warn('讀不到全場自評：', (e && e.message) || e);
+      }
+      const n = rows.length;
+      document.getElementById('scp-n').textContent = n;
+
+      const scores = rows.map(r => (r.payload && r.payload.score) || 0);
+      const avg = n ? (scores.reduce((a, b) => a + b, 0) / n) : 0;
+      document.getElementById('scp-avg').textContent = avg.toFixed(1);
+
+      // 分數分布 0..9
+      const bins = new Array(10).fill(0);
+      scores.forEach(v => { if (v >= 0 && v <= 9) bins[v]++; });
+      const peak = Math.max(1, ...bins);
+      document.getElementById('scp-hist').innerHTML = bins.map((c, i) =>
+        '<div class="hb"><em>' + (c || '') + '</em>' +
+        '<i style="height:' + (c / peak * 100) + '%"></i>' +
+        '<u>' + i + '</u></div>').join('');
+
+      // 各項目勾選率
+      const cnt = {}; ITEM_ORDER.forEach(k => cnt[k] = 0);
+      rows.forEach(r => ((r.payload && r.payload.items) || []).forEach(k => {
+        if (cnt[k] !== undefined) cnt[k]++;
+      }));
+      const rates = ITEM_ORDER.map(k => ({ k: k, pct: n ? Math.round(cnt[k] / n * 100) : 0 }));
+      const weakest = rates.reduce((m, r) => r.pct < m.pct ? r : m, rates[0]);
+      document.getElementById('scp-items').innerHTML = rates.map(r =>
+        '<div class="scp-row' + (r.k === weakest.k && n ? ' weak' : '') + '">' +
+        '<span>' + ITEM_LABEL[r.k] + '</span>' +
+        '<span class="scp-track"><span class="scp-fill" style="width:' + r.pct + '%"></span></span>' +
+        '<b>' + r.pct + '%</b></div>').join('');
+
+      const note = document.getElementById('scp-note');
+      note.innerHTML = n === 0
+        ? '還沒有人送出。請大家先在上一個畫面勾選並按「送出自評」。'
+        : '全場最空的一格是 <b>' + ITEM_LABEL[weakest.k] + '</b>（只有 ' + weakest.pct +
+          '% 的人勾）—— 今天可以多花一點時間在這裡。';
+    }
+
+    viewBtn.addEventListener('click', async () => {
+      panel.classList.add('on');
+      viewBtn.textContent = '讀取中…';
+      await renderStats();
+      viewBtn.textContent = '看全場結果';
+    });
+    closeBtn.addEventListener('click', () => panel.classList.remove('on'));
+
+    // 送出後自動把最新結果算進去
+    btn.addEventListener('click', () => setTimeout(() => {
+      if (panel.classList.contains('on')) renderStats();
+    }, 900));
   })();
 </script>
 

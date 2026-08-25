@@ -55,6 +55,39 @@ selfcheck  digital-power  {"items": ["t1","t2","m2"], "score": 3}
 投票會寫多筆（每次點擊一筆完整選擇），讀取時取每人最新一筆 —— 這是刻意的設計，
 `responses` 沒有 update/delete 權限，資料只進不改。
 
+### 現場怎麼看自評的全場結果
+
+自評那頁（第 11 頁）有一顆 **「看全場結果」**，點了會蓋出統計面板：
+
+- 已作答人數與平均分（滿分 9）
+- **分數分布長條圖**（0–9 各有幾人）
+- **九個項目的勾選率**，最低的那一格會標成琥珀色
+- 底下自動生一句結論：「全場最空的一格是 ＿＿（只有 X% 的人勾）」
+
+按「關閉」回到勾選畫面。送出新的自評時，若面板開著會自動重算。
+
+### 事後想撈資料
+
+Supabase 後台 SQL Editor：
+
+```sql
+-- 每人最新一筆（v_latest_responses 已經幫你去重）
+select participant, payload->>'score' as score, payload->'items' as items, created_at
+from public.v_latest_responses
+where workshop_code = 'math-20260826' and kind = 'selfcheck'
+order by created_at;
+
+-- 各項目勾選率
+select item, count(*) as n,
+       round(count(*) * 100.0 / (select count(*) from public.v_latest_responses
+                                 where workshop_code='math-20260826' and kind='selfcheck'), 1) as pct
+from public.v_latest_responses, jsonb_array_elements_text(payload->'items') as item
+where workshop_code = 'math-20260826' and kind = 'selfcheck'
+group by item order by pct;
+```
+
+文字雲與投票也在同一張表，把 `kind` 換成 `wordcloud` 或 `poll` 即可。
+
 ### 仍保留本機降級
 
 雲端連不上時三個互動都會自動切「本機模式」（橘字標示），畫面照常運作，
