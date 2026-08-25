@@ -2081,6 +2081,7 @@
 
     let words = [];
     let local = false;
+    let fallbackTimer = null;
 
     const localWords = () => { try { return JSON.parse(localStorage.getItem(LS) || '[]'); } catch (e) { return []; } };
     const setMode = (t, c) => { const el = document.getElementById('wc-mode'); if (el) { el.textContent = t; el.style.color = c; } };
@@ -2124,20 +2125,70 @@
       const rect = canvas.getBoundingClientRect();
       if (rect.width < 10 || rect.height < 10) return;
       canvas.width = rect.width; canvas.height = rect.height;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       if (!data || !data.length) return;
+
+      // 字級上限要看「最長的那個詞」，否則長詞會超出畫布被 WordCloud 整個跳過
+      const longest = data.reduce((m, d) => Math.max(m, d[0].length), 1);
+      const cap = Math.floor(canvas.width / (longest * 0.95));
+      const maxFont = Math.max(16, Math.min(72, cap));
+      const minFont = Math.max(12, Math.round(maxFont * 0.34));
       const max = data[0][1];
+
       WordCloud(canvas, {
-        list: data.map(([w, c]) => [w, Math.max(18, Math.round((c / max) * 76))]),
+        list: data.map(([w, c]) => [w, Math.max(minFont, Math.round((c / max) * maxFont))]),
         gridSize: 6, weightFactor: 1,
-        fontFamily: '"Noto Sans TC","Microsoft JhengHei",sans-serif',
+        fontFamily: '"Inter","PingFang TC","Microsoft JhengHei",sans-serif',
         color: () => COLORS[Math.floor(Math.random() * COLORS.length)],
-        backgroundColor: 'transparent', rotateRatio: 0.3, shuffle: true
+        backgroundColor: 'transparent', rotateRatio: 0.25, shuffle: true,
+        shrinkToFit: true,
+        drawOutOfBound: false
+      });
+
+      // 保底：WordCloud 若仍畫不出東西（極長詞、字型未載入等），改用簡單排版直接畫
+      clearTimeout(fallbackTimer);
+      fallbackTimer = setTimeout(() => {
+        const px = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+        let painted = 0;
+        for (let i = 3; i < px.length; i += 400) { if (px[i] > 0) { painted++; if (painted > 2) break; } }
+        if (painted <= 2) drawPlain(data, canvas, ctx, maxFont, minFont, max);
+      }, 700);
+    }
+
+    // 保底渲染：由大到小逐行排，放不下就自動縮
+    function drawPlain(data, canvas, ctx, maxFont, minFont, max) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const FONT = '"Inter","PingFang TC","Microsoft JhengHei",sans-serif';
+
+      const lines = [];
+      let totalH = 0;
+      data.slice(0, 14).forEach(([w, c], i) => {
+        let size = Math.max(minFont, Math.round((c / max) * maxFont));
+        ctx.font = '700 ' + size + 'px ' + FONT;
+        while (ctx.measureText(w).width > canvas.width - 24 && size > 11) {
+          size -= 2;
+          ctx.font = '700 ' + size + 'px ' + FONT;
+        }
+        lines.push({ w: w, size: size, color: COLORS[i % COLORS.length] });
+        totalH += size * 1.5;
+      });
+      if (!lines.length) return;
+
+      let cursor = Math.max(lines[0].size, (canvas.height - totalH) / 2 + lines[0].size * 0.75);
+      lines.forEach(it => {
+        ctx.font = '700 ' + it.size + 'px ' + FONT;
+        ctx.fillStyle = it.color;
+        ctx.fillText(it.w, canvas.width / 2, cursor);
+        cursor += it.size * 1.5;
       });
     }
 
     let pullTimer = null;
     async function pull() {
-      const rows = await fetchAll('wordcloud', SLIDE);
+      const rows = await fetchAll('wordcloud', SLIDE);   // 文字雲要全部，不去重
       words = rows.map(r => r.payload && r.payload.word).filter(Boolean);
       render();
     }
@@ -2171,6 +2222,7 @@
         const rows = await fetchAll('wordcloud', SLIDE);   // 文字雲要全部，不去重
         words = rows.map(r => r.payload && r.payload.word).filter(Boolean);
         setMode('雲端同步', '#81c784');
+        try { localStorage.removeItem(LS); } catch (e) {}   // 雲端正常就清掉本機殘留
         render();
         subscribe('wordcloud', SLIDE, () => pullSoon());
       } catch (e) { goLocal(e); }
