@@ -15,11 +15,22 @@
   <style>
     /* === 全域變數 === */
     :root {
-      --accent:  #e8643a;
-      --accent2: #4fc3f7;
-      --success: #81c784;
-      --warn:    #ffb74d;
-      --purple:  #ce93d8;
+      /* 黑板 */
+      --board:   #1b222b;
+      --ink:     #f2efe2;   /* 粉筆白（微暖） */
+      --muted:   #a8b2ba;
+      /* 粉筆 */
+      --accent:  #f2a37c;   /* 粉筆橘 */
+      --accent2: #8fcdea;   /* 粉筆藍 */
+      --success: #a8cf9a;   /* 粉筆綠 */
+      --warn:    #f2dfa0;   /* 粉筆黃 */
+      --purple:  #cbb2d8;   /* 粉筆紫 */
+      /* 紙卡 */
+      --paper:      #f8f3e6;
+      --paper-ink:  #2c313a;
+      /* 手繪歪斜圓角（兩組交替，模擬手畫的框） */
+      --wob1: 255px 15px 225px 15px / 15px 225px 15px 255px;
+      --wob2: 15px 225px 15px 255px / 255px 15px 225px 15px;
     }
 
     .reveal {
@@ -91,7 +102,7 @@
     .adv-card .adv-icon img {
       width: 60px; height: 60px; object-fit: contain;
       display: block; margin: 0 auto;
-      filter: drop-shadow(0 0 5px rgba(79,195,247,0.27));
+      filter: drop-shadow(0 0 5px rgba(143,205,234,0.27));
     }
     .adv-card .adv-title { font-size: 0.46em; font-weight: 700; color: var(--accent2); margin-bottom: 6px; }
     .adv-card .adv-desc  { font-size: 0.34em; color: #bbb; line-height: 1.6; }
@@ -113,9 +124,9 @@
     /* === 表格 === */
     .reveal table { font-size: 0.38em; width: 100%; border-collapse: collapse; margin-top: 0.6em; }
     .reveal table th {
-      background: rgba(79,195,247,0.15); color: var(--accent2);
+      background: rgba(143,205,234,0.15); color: var(--accent2);
       padding: 9px 10px; text-align: left; font-weight: 700;
-      border-bottom: 2px solid rgba(79,195,247,0.4);
+      border-bottom: 2px solid rgba(143,205,234,0.4);
     }
     .reveal table td {
       padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -141,8 +152,8 @@
 
     /* === 警告框 === */
     .warn-box {
-      background: rgba(255,183,77,0.1);
-      border: 1px solid rgba(255,183,77,0.35);
+      background: rgba(242,223,160,0.1);
+      border: 1px solid rgba(242,223,160,0.35);
       border-left: 4px solid var(--warn);
       border-radius: 2px;
       padding: 16px 20px;
@@ -154,8 +165,8 @@
     .warn-box .wb-title { color: var(--warn); font-weight: 700; font-size: 1.15em; margin-bottom: 6px; }
 
     .ok-box {
-      background: rgba(129,199,132,0.1);
-      border: 1px solid rgba(129,199,132,0.35);
+      background: rgba(168,207,154,0.1);
+      border: 1px solid rgba(168,207,154,0.35);
       border-left: 4px solid var(--success);
       border-radius: 2px;
       padding: 16px 20px;
@@ -169,8 +180,8 @@
     /* === 結論卡 === */
     .conclusion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 0.8em; }
     .conclusion-card { border-radius: 3px; padding: 18px; font-size: 0.4em; }
-    .conclusion-card.positive { background: rgba(79,195,247,0.12); border: 1px solid rgba(79,195,247,0.35); }
-    .conclusion-card.caution  { background: rgba(255,183,77,0.1);  border: 1px solid rgba(255,183,77,0.3); }
+    .conclusion-card.positive { background: rgba(143,205,234,0.12); border: 1px solid rgba(143,205,234,0.35); }
+    .conclusion-card.caution  { background: rgba(242,223,160,0.1);  border: 1px solid rgba(242,223,160,0.3); }
     .conclusion-card .cc-title { font-size: 1.35em; font-weight: 700; margin-bottom: 8px; }
     .conclusion-card.positive .cc-title { color: var(--accent2); }
     .conclusion-card.caution  .cc-title { color: var(--warn); }
@@ -192,9 +203,9 @@
     .samr-step.s1 .s-letter, .samr-step.s1 .s-name { color: #888; }
     .samr-step.s2 { background: rgba(255,255,255,0.033); border-left: 4px solid #999; }
     .samr-step.s2 .s-letter, .samr-step.s2 .s-name { color: #aaa; }
-    .samr-step.s3 { background: rgba(79,195,247,0.12); border-left: 4px solid var(--accent2); }
+    .samr-step.s3 { background: rgba(143,205,234,0.12); border-left: 4px solid var(--accent2); }
     .samr-step.s3 .s-letter, .samr-step.s3 .s-name { color: var(--accent2); }
-    .samr-step.s4 { background: rgba(232,100,58,0.15); border-left: 4px solid var(--accent); }
+    .samr-step.s4 { background: rgba(242,163,124,0.15); border-left: 4px solid var(--accent); }
     .samr-step.s4 .s-letter, .samr-step.s4 .s-name { color: var(--accent); }
 
     /* === Demo 卡 === */
@@ -205,7 +216,7 @@
     .demo-info { font-size: 0.42em; color: #ccc; line-height: 1.75; }
     .demo-info .d-url {
       display: inline-block; margin-top: 10px;
-      background: rgba(79,195,247,0.14); border: 1px solid rgba(79,195,247,0.35);
+      background: rgba(143,205,234,0.14); border: 1px solid rgba(143,205,234,0.35);
       border-radius: 6px; padding: 6px 12px;
       color: var(--accent2); font-family: 'Consolas', monospace; font-size: 0.86em;
       word-break: break-all;
@@ -249,10 +260,10 @@
       display: inline-block; padding: 3px 10px; border-radius: 999px;
       font-size: 0.75em; font-weight: 700; margin-right: 6px;
     }
-    .pill.p-blue { background: rgba(79,195,247,0.2); color: var(--accent2); }
-    .pill.p-orange { background: rgba(232,100,58,0.2); color: var(--accent); }
-    .pill.p-green { background: rgba(129,199,132,0.2); color: var(--success); }
-    .pill.p-purple { background: rgba(206,147,216,0.2); color: var(--purple); }
+    .pill.p-blue { background: rgba(143,205,234,0.2); color: var(--accent2); }
+    .pill.p-orange { background: rgba(242,163,124,0.2); color: var(--accent); }
+    .pill.p-green { background: rgba(168,207,154,0.2); color: var(--success); }
+    .pill.p-purple { background: rgba(203,178,216,0.2); color: var(--purple); }
 
     .lead { font-size: 0.58em; color: #ddd; line-height: 1.85; margin-top: 0.4em; }
     .note-sm { font-size: 0.34em; color: #777; margin-top: 0.7em; line-height: 1.6; }
@@ -261,7 +272,7 @@
     .flow-step img {
       width: 46px; height: 46px; object-fit: contain;
       display: block; margin: 0 auto 8px;
-      filter: drop-shadow(0 0 4px rgba(79,195,247,0.25));
+      filter: drop-shadow(0 0 4px rgba(143,205,234,0.25));
     }
 
     /* === 範例圖（帶說明浮層）=== */
@@ -285,7 +296,7 @@
     /* === SAMR 圖示 === */
     .samr-step .s-icon img {
       width: 40px; height: 40px; object-fit: contain; display: block; margin: 0 auto;
-      filter: drop-shadow(0 0 4px rgba(79,195,247,0.23));
+      filter: drop-shadow(0 0 4px rgba(143,205,234,0.23));
     }
 
     /* === 自評九宮格（可勾選）=== */
@@ -295,12 +306,12 @@
       border-radius: 2px; padding: 11px 9px; cursor: pointer; text-align: center;
       transition: background 0.18s, border-color 0.18s; user-select: none;
     }
-    .sc-cell:hover { border-color: rgba(79,195,247,0.5); }
-    .sc-cell.on { background: rgba(79,195,247,0.18); border-color: var(--accent2); }
+    .sc-cell:hover { border-color: rgba(143,205,234,0.5); }
+    .sc-cell.on { background: rgba(143,205,234,0.18); border-color: var(--accent2); }
     .sc-cell .sc-box {
       width: 17px; height: 17px; border-radius: 4px; border: 2px solid rgba(255,255,255,0.35);
       margin: 0 auto 6px; display: flex; align-items: center; justify-content: center;
-      font-size: 11px; color: #0d1117; font-weight: 900;
+      font-size: 11px; color: #1b222b; font-weight: 900;
     }
     .sc-cell.on .sc-box { background: var(--accent2); border-color: var(--accent2); }
     .sc-cell .sc-t { font-size: 0.33em; color: #ddd; font-weight: 700; line-height: 1.4; }
@@ -308,7 +319,7 @@
     .sc-cat { font-size: 0.3em; color: var(--accent2); font-weight: 700; margin: 8px 0 2px; }
 
     .btn-primary {
-      background: var(--accent2); color: #0d1117; border: none; border-radius: 2px;
+      background: var(--accent2); color: #1b222b; border: none; border-radius: 2px;
       padding: 9px 22px; font-weight: 700; font-size: 0.36em; cursor: pointer;
       font-family: inherit;
     }
@@ -344,7 +355,7 @@
     .mini-line.w9 { width: 96%; } .mini-line.w8 { width: 86%; }
     .mini-line.w7 { width: 74%; } .mini-line.w5 { width: 55%; }
     .mini-key {
-      display: inline-block; background: rgba(79,195,247,0.22); border: 1px solid rgba(79,195,247,0.45);
+      display: inline-block; background: rgba(143,205,234,0.22); border: 1px solid rgba(143,205,234,0.45);
       color: var(--accent2); border-radius: 5px; padding: 4px 10px; font-size: 0.28em;
       font-weight: 700; margin: 3px 4px 0 0;
     }
@@ -352,15 +363,15 @@
       position: absolute; top: 8px; right: 9px; font-size: 0.26em; font-weight: 700;
       padding: 3px 9px; border-radius: 11px;
     }
-    .mini-badge.bad  { background: rgba(255,183,77,0.2); color: var(--warn); }
-    .mini-badge.good { background: rgba(129,199,132,0.2); color: var(--success); }
+    .mini-badge.bad  { background: rgba(242,223,160,0.2); color: var(--warn); }
+    .mini-badge.good { background: rgba(168,207,154,0.2); color: var(--success); }
     .mini-cap { font-size: 0.29em; color: #999; line-height: 1.6; margin-top: 7px; }
     .mini-cap b { color: #ddd; }
 
     /* === Canva 備用連結卡 === */
     .canva-card {
       display: flex; align-items: center; gap: 13px;
-      background: rgba(206,147,216,0.10); border: 1px solid rgba(206,147,216,0.3);
+      background: rgba(203,178,216,0.10); border: 1px solid rgba(203,178,216,0.3);
       border-left: 4px solid var(--purple); border-radius: 2px; padding: 10px 14px;
       margin-top: 0.6em;
     }
@@ -375,18 +386,20 @@
       border-radius: 3px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12);
       margin-top: 0.5em;
     }
-    .game-banner img { display: block; width: 100%; height: 92px; object-fit: cover; }
+    .game-banner img { display: block; width: 100%; height: 72px; object-fit: cover; }
 
 
     /* === 視覺精修 === */
 
-    /* 極淡背景網格：讓深色底不再是一塊死色 */
-    body::before {
-      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-      background-size: 46px 46px;
+    /* 黑板底：噪點紙面 + 中央微亮、邊角壓暗 */
+    html, body { background: var(--board); }
+    .reveal-viewport, .reveal {
+      background:
+        radial-gradient(ellipse at 50% 42%, rgba(255,255,255,.05), transparent 62%),
+        radial-gradient(ellipse at 50% 118%, rgba(0,0,0,.5), transparent 55%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 0.94 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"),
+        linear-gradient(160deg, #1e2630, #1a212a 55%, #171d25);
+      color: var(--ink);
     }
 
     /* 左下角場次代碼：低調的身分標記 */
@@ -394,18 +407,42 @@
       content: 'math-20260826';
       position: fixed; left: 20px; bottom: 14px; z-index: 20;
       font-family: 'Inter', monospace; font-size: 11px;
-      letter-spacing: 0.14em; color: rgba(255,255,255,0.17);
+      letter-spacing: 0.14em; color: rgba(242,239,226,0.2);
       pointer-events: none;
     }
 
-    /* 標題左側細豎線，取代千篇一律的置中大標 */
-    .reveal h2 { position: relative; padding-left: 15px; }
-    .reveal h2::before {
-      content: ''; position: absolute; left: 0; top: 0.2em; bottom: 0.2em;
-      width: 3px; background: var(--accent);
+    /* 標題：粉筆手寫感的波浪底線 */
+    .reveal h2 {
+      display: inline-block;
+      padding-bottom: 0.26em;
+      margin-bottom: 0.3em;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='9' viewBox='0 0 240 9'%3E%3Cpath d='M3 6 C 35 2.5, 62 7.5, 95 4.5 S 155 2.5, 185 5.5 S 222 7, 237 3.5' fill='none' stroke='%23f2a37c' stroke-width='2.6' stroke-linecap='round' opacity='.85'/%3E%3C/svg%3E") left bottom / 240px 9px repeat-x;
+      color: var(--ink);
+      font-weight: 700;
     }
-    .title-slide h2, .chapter h2, .end-slide h2 { padding-left: 0; }
-    .title-slide h2::before, .chapter h2::before, .end-slide h2::before { display: none; }
+    .title-slide h2, .chapter h2, .end-slide h2 { background: none; padding-bottom: 0; }
+
+    /* eyebrow：標題上方的小標，粉筆橘、字距拉開 */
+    .eyebrow {
+      color: var(--accent);
+      font-size: 0.3em;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      margin: 0 0 0.35em;
+      display: block;
+      line-height: 1.2;
+    }
+
+    /* 每頁底部一句收束語 */
+    .takeaway {
+      margin-top: 0.55em;
+      padding: 0.42em 0 0;
+      border-top: 2px dashed rgba(242,239,226,.2);
+      font-size: 0.4em;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    .takeaway b, .takeaway strong { color: var(--accent); }
 
     /* 頁碼與進度條低調化 */
     .reveal .slide-number {
@@ -418,14 +455,31 @@
     /* 表格：拿掉色塊底，改用細線與字距 */
     .reveal table th {
       background: transparent;
-      border-bottom: 1px solid rgba(79,195,247,0.45);
+      border-bottom: 2px dashed rgba(143,205,234,0.4);
       letter-spacing: 0.05em; font-weight: 600;
       text-transform: none; padding-bottom: 7px;
     }
     .reveal table td { border-bottom: 1px solid rgba(255,255,255,0.06); }
 
-    /* 卡片：頂線收細，去掉厚重感 */
-    .adv-card { border-top-width: 2px; }
+    /* 卡片：手繪歪斜圓角，像黑板上貼的紙 */
+    .adv-card {
+      border-top-width: 2px;
+      border-radius: var(--wob1);
+    }
+    .adv-grid > .adv-card:nth-child(even) { border-radius: var(--wob2); }
+    .warn-box, .ok-box { border-radius: var(--wob2); }
+    .conclusion-card:nth-child(odd)  { border-radius: var(--wob1); }
+    .conclusion-card:nth-child(even) { border-radius: var(--wob2); }
+    .stat-card:nth-child(odd)  { border-radius: var(--wob1); }
+    .stat-card:nth-child(even) { border-radius: var(--wob2); }
+    .vs-col.left-col  { border-radius: var(--wob1); }
+    .vs-col.right-col { border-radius: var(--wob2); }
+    .link-item:nth-child(odd)  { border-radius: var(--wob1); }
+    .link-item:nth-child(even) { border-radius: var(--wob2); }
+    .canva-card { border-radius: var(--wob2); }
+    .mini-deck { border-radius: var(--wob1); }
+    .sc-cell:nth-child(odd)  { border-radius: var(--wob1); }
+    .sc-cell:nth-child(even) { border-radius: var(--wob2); }
     .conclusion-card, .stat-card { border-width: 1px; }
 
     /* 引用框：只留左線，不要整塊底色 */
@@ -461,6 +515,7 @@
 
     <!-- ============ 2. 路線圖 ============ -->
     <section>
+      <p class="eyebrow">今天的路線</p>
       <h2>今天走這條路</h2>
       <div class="flow">
         <div class="flow-step"><img src="images/icon_hw.png" alt=""><span class="fs-title">① 硬體</span>你手上已經有什麼</div>
@@ -473,7 +528,7 @@
         <div class="flow-arrow">▶</div>
         <div class="flow-step"><img src="images/icon_exam.png" alt=""><span class="fs-title">⑤ 會考非選</span>出題與批改</div>
       </div>
-      <div class="quote-box" style="margin-top:1.1em;">
+      <div class="takeaway" style="margin-top:1.1em;">
         今天不談「怎麼用某個軟體」。<br>
         談的是 —— <span style="color:var(--accent);font-weight:700;">當市面上沒有你要的那個教材時，你可以自己做出來。</span>
       </div>
@@ -482,6 +537,7 @@
 
     <!-- ============ 3. 破冰文字雲 ============ -->
     <section id="slide-wordcloud">
+      <p class="eyebrow">互動 1｜破冰診斷</p>
       <h2 style="font-size:1.05em; margin-bottom:0.35em;">先問一句：你的數學課，最常用的數位工具是什麼？</h2>
       <div style="display:grid; grid-template-columns:250px 1fr; gap:14px; height:450px;">
 
@@ -489,11 +545,11 @@
           <div style="background:rgba(255,255,255,0.028); border-radius:3px; padding:14px;">
             <div style="font-size:0.36em; color:var(--accent2); font-weight:700; margin-bottom:8px;">輸入你的答案</div>
             <input id="wc-input" type="text" placeholder="例：GGB、康軒電子書…" maxlength="20"
-              style="width:100%; padding:8px 12px; border-radius:2px; border:1px solid rgba(79,195,247,0.3);
+              style="width:100%; padding:8px 12px; border-radius:2px; border:1px solid rgba(143,205,234,0.3);
                      background:rgba(255,255,255,0.08); color:#fff; font-size:13px;
                      box-sizing:border-box; font-family:inherit; outline:none;" />
             <button id="wc-btn"
-              style="width:100%; margin-top:8px; padding:9px; background:var(--accent2); color:#0d1117;
+              style="width:100%; margin-top:8px; padding:9px; background:var(--accent2); color:#1b222b;
                      border:none; border-radius:2px; font-weight:700; font-size:13px; cursor:pointer;">
               送出 ↵
             </button>
@@ -501,7 +557,7 @@
           <div style="background:rgba(255,255,255,0.028); border-radius:3px; padding:14px; flex:1; overflow:hidden; display:flex; flex-direction:column;">
             <div style="font-size:0.36em; color:var(--accent2); font-weight:700; margin-bottom:8px;">
               熱門答案
-              <span style="display:inline-block; background:#ff4757; color:#fff; padding:2px 7px;
+              <span style="display:inline-block; background:#d8624f; color:#fff; padding:2px 7px;
                            border-radius:3px; font-size:0.85em; animation:pulse 1.5s infinite;">LIVE</span>
               <span id="wc-mode" style="font-size:0.82em; font-weight:400; color:#777; margin-left:5px;">連線中…</span>
             </div>
@@ -538,6 +594,7 @@
 
     <!-- ============ 5. 觸控大屏 ============ -->
     <section>
+      <p class="eyebrow">PART 1｜教室現況</p>
       <h2>觸控大屏：三種連線，差在哪</h2>
       <table>
         <tr><th style="width:180px;">連線方式</th><th>特性</th><th style="width:200px;">要注意</th></tr>
@@ -557,13 +614,14 @@
           <td>有微延遲，但<span class="hl">老師能走下講台</span></td>
         </tr>
       </table>
-      <div class="quote-box" style="margin-top:1em;">
+      <div class="takeaway" style="margin-top:1em;">
         硬體環境領導教學 —— 只有當老師的雙手被解放，教學模式才會真的改變。
       </div>
     </section>
 
     <!-- ============ 6. 平板載具 ============ -->
     <section>
+      <p class="eyebrow">PART 1｜教室現況</p>
       <h2>生生用平板：三種載具</h2>
       <div class="adv-grid g3">
         <div class="adv-card">
@@ -588,6 +646,7 @@
 
     <!-- ============ 7. 五大類軟體 ============ -->
     <section>
+      <p class="eyebrow">PART 1｜教室現況</p>
       <h2>教學軟體，其實只有五類</h2>
       <table>
         <tr><th style="width:150px;">類別</th><th>代表</th><th>對數學科的意義</th></tr>
@@ -605,6 +664,7 @@
 
     <!-- ============ 8. 卡住的地方 ============ -->
     <section>
+      <p class="eyebrow">PART 1｜教室現況</p>
       <h2>硬體到位、軟體成熟 —— 那卡住的是什麼？</h2>
       <div class="vs-grid">
         <div class="vs-col left-col">
@@ -627,7 +687,7 @@
           </ul>
         </div>
       </div>
-      <div class="quote-box" style="margin-top:0.9em;">
+      <div class="takeaway" style="margin-top:0.9em;">
         <span style="color:var(--accent);font-weight:700;">問題不在硬體，在教材。</span>
         專為觸控大屏設計的數學教材，市面上少得可憐 —— 這正是今天下半場要處理的事。
       </div>
@@ -635,6 +695,7 @@
 
     <!-- ============ 9. TPACK ============ -->
     <section>
+      <p class="eyebrow">PART 1｜教學心法</p>
       <h2>先講一個框架：TPACK</h2>
       <div class="tpack-wrap">
         <div>
@@ -665,7 +726,7 @@
           <img src="images/tpack_venn.png" alt="TPACK 三圓交集">
         </div>
       </div>
-      <div class="quote-box" style="margin-top:0.6em; font-size:0.44em;">
+      <div class="takeaway" style="margin-top:0.6em; font-size:0.44em;">
         三個圈的<span style="color:var(--accent);font-weight:700;">交集</span>才是 TPACK。把 T 換成 AI，
         就是 <span style="color:var(--accent2);font-weight:700;">AIPACK</span> —— 框架沒變，換的只是工具。
       </div>
@@ -680,6 +741,7 @@
 
     <!-- ============ 10. PIDS ============ -->
     <section>
+      <p class="eyebrow">PART 1｜教學心法</p>
       <h2 style="font-size:1.12em;margin-bottom:0.15em;">PIDS 三力，剛好一一對上 TPACK</h2>
 
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
@@ -732,6 +794,7 @@
 
     <!-- ============ 10. 數位力自評 ============ -->
     <section>
+      <p class="eyebrow">互動 2｜數位力盤點</p>
       <h2 style="font-size:1.15em;margin-bottom:0.1em;">數位力自評：做得到的就打勾</h2>
       <p class="note-sm" style="margin:0 0 6px;">九個項目，點一下就勾。勾完按送出，我這邊會收到全場的分布。</p>
 
@@ -769,6 +832,7 @@
 
     <!-- ============ 11. SAMR ============ -->
     <section>
+      <p class="eyebrow">PART 1｜教學心法</p>
       <h2>SAMR：判斷一個新工具值不值得學</h2>
       <div class="samr-ladder">
         <div class="samr-step s1">
@@ -807,6 +871,7 @@
 
     <!-- ============ 12. SAMR 警告 ============ -->
     <section>
+      <p class="eyebrow">PART 1｜教學心法</p>
       <h2>這把尺，今天請一路用到底</h2>
       <div class="warn-box" style="font-size:0.5em;">
         <div class="wb-title" style="font-size:1.1em;">學新工具前，先跟你手上現有的比一次</div>
@@ -838,6 +903,7 @@
 
     <!-- ============ 13. 雙重編碼 ============ -->
     <section>
+      <p class="eyebrow">PART 1｜視覺力</p>
       <h2 style="font-size:1.15em;margin-bottom:0.1em;">視覺力（一）：別讓學生的大腦打架</h2>
       <p class="note-sm" style="margin:0 0 8px;">
         大腦處理「文字／語音」和「圖片」走的是<strong style="color:var(--accent2);">兩個不同通道</strong>。
@@ -870,27 +936,27 @@
             <!-- 3-4-5 直角三角形，三邊各配一個真正的正方形；關鍵字一起畫在右側 -->
             <svg viewBox="-10 -10 274 128" style="width:100%;height:100px;display:block;margin:5px 0 0;">
               <!-- c² 斜邊正方形 (邊長 50) -->
-              <polygon points="70,70 40,30 80,0 110,40" fill="rgba(129,199,132,0.26)" stroke="#81c784" stroke-width="1.5"/>
+              <polygon points="70,70 40,30 80,0 110,40" fill="rgba(168,207,154,0.26)" stroke="#a8cf9a" stroke-width="1.5"/>
               <!-- b² 左側正方形 (邊長 40) -->
-              <rect x="0" y="30" width="40" height="40" fill="rgba(232,100,58,0.26)" stroke="#e8643a" stroke-width="1.5"/>
+              <rect x="0" y="30" width="40" height="40" fill="rgba(242,163,124,0.26)" stroke="#f2a37c" stroke-width="1.5"/>
               <!-- a² 下方正方形 (邊長 30) -->
-              <rect x="40" y="70" width="30" height="30" fill="rgba(79,195,247,0.28)" stroke="#4fc3f7" stroke-width="1.5"/>
+              <rect x="40" y="70" width="30" height="30" fill="rgba(143,205,234,0.28)" stroke="#8fcdea" stroke-width="1.5"/>
               <!-- 三角形本體 -->
               <polygon points="40,70 70,70 40,30" fill="rgba(255,255,255,0.12)" stroke="#fff" stroke-width="1.6"/>
               <polyline points="46,70 46,64 40,64" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="1.2"/>
-              <text x="55" y="89" fill="#4fc3f7" font-size="12" text-anchor="middle" font-family="Consolas,monospace">a²</text>
-              <text x="20" y="55" fill="#e8643a" font-size="12" text-anchor="middle" font-family="Consolas,monospace">b²</text>
-              <text x="76" y="37" fill="#81c784" font-size="12" text-anchor="middle" font-family="Consolas,monospace">c²</text>
+              <text x="55" y="89" fill="#8fcdea" font-size="12" text-anchor="middle" font-family="Consolas,monospace">a²</text>
+              <text x="20" y="55" fill="#f2a37c" font-size="12" text-anchor="middle" font-family="Consolas,monospace">b²</text>
+              <text x="76" y="37" fill="#a8cf9a" font-size="12" text-anchor="middle" font-family="Consolas,monospace">c²</text>
 
               <!-- 右側：關鍵字（投影片上只留這幾個字）-->
               <text x="196" y="16" fill="#fff" font-size="15" text-anchor="middle" font-family="Consolas,monospace">a² + b² = c²</text>
               <g>
-                <rect x="140" y="30" width="112" height="22" rx="5" fill="rgba(79,195,247,0.2)" stroke="rgba(79,195,247,0.5)" stroke-width="1.2"/>
-                <text x="196" y="45" fill="#4fc3f7" font-size="13" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">兩股</text>
-                <rect x="140" y="58" width="112" height="22" rx="5" fill="rgba(79,195,247,0.2)" stroke="rgba(79,195,247,0.5)" stroke-width="1.2"/>
-                <text x="196" y="73" fill="#4fc3f7" font-size="13" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">斜邊</text>
-                <rect x="140" y="86" width="112" height="22" rx="5" fill="rgba(79,195,247,0.2)" stroke="rgba(79,195,247,0.5)" stroke-width="1.2"/>
-                <text x="196" y="101" fill="#4fc3f7" font-size="13" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">直角</text>
+                <rect x="140" y="30" width="112" height="22" rx="5" fill="rgba(143,205,234,0.2)" stroke="rgba(143,205,234,0.5)" stroke-width="1.2"/>
+                <text x="196" y="45" fill="#8fcdea" font-size="13" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">兩股</text>
+                <rect x="140" y="58" width="112" height="22" rx="5" fill="rgba(143,205,234,0.2)" stroke="rgba(143,205,234,0.5)" stroke-width="1.2"/>
+                <text x="196" y="73" fill="#8fcdea" font-size="13" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">斜邊</text>
+                <rect x="140" y="86" width="112" height="22" rx="5" fill="rgba(143,205,234,0.2)" stroke="rgba(143,205,234,0.5)" stroke-width="1.2"/>
+                <text x="196" y="101" fill="#8fcdea" font-size="13" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">直角</text>
               </g>
             </svg>
           </div>
@@ -901,13 +967,14 @@
         </div>
       </div>
 
-      <div class="quote-box" style="margin-top:10px; font-size:0.5em;">
+      <div class="takeaway" style="margin-top:10px; font-size:0.5em;">
         口訣：<span style="color:var(--accent);font-weight:700;">簡報字多就少講話，要多講話簡報就只放圖。</span>
       </div>
     </section>
 
     <!-- ============ 14. 認知負荷 ============ -->
     <section>
+      <p class="eyebrow">PART 1｜視覺力</p>
       <h2 style="font-size:1.12em;margin-bottom:0.1em;">視覺力（二）：三種認知負荷</h2>
       <p class="note-sm" style="margin:0 0 6px;">學生腦袋的負擔分三種，處理方式完全不同 —— 不是全部都要減少。</p>
       <table>
@@ -937,6 +1004,7 @@
 
     <!-- ============ 視覺力（三）：做減法 ============ -->
     <section>
+      <p class="eyebrow">PART 1｜視覺力</p>
       <h2 style="font-size:1.12em;margin-bottom:0.1em;">視覺力（三）：做減法長什麼樣</h2>
       <p class="note-sm" style="margin:0 0 8px;">同一份考卷、同一台大屏，差別只在有沒有把雜訊拿掉。</p>
 
@@ -959,7 +1027,7 @@
                 <rect x="12" y="82" width="88"  height="9" fill="#8ce99a"/>
                 <rect x="130" y="16" width="60"  height="9" fill="#ffe066"/>
               </g>
-              <g stroke="#ff6b6b" stroke-width="2" fill="none" opacity="0.75">
+              <g stroke="#d8624f" stroke-width="2" fill="none" opacity="0.75">
                 <path d="M120 20 L134 34 M134 20 L120 34"/>
                 <path d="M20 60 C60 52, 90 74, 112 62" />
                 <path d="M150 86 L176 78 M170 74 L178 79 L172 85"/>
@@ -980,17 +1048,17 @@
                 <rect x="126" y="84" width="112" height="20" rx="3" fill="#fff"/>
               </g>
               <rect x="38" y="34" width="174" height="42" rx="5"
-                    fill="rgba(79,195,247,0.14)" stroke="#4fc3f7" stroke-width="1.8"/>
+                    fill="rgba(143,205,234,0.14)" stroke="#8fcdea" stroke-width="1.8"/>
               <rect x="48" y="44" width="120" height="7" rx="3" fill="rgba(255,255,255,0.7)"/>
               <rect x="48" y="58" width="86"  height="7" rx="3" fill="rgba(255,255,255,0.45)"/>
-              <circle cx="196" cy="55" r="7" fill="none" stroke="#e8643a" stroke-width="1.8"/>
+              <circle cx="196" cy="55" r="7" fill="none" stroke="#f2a37c" stroke-width="1.8"/>
             </svg>
           </div>
           <div class="mini-cap"><b>放大／截圖，其他全部暗掉</b><br>視線只有一個去處，剩下的認知資源全給內容。</div>
         </div>
       </div>
 
-      <div class="quote-box" style="margin-top:11px; font-size:0.5em;">
+      <div class="takeaway" style="margin-top:11px; font-size:0.5em;">
         減掉的是<span style="color:var(--warn);font-weight:700;">雜訊</span>，
         不是<span style="color:var(--success);font-weight:700;">內容</span>。
       </div>
@@ -998,6 +1066,7 @@
 
     <!-- ============ 15. 白板四招 ============ -->
     <section>
+      <p class="eyebrow">PART 1｜視覺力</p>
       <h2 style="font-size:1.12em;">視覺力（四）：明天就能用的白板四招</h2>
       <div class="adv-grid">
         <div class="adv-card" style="text-align:left; padding:12px 14px;">
@@ -1028,6 +1097,7 @@
 
     <!-- ============ 範例簡報：課本文字怎麼變成一頁 ============ -->
     <section>
+      <p class="eyebrow">PART 1｜視覺力</p>
       <h2 style="font-size:1.15em;">課本那一大段文字，怎麼變成一頁</h2>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:center; margin-top:0.4em;">
         <div class="adv-grid g3" style="grid-template-columns:1fr; gap:9px; margin-top:0;">
@@ -1053,7 +1123,7 @@
             </div>
           </div>
         </div>
-        <div style="background:rgba(206,147,216,0.10); border:1px solid rgba(206,147,216,0.3);
+        <div style="background:rgba(203,178,216,0.10); border:1px solid rgba(203,178,216,0.3);
                     border-radius:3px; padding:16px 18px; text-align:center;">
           <div style="font-size:0.42em; color:var(--purple); font-weight:700; margin-bottom:8px;">
             做完長什麼樣 — 真實成品
@@ -1079,6 +1149,7 @@
 
     <!-- ============ VIZ 滑桿對比 ============ -->
     <section id="slide-viz">
+      <p class="eyebrow">PART 1｜視覺力</p>
       <h2 style="font-size:1.15em;margin-bottom:0.15em;">同一個畢氏定理，兩種呈現</h2>
       <p class="note-sm" style="margin:0 0 8px;">① 先拖<span style="color:var(--accent2);">揭露滑桿</span>把課本靜態圖換成動態教材　② 再拖<span style="color:var(--accent);">邊長滑桿</span>看關係怎麼動</p>
 
@@ -1105,10 +1176,10 @@
           <div style="min-width:172px;">
             <div style="font-size:0.44em;color:var(--accent2);font-weight:700;margin-bottom:8px;">動態教材</div>
             <div style="font-family:'Consolas',monospace;font-size:0.36em;line-height:2.1;">
-              <div><span style="color:#4fc3f7;">a² =</span> <span id="pyth-a2" style="color:#fff;">9</span></div>
-              <div><span style="color:#e8643a;">b² =</span> <span id="pyth-b2" style="color:#fff;">16</span></div>
+              <div><span style="color:#8fcdea;">a² =</span> <span id="pyth-a2" style="color:#fff;">9</span></div>
+              <div><span style="color:#f2a37c;">b² =</span> <span id="pyth-b2" style="color:#fff;">16</span></div>
               <div style="border-top:1px solid rgba(255,255,255,0.15);margin-top:5px;padding-top:5px;">
-                <span style="color:#81c784;">c² =</span> <span id="pyth-c2" style="color:#fff;font-weight:700;">25</span>
+                <span style="color:#a8cf9a;">c² =</span> <span id="pyth-c2" style="color:#fff;font-weight:700;">25</span>
               </div>
             </div>
             <div style="font-size:0.3em;color:#888;line-height:1.7;margin-top:8px;">
@@ -1118,8 +1189,8 @@
         </div>
 
         <div id="viz-divider" style="position:absolute;top:0;left:0;width:3px;height:100%;
-          background:linear-gradient(to bottom,transparent,#4fc3f7,transparent);
-          box-shadow:0 0 12px #4fc3f7;pointer-events:none;"></div>
+          background:linear-gradient(to bottom,transparent,#8fcdea,transparent);
+          box-shadow:0 0 12px #8fcdea;pointer-events:none;"></div>
       </div>
 
       <div style="display:flex;align-items:center;gap:10px;margin-top:10px;">
@@ -1129,12 +1200,12 @@
       </div>
 
       <div id="pyth-controls" style="display:flex;align-items:center;gap:14px;margin-top:8px;opacity:0.25;transition:opacity 0.3s;">
-        <span style="font-size:0.3em;color:#4fc3f7;white-space:nowrap;width:64px;">a = <span id="pyth-av">3</span></span>
+        <span style="font-size:0.3em;color:#8fcdea;white-space:nowrap;width:64px;">a = <span id="pyth-av">3</span></span>
         <input id="pyth-a" type="range" min="1" max="8" step="1" value="3"
-          style="flex:1;min-width:0;accent-color:#4fc3f7;cursor:pointer;">
-        <span style="font-size:0.3em;color:#e8643a;white-space:nowrap;width:64px;">b = <span id="pyth-bv">4</span></span>
+          style="flex:1;min-width:0;accent-color:#8fcdea;cursor:pointer;">
+        <span style="font-size:0.3em;color:#f2a37c;white-space:nowrap;width:64px;">b = <span id="pyth-bv">4</span></span>
         <input id="pyth-b" type="range" min="1" max="8" step="1" value="4"
-          style="flex:1;min-width:0;accent-color:#e8643a;cursor:pointer;">
+          style="flex:1;min-width:0;accent-color:#f2a37c;cursor:pointer;">
       </div>
 
       <p class="note-sm" style="margin-top:8px;">這一頁本身就是範例 —— 眼睛對會動的東西極度敏感，這是視覺力最直接的槓桿。</p>
@@ -1153,6 +1224,7 @@
 
     <!-- ============ 18. 生成式 vs Agent ============ -->
     <section>
+      <p class="eyebrow">PART 2｜做出課本沒有的</p>
       <h2 style="font-size:1.15em;margin-bottom:0.15em;">先分清楚：生成式 AI 和 AI Agent</h2>
 
       <svg viewBox="0 0 580 128" style="width:100%;height:132px;display:block;margin:2px 0 6px;">
@@ -1161,18 +1233,18 @@
             <path d="M0,0 L6,2.6 L0,5.2 z" fill="#7b8794"/>
           </marker>
           <marker id="ahc" markerWidth="7" markerHeight="7" refX="6" refY="2.6" orient="auto">
-            <path d="M0,0 L6,2.6 L0,5.2 z" fill="#4fc3f7"/>
+            <path d="M0,0 L6,2.6 L0,5.2 z" fill="#8fcdea"/>
           </marker>
         </defs>
 
         <!-- 左：生成式 AI -->
         <g>
-          <circle cx="22" cy="44" r="7" fill="none" stroke="#ffb74d" stroke-width="1.6"/>
-          <path d="M12 62 q10 -11 20 0" fill="none" stroke="#ffb74d" stroke-width="1.6"/>
-          <text x="22" y="78" fill="#ffb74d" font-size="9" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">你</text>
+          <circle cx="22" cy="44" r="7" fill="none" stroke="#f2dfa0" stroke-width="1.6"/>
+          <path d="M12 62 q10 -11 20 0" fill="none" stroke="#f2dfa0" stroke-width="1.6"/>
+          <text x="22" y="78" fill="#f2dfa0" font-size="9" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">你</text>
           <line x1="35" y1="48" x2="58" y2="48" stroke="#7b8794" stroke-width="1.4" marker-end="url(#ah)"/>
           <path d="M70 40 a11 11 0 0 1 21 -4 a9 9 0 0 1 8 14 h-27 a9 9 0 0 1 -2 -10 z"
-                fill="rgba(255,183,77,0.14)" stroke="#ffb74d" stroke-width="1.4"/>
+                fill="rgba(242,223,160,0.14)" stroke="#f2dfa0" stroke-width="1.4"/>
           <text x="84" y="70" fill="#999" font-size="8.5" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">雲端</text>
           <line x1="104" y1="48" x2="126" y2="48" stroke="#7b8794" stroke-width="1.4" marker-end="url(#ah)"/>
           <rect x="130" y="30" width="52" height="36" rx="4" fill="rgba(255,255,255,0.045)" stroke="#888" stroke-width="1.3"/>
@@ -1180,9 +1252,9 @@
           <line x1="138" y1="48" x2="174" y2="48" stroke="#aaa" stroke-width="2.4"/>
           <line x1="138" y1="55" x2="160" y2="55" stroke="#aaa" stroke-width="2.4"/>
           <text x="156" y="78" fill="#999" font-size="8.5" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">一段文字</text>
-          <line x1="156" y1="86" x2="156" y2="102" stroke="#ffb74d" stroke-width="1.4"
+          <line x1="156" y1="86" x2="156" y2="102" stroke="#f2dfa0" stroke-width="1.4"
                 stroke-dasharray="3 3" marker-end="url(#ah)"/>
-          <text x="156" y="118" fill="#ffb74d" font-size="9.5" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">你自己複製貼上</text>
+          <text x="156" y="118" fill="#f2dfa0" font-size="9.5" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">你自己複製貼上</text>
         </g>
 
         <line x1="245" y1="8" x2="245" y2="120" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
@@ -1190,24 +1262,24 @@
 
         <!-- 右：AI Agent -->
         <g>
-          <circle cx="290" cy="44" r="7" fill="none" stroke="#4fc3f7" stroke-width="1.6"/>
-          <path d="M280 62 q10 -11 20 0" fill="none" stroke="#4fc3f7" stroke-width="1.6"/>
-          <text x="290" y="78" fill="#4fc3f7" font-size="9" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">你</text>
-          <line x1="303" y1="48" x2="326" y2="48" stroke="#4fc3f7" stroke-width="1.4" marker-end="url(#ahc)"/>
-          <rect x="330" y="26" width="76" height="44" rx="6" fill="rgba(79,195,247,0.15)" stroke="#4fc3f7" stroke-width="1.7"/>
-          <text x="368" y="46" fill="#4fc3f7" font-size="11" font-weight="700" text-anchor="middle" font-family="Consolas,monospace">Agent</text>
+          <circle cx="290" cy="44" r="7" fill="none" stroke="#8fcdea" stroke-width="1.6"/>
+          <path d="M280 62 q10 -11 20 0" fill="none" stroke="#8fcdea" stroke-width="1.6"/>
+          <text x="290" y="78" fill="#8fcdea" font-size="9" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">你</text>
+          <line x1="303" y1="48" x2="326" y2="48" stroke="#8fcdea" stroke-width="1.4" marker-end="url(#ahc)"/>
+          <rect x="330" y="26" width="76" height="44" rx="6" fill="rgba(143,205,234,0.15)" stroke="#8fcdea" stroke-width="1.7"/>
+          <text x="368" y="46" fill="#8fcdea" font-size="11" font-weight="700" text-anchor="middle" font-family="Consolas,monospace">Agent</text>
           <text x="368" y="59" fill="#8bb6cc" font-size="8" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">在你的電腦裡</text>
-          <line x1="408" y1="34" x2="452" y2="22" stroke="#4fc3f7" stroke-width="1.4" marker-end="url(#ahc)"/>
-          <line x1="408" y1="48" x2="452" y2="48" stroke="#4fc3f7" stroke-width="1.4" marker-end="url(#ahc)"/>
-          <line x1="408" y1="62" x2="452" y2="74" stroke="#4fc3f7" stroke-width="1.4" marker-end="url(#ahc)"/>
-          <rect x="456" y="12" width="20" height="20" rx="3" fill="rgba(255,255,255,0.08)" stroke="#81c784" stroke-width="1.3"/>
-          <text x="484" y="26" fill="#81c784" font-size="9" font-family="'Noto Sans TC',sans-serif">讀寫你的檔案</text>
-          <circle cx="466" cy="48" r="10" fill="none" stroke="#81c784" stroke-width="1.3"/>
-          <ellipse cx="466" cy="48" rx="4.5" ry="10" fill="none" stroke="#81c784" stroke-width="1"/>
-          <line x1="456" y1="48" x2="476" y2="48" stroke="#81c784" stroke-width="1"/>
-          <text x="484" y="52" fill="#81c784" font-size="9" font-family="'Noto Sans TC',sans-serif">上網抓資料</text>
-          <path d="M458 66 h18 v20 h-18 z M458 66 l9 8 l9 -8" fill="rgba(255,255,255,0.08)" stroke="#81c784" stroke-width="1.3"/>
-          <text x="484" y="80" fill="#81c784" font-size="9" font-family="'Noto Sans TC',sans-serif">直接產出成品</text>
+          <line x1="408" y1="34" x2="452" y2="22" stroke="#8fcdea" stroke-width="1.4" marker-end="url(#ahc)"/>
+          <line x1="408" y1="48" x2="452" y2="48" stroke="#8fcdea" stroke-width="1.4" marker-end="url(#ahc)"/>
+          <line x1="408" y1="62" x2="452" y2="74" stroke="#8fcdea" stroke-width="1.4" marker-end="url(#ahc)"/>
+          <rect x="456" y="12" width="20" height="20" rx="3" fill="rgba(255,255,255,0.08)" stroke="#a8cf9a" stroke-width="1.3"/>
+          <text x="484" y="26" fill="#a8cf9a" font-size="9" font-family="'Noto Sans TC',sans-serif">讀寫你的檔案</text>
+          <circle cx="466" cy="48" r="10" fill="none" stroke="#a8cf9a" stroke-width="1.3"/>
+          <ellipse cx="466" cy="48" rx="4.5" ry="10" fill="none" stroke="#a8cf9a" stroke-width="1"/>
+          <line x1="456" y1="48" x2="476" y2="48" stroke="#a8cf9a" stroke-width="1"/>
+          <text x="484" y="52" fill="#a8cf9a" font-size="9" font-family="'Noto Sans TC',sans-serif">上網抓資料</text>
+          <path d="M458 66 h18 v20 h-18 z M458 66 l9 8 l9 -8" fill="rgba(255,255,255,0.08)" stroke="#a8cf9a" stroke-width="1.3"/>
+          <text x="484" y="80" fill="#a8cf9a" font-size="9" font-family="'Noto Sans TC',sans-serif">直接產出成品</text>
         </g>
       </svg>
 
@@ -1239,6 +1311,7 @@
 
     <!-- ============ 19. 四大能力 ============ -->
     <section>
+      <p class="eyebrow">PART 2｜做出課本沒有的</p>
       <h2>Agent 的四大能力</h2>
       <div class="adv-grid g4">
         <div class="adv-card">
@@ -1271,6 +1344,7 @@
 
     <!-- ============ 21. 三個 Demo 預告 ============ -->
     <section>
+      <p class="eyebrow">PART 2｜做出課本沒有的</p>
       <h2>接下來，三個現場 Demo</h2>
       <div class="adv-grid g3">
         <div class="adv-card" style="text-align:left; padding:16px 18px;">
@@ -1298,7 +1372,7 @@
           </div>
         </div>
       </div>
-      <div class="quote-box" style="margin-top:1em;">
+      <div class="takeaway" style="margin-top:1em;">
         三個 Demo 的共同點：<span style="color:var(--accent);font-weight:700;">全部是 SAMR 的 M 或 R</span> ——
         沒有一個是「本來就買得到、只是換成數位版」。
       </div>
@@ -1306,6 +1380,7 @@
 
     <!-- ============ 22. GitHub Pages ============ -->
     <section>
+      <p class="eyebrow">PART 2｜做出課本沒有的</p>
       <h2>從一個念頭，到一個學生能掃的網址</h2>
       <div class="flow">
         <div class="flow-step"><img src="images/icon_say.png" alt=""><span class="fs-title">① 你說一句</span>「做一個畢氏定理的滑桿網頁」</div>
@@ -1327,6 +1402,7 @@
 
     <!-- ============ 23. Demo：八下整冊 ============ -->
     <section>
+      <p class="eyebrow">PART 2｜現場 Demo</p>
       <h2 style="font-size:1.12em;margin-bottom:0.1em;"><span class="pill p-blue">DEMO 1</span> 國中數學全六冊，互動複習簡報</h2>
       <p class="note-sm" style="margin:0 0 4px;">
         <strong style="color:#ccc;">364 頁、約 169 頁互動</strong>，涵蓋國中三年全部課程，依 108 課綱逐條查核、超綱為零。
@@ -1377,6 +1453,7 @@
     <!-- ============ 24. Demo：二次函數 ============ -->
 <!-- ============ 25. 怎麼做出來的 ============ -->
     <section>
+      <p class="eyebrow">PART 2｜做出課本沒有的</p>
       <h2>這些頁面，實際上怎麼長出來的</h2>
       <div class="code-block">
 <span class="cm"># 你對 Agent 說的話，大概長這樣 —— 就是自然語言</span>
@@ -1411,10 +1488,11 @@
 
     <!-- ============ 27. 機制即評量 ============ -->
     <section>
+      <p class="eyebrow">PART 3｜遊戲即評量</p>
       <h2>設計原理：機制即評量</h2>
       <div class="vs-grid">
         <div class="vs-col left-col">
-          <div class="vs-label left"><img src="images/icon_detach.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 4px rgba(79,195,247,0.23));">✗ 外掛式</div>
+          <div class="vs-label left"><img src="images/icon_detach.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 4px rgba(143,205,234,0.23));">✗ 外掛式</div>
           <ul>
             <li>答完題 → 才給遊戲獎勵</li>
             <li>數學是門票，遊戲是糖果</li>
@@ -1424,7 +1502,7 @@
         </div>
         <div class="vs-center">VS</div>
         <div class="vs-col right-col">
-          <div class="vs-label right"><img src="images/icon_embed.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 4px rgba(79,195,247,0.23));">✓ 內建式</div>
+          <div class="vs-label right"><img src="images/icon_embed.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 4px rgba(143,205,234,0.23));">✓ 內建式</div>
           <ul>
             <li>遊戲的「操作動詞」＝ 數學行為本身</li>
             <li>報座標才能攻擊、解不等式才能出招</li>
@@ -1433,7 +1511,7 @@
           </ul>
         </div>
       </div>
-      <div class="quote-box" style="margin-top:0.9em;">
+      <div class="takeaway" style="margin-top:0.9em;">
         老師在後台看到的不是「誰玩贏了」，而是
         <span style="color:var(--accent);font-weight:700;">誰在哪一步卡住、犯的是哪一種錯</span>。
       </div>
@@ -1441,6 +1519,7 @@
 
     <!-- ============ 28. Demo：軍艦棋 ============ -->
     <section>
+      <p class="eyebrow">PART 3｜現場 Demo</p>
       <h2 style="font-size:1.12em;margin-bottom:0.1em;"><span class="pill p-orange">DEMO 2-1</span> 座標軍艦棋</h2>
       <div class="game-banner"><img src="images/game_battleship.png" alt="座標軍艦棋"></div>
       <div class="demo-box">
@@ -1467,6 +1546,7 @@
 
     <!-- ============ 29. Demo：不等式格鬥場 ============ -->
     <section>
+      <p class="eyebrow">PART 3｜現場 Demo</p>
       <h2 style="font-size:1.12em;margin-bottom:0.1em;"><span class="pill p-orange">DEMO 2-2</span> 不等式格鬥場
         </h2>
       <div class="game-banner"><img src="images/game_fighter.png" alt="不等式格鬥場"></div>
@@ -1483,7 +1563,7 @@
         </div>
         <div class="qr-wrap" data-url="https://my-teaching-tools.web.app/games/linear-inequality-fighter/"></div>
       </div>
-      <div class="warn-box">
+      <div class="warn-box" style="font-size:0.37em;padding:12px 16px;">
         <div class="wb-title">誘答選項直接打在誤解上</div>
         「同除 −4 不變號」、「不等號改成 &gt;」—— 這兩個選項不是隨便湊的，
         是<strong>國中生真的會犯的錯</strong>。選了就知道他卡在哪。結算頁有逐人傷害與失誤統計。
@@ -1492,8 +1572,9 @@
 
     <!-- ============ 30. Demo：中位數偵探 ============ -->
     <section>
+      <p class="eyebrow">PART 3｜現場 Demo</p>
       <h2 style="font-size:1.12em;margin-bottom:0.1em;"><span class="pill p-orange">DEMO 2-3</span> 中位數偵探</h2>
-      <div class="game-banner"><img src="images/game_detective.png" alt="中位數偵探"></div>
+      <div class="game-banner"><img src="images/game_detective.png" alt="中位數偵探" style="height:56px;"></div>
       <div class="demo-box">
         <div class="demo-info">
           <strong style="color:var(--accent2);">全班共玩一場</strong>，老師主持、限時自動推進。<br><br>
@@ -1509,7 +1590,7 @@
         <tr><td class="hl2">第二輪</td><td>亂序數字矩陣</td><td>可以數，但難找中間那個</td><td class="hl">7</td></tr>
         <tr><td class="hl2">第三輪</td><td>排序後的矩陣</td><td>結構化了，<strong style="color:#ddd;">可精確定位</strong></td><td class="hl">4</td></tr>
       </table>
-      <p class="lead" style="margin-top:0.7em; font-size:0.5em;">
+      <p class="lead" style="margin-top:0.5em; font-size:0.44em;">
         表徵逐步結構化 = <span style="color:var(--accent);font-weight:700;">概念發展的鷹架</span>。
         資訊越完整、分數越低 —— 逼學生早一點想通「為什麼要排序」。
       </p>
@@ -1517,6 +1598,7 @@
 
     <!-- ============ 31. 橫向比較 ============ -->
     <section>
+      <p class="eyebrow">PART 3｜遊戲即評量</p>
       <h2>三款遊戲，三種課堂結構</h2>
       <table>
         <tr>
@@ -1561,10 +1643,11 @@
 
     <!-- ============ 32. 設計檢驗 ============ -->
     <section>
+      <p class="eyebrow">PART 3｜遊戲即評量</p>
       <h2>一個檢驗：拿掉數學，還玩得下去嗎？</h2>
       <div class="conclusion-grid">
         <div class="conclusion-card caution">
-          <div class="cc-title"><img src="images/icon_detach.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 4px rgba(79,195,247,0.23));">還玩得下去</div>
+          <div class="cc-title"><img src="images/icon_detach.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 4px rgba(143,205,234,0.23));">還玩得下去</div>
           <ul>
             <li>數學只是遊戲的「門票」</li>
             <li>換成成語、單字也照樣跑</li>
@@ -1573,7 +1656,7 @@
           </ul>
         </div>
         <div class="conclusion-card positive">
-          <div class="cc-title"><img src="images/icon_embed.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 4px rgba(79,195,247,0.23));">直接不存在</div>
+          <div class="cc-title"><img src="images/icon_embed.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 4px rgba(143,205,234,0.23));">直接不存在</div>
           <ul>
             <li>軍艦棋拿掉「報座標」→ 遊戲沒了</li>
             <li>格鬥場拿掉「解不等式」→ 沒招可出</li>
@@ -1582,7 +1665,7 @@
           </ul>
         </div>
       </div>
-      <div class="quote-box" style="margin-top:0.9em;">
+      <div class="takeaway" style="margin-top:0.9em;">
         設計自己的遊戲時，先問這一句。<br>
         <span style="color:var(--accent);font-weight:700;">答案是「還玩得下去」，就回去重想機制。</span>
       </div>
@@ -1601,6 +1684,7 @@
 
     <!-- ============ 34. 命題公式 ============ -->
     <section>
+      <p class="eyebrow">PART 4｜會考非選</p>
       <h2>先看清楚：非選題其實有公式</h2>
       <p class="lead" style="font-size:0.5em;">分析 103–115 年官方試題後，結構穩定到令人意外：</p>
       <div class="stat-row">
@@ -1631,6 +1715,7 @@
 
     <!-- ============ 35. 自動命題 ============ -->
     <section>
+      <p class="eyebrow">PART 4｜現場 Demo</p>
       <h2><span class="pill p-purple">DEMO 3-1</span> 把命題規則變成可重複執行的模板</h2>
       <div class="warn-box" style="margin-top:0;">
         <div class="wb-title">不是「叫 AI 每次現寫一題」</div>
@@ -1653,8 +1738,9 @@
 
     <!-- ============ 36. AI 批改閉環 ============ -->
     <section>
+      <p class="eyebrow">PART 4｜現場 Demo</p>
       <h2><span class="pill p-purple">DEMO 3-2</span> 從學生手寫，到成績出爐</h2>
-      <div class="code-block" style="font-size:0.31em; line-height:1.7;">
+      <div class="code-block" style="font-size:0.285em; line-height:1.6; padding:11px 15px;">
 學生 iPad <span class="kw">手寫</span>／拍照上傳　<span class="cm">（站內 canvas，或相機＋文件掃描校正）</span>
 　↓ 交卷
 收卷 → 圖存雲端 → 寫進試算表
@@ -1667,7 +1753,7 @@
 　↓
 學生自己查：級分、評語、紅筆圖、參考答案
       </div>
-      <div style="display:grid; grid-template-columns:1fr 200px; gap:16px; align-items:center; margin-top:8px;">
+      <div style="display:grid; grid-template-columns:1fr 200px; gap:14px; align-items:center; margin-top:6px;">
         <div class="link-list" style="grid-template-columns:1fr; gap:7px; margin-top:0;">
           <div class="link-item">
             <span class="li-name">最近一次 · 非選練習卷 第 1~2 冊（0813）</span>
@@ -1695,6 +1781,7 @@
 
     <!-- ============ 37. 三層給分 ============ -->
     <section>
+      <p class="eyebrow">PART 4｜會考非選</p>
       <h2>為什麼 AI 需要「評分規準」才批得準</h2>
       <p class="lead" style="font-size:0.48em;">官方的給分標準其實是三層，AI 只拿到第一層是不夠的：</p>
       <table>
@@ -1727,6 +1814,7 @@
 
     <!-- ============ 38. 誠實面 ============ -->
     <section>
+      <p class="eyebrow">PART 4｜會考非選</p>
       <h2>誠實講：AI 到得了哪裡，哪裡一定要人</h2>
       <div class="vs-grid">
         <div class="vs-col right-col">
@@ -1750,7 +1838,7 @@
           </ul>
         </div>
       </div>
-      <div class="quote-box" style="margin-top:0.9em;">
+      <div class="takeaway" style="margin-top:0.9em;">
         AI 省掉的是<span style="color:var(--accent2);font-weight:700;">「翻 30 份、找出哪幾份要細看」</span>的時間，
         不是<span style="color:var(--accent);font-weight:700;">「決定這個孩子幾分」</span>的責任。
       </div>
@@ -1758,6 +1846,7 @@
 
     <!-- ============ 39. 投票 ============ -->
     <section id="slide-poll">
+      <p class="eyebrow">互動 3｜行動盤點</p>
       <h2 style="font-size:1.15em;margin-bottom:0.1em;">回去以後，你打算做哪些？</h2>
       <p class="note-sm" style="margin:0 0 6px;">可以複選，再點一次可以取消。選你這學期真的做得完的。</p>
       <div id="poll-options" style="display:flex; flex-direction:column; gap:9px; margin-top:0.4em;"></div>
@@ -1771,6 +1860,7 @@
 
     <!-- ============ AI 素養 ============ -->
     <section>
+      <p class="eyebrow">收尾｜AI 素養</p>
       <h2 style="font-size:1.15em;margin-bottom:0.1em;">AI 素養：你要守的，和你要教的</h2>
       <p class="note-sm" style="margin:0 0 6px;">前兩件是老師自己的界線，後兩件是要交到學生手上的能力。</p>
       <div class="adv-grid g4">
@@ -1819,7 +1909,7 @@
         </tr>
       </table>
 
-      <div class="quote-box" style="margin-top:9px; font-size:0.46em;">
+      <div class="takeaway" style="margin-top:9px; font-size:0.46em;">
         <span style="color:var(--accent);font-weight:700;">基本能力越強，AI 才是越強大的放大器；沒有基本能力，AI 只是大腦的代工。</span>
         這句話對學生成立，對我們自己也一樣。
       </div>
@@ -1827,6 +1917,7 @@
 
     <!-- ============ 41. 三種老師的下一步 ============ -->
     <section>
+      <p class="eyebrow">收尾｜明天的第一步</p>
       <h2 style="font-size:1.15em;margin-bottom:0.1em;">明天回到學校，各自的第一步</h2>
       <p class="note-sm" style="margin:0 0 8px;">今天在場的三種夥伴，起點不同，第一步也不該一樣。</p>
       <div class="adv-grid g3">
@@ -1877,7 +1968,7 @@
         <div class="big">
           <img src="images/icon_output.png" alt=""
                style="width:130px;height:130px;object-fit:contain;
-                      filter:drop-shadow(0 0 12px rgba(79,195,247,0.32));">
+                      filter:drop-shadow(0 0 12px rgba(143,205,234,0.32));">
         </div>
         <h1 style="color:var(--accent2); font-size:1.5em;">工具會一直換<br>但「知道學生卡在哪」不會</h1>
         <p class="tagline" style="margin-top:1em;">
@@ -1951,11 +2042,11 @@
       }
 
       // c 邊正方形（斜邊外側）：u = (b, a)，長度剛好是 c
-      poly([[a,0],[0,b],[b,b+a],[a+b,a]], 'rgba(129,199,132,0.22)', '#81c784');
+      poly([[a,0],[0,b],[b,b+a],[a+b,a]], 'rgba(168,207,154,0.22)', '#a8cf9a');
       // a 邊正方形（x 軸下方）
-      poly([[0,0],[a,0],[a,-a],[0,-a]], 'rgba(79,195,247,0.25)', '#4fc3f7');
+      poly([[0,0],[a,0],[a,-a],[0,-a]], 'rgba(143,205,234,0.25)', '#8fcdea');
       // b 邊正方形（y 軸左方）
-      poly([[0,0],[0,b],[-b,b],[-b,0]], 'rgba(232,100,58,0.25)', '#e8643a');
+      poly([[0,0],[0,b],[-b,b],[-b,0]], 'rgba(242,163,124,0.25)', '#f2a37c');
 
       // 三角形本體
       poly([[0,0],[a,0],[0,b]], 'rgba(255,255,255,0.10)', '#ffffff');
@@ -1968,9 +2059,9 @@
       ctx.strokeStyle = 'rgba(255,255,255,0.75)'; ctx.lineWidth = 1.5; ctx.stroke();
 
       // 面積數字
-      label(a*a, a/2, -a/2, '#4fc3f7', Math.max(11, Math.min(17, a*3)));
-      label(b*b, -b/2, b/2, '#e8643a', Math.max(11, Math.min(17, b*3)));
-      label((a*a + b*b), (a+b)/2, (a+b)/2, '#81c784', Math.max(12, Math.min(19, c*2.6)));
+      label(a*a, a/2, -a/2, '#8fcdea', Math.max(11, Math.min(17, a*3)));
+      label(b*b, -b/2, b/2, '#f2a37c', Math.max(11, Math.min(17, b*3)));
+      label((a*a + b*b), (a+b)/2, (a+b)/2, '#a8cf9a', Math.max(12, Math.min(19, c*2.6)));
 
       document.getElementById('pyth-av').textContent = a;
       document.getElementById('pyth-bv').textContent = b;
@@ -2004,7 +2095,7 @@
         new QRCode(el, {
           text: el.dataset.url,
           width: size, height: size,
-          colorDark: '#0d1117', colorLight: '#ffffff',
+          colorDark: '#1b222b', colorLight: '#ffffff',
           correctLevel: QRCode.CorrectLevel.M
         });
         el.dataset.done = '1';
@@ -2074,7 +2165,7 @@
   (function initWordcloud() {
     const SLIDE = 'intro';
     const LS = 'tcmath_wc_local';
-    const COLORS = ['#4fc3f7','#e8643a','#ffb74d','#81c784','#ce93d8','#80deea','#f48fb1'];
+    const COLORS = ['#8fcdea','#f2a37c','#f2dfa0','#a8cf9a','#cbb2d8','#9fd8e0','#e8a9bc'];
     const input = document.getElementById('wc-input');
     const btn   = document.getElementById('wc-btn');
     if (!input || !btn) return;
@@ -2090,9 +2181,9 @@
       if (local) return;
       local = true;
       console.warn('文字雲改用本機模式：', (err && err.message) || err);
-      setMode('本機模式', '#ffb74d');
+      setMode('本機模式', '#f2dfa0');
       const tip = document.getElementById('wc-empty');
-      if (tip) tip.innerHTML = '雲端未連上，已切換<strong style="color:#ffb74d;">本機模式</strong><br>這台電腦輸入的詞仍會顯示';
+      if (tip) tip.innerHTML = '雲端未連上，已切換<strong style="color:#f2dfa0;">本機模式</strong><br>這台電腦輸入的詞仍會顯示';
       words = localWords();
       render();
     }
@@ -2221,7 +2312,7 @@
       try {
         const rows = await fetchAll('wordcloud', SLIDE);   // 文字雲要全部，不去重
         words = rows.map(r => r.payload && r.payload.word).filter(Boolean);
-        setMode('雲端同步', '#81c784');
+        setMode('雲端同步', '#a8cf9a');
         try { localStorage.removeItem(LS); } catch (e) {}   // 雲端正常就清掉本機殘留
         render();
         subscribe('wordcloud', SLIDE, () => pullSoon());
@@ -2259,7 +2350,7 @@
       if (local) return;
       local = true;
       console.warn('投票改用本機模式：', (err && err.message) || err);
-      setMode('本機模式', '#ffb74d');
+      setMode('本機模式', '#f2dfa0');
       paint();
     }
 
@@ -2317,7 +2408,7 @@
           chk.textContent = on ? '✓' : '';
           chk.style.background = on ? 'var(--accent2)' : 'transparent';
           chk.style.borderColor = on ? 'var(--accent2)' : 'rgba(255,255,255,0.3)';
-          chk.style.color = '#0d1117';
+          chk.style.color = '#1b222b';
         }
         if (btn) btn.style.borderColor = on ? 'var(--accent2)' : 'rgba(255,255,255,0.1)';
       });
@@ -2337,7 +2428,7 @@
         ((me && me.payload && me.payload.options) || []).forEach(id => mine.add(id));
         const el = document.getElementById('poll-mine');
         if (el) el.textContent = mine.size;
-        setMode('雲端同步', '#81c784');
+        setMode('雲端同步', '#a8cf9a');
         paint();
         subscribe('poll', SLIDE, () => pullPollSoon());
       } catch (e) { goLocal(e); }
@@ -2383,7 +2474,7 @@
       try {
         await send('selfcheck', SLIDE, { score: items.length, items: items });
         btn.textContent = '已送出 ✓';
-        if (msgEl) { msgEl.textContent = '收到了，謝謝！'; msgEl.style.color = '#81c784'; }
+        if (msgEl) { msgEl.textContent = '收到了，謝謝！'; msgEl.style.color = '#a8cf9a'; }
       } catch (e) {
         console.warn('自評改存本機：', (e && e.message) || e);
         try {
@@ -2393,7 +2484,7 @@
           localStorage.setItem(key, JSON.stringify(arr));
         } catch (err) {}
         btn.textContent = '已記錄 ✓';
-        if (msgEl) { msgEl.textContent = '本機模式（雲端未連上）'; msgEl.style.color = '#ffb74d'; }
+        if (msgEl) { msgEl.textContent = '本機模式（雲端未連上）'; msgEl.style.color = '#f2dfa0'; }
       }
     });
     refresh();
