@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
@@ -20,12 +23,12 @@
     }
 
     .reveal {
-      font-family: 'Segoe UI', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+      font-family: 'Inter', 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', sans-serif;
     }
     .reveal h1, .reveal h2, .reveal h3 {
-      font-family: 'Segoe UI', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      font-family: 'Inter', 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.03em;
     }
     .reveal h1 { font-size: 2.1em; }
     .reveal h2 { font-size: 1.4em; color: var(--accent2); }
@@ -63,9 +66,9 @@
     /* === 統計數字卡 === */
     .stat-row { display: flex; gap: 18px; justify-content: center; margin-top: 0.8em; }
     .stat-card {
-      background: rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.045);
       border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 12px;
+      border-radius: 3px;
       padding: 18px 22px;
       text-align: center;
       flex: 1;
@@ -78,9 +81,9 @@
     .adv-grid.g3 { grid-template-columns: repeat(3, 1fr); }
     .adv-grid.g4 { grid-template-columns: repeat(4, 1fr); }
     .adv-card {
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.033);
       border-top: 4px solid var(--accent2);
-      border-radius: 8px;
+      border-radius: 2px;
       padding: 16px 12px;
       text-align: center;
     }
@@ -88,14 +91,14 @@
     .adv-card .adv-icon img {
       width: 60px; height: 60px; object-fit: contain;
       display: block; margin: 0 auto;
-      filter: drop-shadow(0 0 10px rgba(79,195,247,0.6));
+      filter: drop-shadow(0 0 5px rgba(79,195,247,0.27));
     }
     .adv-card .adv-title { font-size: 0.46em; font-weight: 700; color: var(--accent2); margin-bottom: 6px; }
     .adv-card .adv-desc  { font-size: 0.34em; color: #bbb; line-height: 1.6; }
 
     /* === VS 對比 === */
     .vs-grid { display: grid; grid-template-columns: 1fr 54px 1fr; gap: 0; align-items: start; margin-top: 0.6em; }
-    .vs-col { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 18px; }
+    .vs-col { background: rgba(255,255,255,0.033); border-radius: 3px; padding: 18px; }
     .vs-col.left-col  { border-top: 3px solid var(--warn); }
     .vs-col.right-col { border-top: 3px solid var(--accent2); }
     .vs-label { font-size: 0.62em; font-weight: 700; margin-bottom: 10px; letter-spacing: 0.03em; }
@@ -103,7 +106,7 @@
     .vs-label.right { color: var(--accent2); }
     .vs-center { display: flex; align-items: center; justify-content: center; font-size: 1.2em; font-weight: 900; color: #555; height: 100%; }
     .vs-col ul { font-size: 0.38em; list-style: none; padding: 0; margin: 0; }
-    .vs-col ul li { padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); line-height: 1.5; }
+    .vs-col ul li { padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.028); line-height: 1.5; }
     .vs-col ul li:last-child { border-bottom: none; }
     .vs-col ul li::before { content: "✦ "; opacity: 0.5; }
 
@@ -124,9 +127,9 @@
 
     /* === 引用 === */
     .quote-box {
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.033);
       border-left: 4px solid var(--accent);
-      border-radius: 8px;
+      border-radius: 2px;
       padding: 18px 22px;
       margin: 0.7em 0;
       font-size: 0.5em;
@@ -141,7 +144,7 @@
       background: rgba(255,183,77,0.1);
       border: 1px solid rgba(255,183,77,0.35);
       border-left: 4px solid var(--warn);
-      border-radius: 8px;
+      border-radius: 2px;
       padding: 16px 20px;
       font-size: 0.42em;
       color: #ddd;
@@ -154,7 +157,7 @@
       background: rgba(129,199,132,0.1);
       border: 1px solid rgba(129,199,132,0.35);
       border-left: 4px solid var(--success);
-      border-radius: 8px;
+      border-radius: 2px;
       padding: 16px 20px;
       font-size: 0.42em;
       color: #ddd;
@@ -165,7 +168,7 @@
 
     /* === 結論卡 === */
     .conclusion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 0.8em; }
-    .conclusion-card { border-radius: 10px; padding: 18px; font-size: 0.4em; }
+    .conclusion-card { border-radius: 3px; padding: 18px; font-size: 0.4em; }
     .conclusion-card.positive { background: rgba(79,195,247,0.12); border: 1px solid rgba(79,195,247,0.35); }
     .conclusion-card.caution  { background: rgba(255,183,77,0.1);  border: 1px solid rgba(255,183,77,0.3); }
     .conclusion-card .cc-title { font-size: 1.35em; font-weight: 700; margin-bottom: 8px; }
@@ -179,15 +182,15 @@
     .samr-step {
       display: grid; grid-template-columns: 46px 44px 116px 1fr;
       align-items: center; gap: 13px;
-      border-radius: 8px; padding: 11px 16px;
+      border-radius: 2px; padding: 11px 16px;
       font-size: 0.4em;
     }
     .samr-step .s-letter { font-size: 1.8em; font-weight: 900; text-align: center; line-height: 1; }
     .samr-step .s-name { font-weight: 700; font-size: 1.15em; }
     .samr-step .s-ex { color: #bbb; line-height: 1.5; }
-    .samr-step.s1 { background: rgba(255,255,255,0.04); border-left: 4px solid #666; }
+    .samr-step.s1 { background: rgba(255,255,255,0.028); border-left: 4px solid #666; }
     .samr-step.s1 .s-letter, .samr-step.s1 .s-name { color: #888; }
-    .samr-step.s2 { background: rgba(255,255,255,0.05); border-left: 4px solid #999; }
+    .samr-step.s2 { background: rgba(255,255,255,0.033); border-left: 4px solid #999; }
     .samr-step.s2 .s-letter, .samr-step.s2 .s-name { color: #aaa; }
     .samr-step.s3 { background: rgba(79,195,247,0.12); border-left: 4px solid var(--accent2); }
     .samr-step.s3 .s-letter, .samr-step.s3 .s-name { color: var(--accent2); }
@@ -210,7 +213,7 @@
     .demo-info .d-url a { color: inherit; text-decoration: none; }
     .demo-info .d-url a:hover { color: #fff; text-decoration: underline; }
     .qr-wrap {
-      background: #fff; border-radius: 10px; padding: 10px;
+      background: #fff; border-radius: 3px; padding: 10px;
       display: flex; align-items: center; justify-content: center;
     }
     .qr-wrap img, .qr-wrap canvas { display: block; width: 148px; height: 148px; }
@@ -218,8 +221,8 @@
     /* === 流程鏈 === */
     .flow { display: flex; align-items: stretch; gap: 8px; margin-top: 0.7em; }
     .flow-step {
-      flex: 1; background: rgba(255,255,255,0.05);
-      border-top: 3px solid var(--accent2); border-radius: 8px;
+      flex: 1; background: rgba(255,255,255,0.033);
+      border-top: 3px solid var(--accent2); border-radius: 2px;
       padding: 14px 10px; text-align: center; font-size: 0.36em; line-height: 1.55;
     }
     .flow-step .fs-num { color: var(--accent); font-weight: 800; font-size: 1.3em; display: block; margin-bottom: 5px; }
@@ -229,7 +232,7 @@
     /* === 程式碼樣式 === */
     .code-block {
       background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px; padding: 14px 18px; margin-top: 0.6em;
+      border-radius: 2px; padding: 14px 18px; margin-top: 0.6em;
       font-family: 'Consolas', 'Courier New', monospace;
       font-size: 0.36em; color: #a5d6a7; line-height: 1.8; white-space: pre-wrap;
     }
@@ -243,7 +246,7 @@
 
     /* === 小標籤 === */
     .pill {
-      display: inline-block; padding: 3px 10px; border-radius: 12px;
+      display: inline-block; padding: 3px 10px; border-radius: 999px;
       font-size: 0.75em; font-weight: 700; margin-right: 6px;
     }
     .pill.p-blue { background: rgba(79,195,247,0.2); color: var(--accent2); }
@@ -258,12 +261,12 @@
     .flow-step img {
       width: 46px; height: 46px; object-fit: contain;
       display: block; margin: 0 auto 8px;
-      filter: drop-shadow(0 0 8px rgba(79,195,247,0.55));
+      filter: drop-shadow(0 0 4px rgba(79,195,247,0.25));
     }
 
     /* === 範例圖（帶說明浮層）=== */
     .example-fig {
-      margin-top: 0.7em; border-radius: 10px; overflow: hidden;
+      margin-top: 0.7em; border-radius: 3px; overflow: hidden;
       border: 1px solid rgba(255,255,255,0.12); position: relative;
     }
     .example-fig img { display: block; width: 100%; object-fit: cover; }
@@ -276,20 +279,20 @@
 
     /* === TPACK 三圓 === */
     .tpack-wrap { display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: center; margin-top: 0.5em; }
-    .tpack-wrap .venn { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+    .tpack-wrap .venn { border-radius: 3px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
     .tpack-wrap .venn img { display: block; width: 100%; height: 250px; object-fit: cover; }
 
     /* === SAMR 圖示 === */
     .samr-step .s-icon img {
       width: 40px; height: 40px; object-fit: contain; display: block; margin: 0 auto;
-      filter: drop-shadow(0 0 8px rgba(79,195,247,0.5));
+      filter: drop-shadow(0 0 4px rgba(79,195,247,0.23));
     }
 
     /* === 自評九宮格（可勾選）=== */
     .sc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: 0.4em; }
     .sc-cell {
-      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 8px; padding: 11px 9px; cursor: pointer; text-align: center;
+      background: rgba(255,255,255,0.033); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 2px; padding: 11px 9px; cursor: pointer; text-align: center;
       transition: background 0.18s, border-color 0.18s; user-select: none;
     }
     .sc-cell:hover { border-color: rgba(79,195,247,0.5); }
@@ -305,7 +308,7 @@
     .sc-cat { font-size: 0.3em; color: var(--accent2); font-weight: 700; margin: 8px 0 2px; }
 
     .btn-primary {
-      background: var(--accent2); color: #0d1117; border: none; border-radius: 8px;
+      background: var(--accent2); color: #0d1117; border: none; border-radius: 2px;
       padding: 9px 22px; font-weight: 700; font-size: 0.36em; cursor: pointer;
       font-family: inherit;
     }
@@ -314,7 +317,7 @@
     /* === 連結清單 === */
     .link-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 0.5em; }
     .link-item {
-      background: rgba(255,255,255,0.05); border-left: 3px solid var(--accent2);
+      background: rgba(255,255,255,0.033); border-left: 3px solid var(--accent2);
       border-radius: 6px; padding: 9px 12px; font-size: 0.32em; line-height: 1.5;
     }
     .link-item a { color: var(--accent2); text-decoration: none; font-family: 'Consolas', monospace; }
@@ -330,7 +333,7 @@
 
     /* === 迷你投影片（用來示範好壞對比）=== */
     .mini-deck {
-      background: #141922; border: 1px solid rgba(255,255,255,0.16); border-radius: 8px;
+      background: #141922; border: 1px solid rgba(255,255,255,0.16); border-radius: 2px;
       padding: 12px 14px; position: relative; overflow: hidden;
     }
     .mini-deck .md-head {
@@ -358,7 +361,7 @@
     .canva-card {
       display: flex; align-items: center; gap: 13px;
       background: rgba(206,147,216,0.10); border: 1px solid rgba(206,147,216,0.3);
-      border-left: 4px solid var(--purple); border-radius: 8px; padding: 10px 14px;
+      border-left: 4px solid var(--purple); border-radius: 2px; padding: 10px 14px;
       margin-top: 0.6em;
     }
     .canva-card .cc-txt { flex: 1; font-size: 0.32em; color: #bbb; line-height: 1.6; }
@@ -369,10 +372,71 @@
 
     /* === 遊戲橫幅 === */
     .game-banner {
-      border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 3px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12);
       margin-top: 0.5em;
     }
     .game-banner img { display: block; width: 100%; height: 92px; object-fit: cover; }
+
+
+    /* === 視覺精修 === */
+
+    /* 極淡背景網格：讓深色底不再是一塊死色 */
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 46px 46px;
+    }
+
+    /* 左下角場次代碼：低調的身分標記 */
+    body::after {
+      content: 'math-20260826';
+      position: fixed; left: 20px; bottom: 14px; z-index: 20;
+      font-family: 'Inter', monospace; font-size: 11px;
+      letter-spacing: 0.14em; color: rgba(255,255,255,0.17);
+      pointer-events: none;
+    }
+
+    /* 標題左側細豎線，取代千篇一律的置中大標 */
+    .reveal h2 { position: relative; padding-left: 15px; }
+    .reveal h2::before {
+      content: ''; position: absolute; left: 0; top: 0.2em; bottom: 0.2em;
+      width: 3px; background: var(--accent);
+    }
+    .title-slide h2, .chapter h2, .end-slide h2 { padding-left: 0; }
+    .title-slide h2::before, .chapter h2::before, .end-slide h2::before { display: none; }
+
+    /* 頁碼與進度條低調化 */
+    .reveal .slide-number {
+      background: transparent; color: rgba(255,255,255,0.3);
+      font-family: 'Inter', sans-serif; font-size: 13px;
+      letter-spacing: 0.06em; right: 20px; bottom: 12px;
+    }
+    .reveal .progress { height: 2px; }
+
+    /* 表格：拿掉色塊底，改用細線與字距 */
+    .reveal table th {
+      background: transparent;
+      border-bottom: 1px solid rgba(79,195,247,0.45);
+      letter-spacing: 0.05em; font-weight: 600;
+      text-transform: none; padding-bottom: 7px;
+    }
+    .reveal table td { border-bottom: 1px solid rgba(255,255,255,0.06); }
+
+    /* 卡片：頂線收細，去掉厚重感 */
+    .adv-card { border-top-width: 2px; }
+    .conclusion-card, .stat-card { border-width: 1px; }
+
+    /* 引用框：只留左線，不要整塊底色 */
+    .quote-box {
+      background: transparent;
+      border-left: 2px solid var(--accent);
+      padding-left: 18px;
+    }
+
+    /* 數字強調用等寬，排起來才齊 */
+    .stat-card .num, .code-block, .d-url, .qr-label { font-variant-numeric: tabular-nums; }
 
     /* === LIVE 動畫 === */
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
@@ -422,23 +486,23 @@
       <div style="display:grid; grid-template-columns:250px 1fr; gap:14px; height:450px;">
 
         <div style="display:flex; flex-direction:column; gap:10px;">
-          <div style="background:rgba(255,255,255,0.06); border-radius:10px; padding:14px;">
+          <div style="background:rgba(255,255,255,0.028); border-radius:3px; padding:14px;">
             <div style="font-size:0.36em; color:var(--accent2); font-weight:700; margin-bottom:8px;">輸入你的答案</div>
             <input id="wc-input" type="text" placeholder="例：GGB、康軒電子書…" maxlength="20"
-              style="width:100%; padding:8px 12px; border-radius:8px; border:1px solid rgba(79,195,247,0.3);
+              style="width:100%; padding:8px 12px; border-radius:2px; border:1px solid rgba(79,195,247,0.3);
                      background:rgba(255,255,255,0.08); color:#fff; font-size:13px;
                      box-sizing:border-box; font-family:inherit; outline:none;" />
             <button id="wc-btn"
               style="width:100%; margin-top:8px; padding:9px; background:var(--accent2); color:#0d1117;
-                     border:none; border-radius:8px; font-weight:700; font-size:13px; cursor:pointer;">
+                     border:none; border-radius:2px; font-weight:700; font-size:13px; cursor:pointer;">
               送出 ↵
             </button>
           </div>
-          <div style="background:rgba(255,255,255,0.06); border-radius:10px; padding:14px; flex:1; overflow:hidden; display:flex; flex-direction:column;">
+          <div style="background:rgba(255,255,255,0.028); border-radius:3px; padding:14px; flex:1; overflow:hidden; display:flex; flex-direction:column;">
             <div style="font-size:0.36em; color:var(--accent2); font-weight:700; margin-bottom:8px;">
               熱門答案
               <span style="display:inline-block; background:#ff4757; color:#fff; padding:2px 7px;
-                           border-radius:10px; font-size:0.85em; animation:pulse 1.5s infinite;">LIVE</span>
+                           border-radius:3px; font-size:0.85em; animation:pulse 1.5s infinite;">LIVE</span>
               <span id="wc-mode" style="font-size:0.82em; font-weight:400; color:#777; margin-left:5px;">連線中…</span>
             </div>
             <div id="wc-list" style="font-size:0.32em; overflow-y:auto; flex:1; color:#ccc;"></div>
@@ -449,8 +513,8 @@
           </div>
         </div>
 
-        <div style="background:rgba(255,255,255,0.04); border-radius:12px; overflow:hidden;
-                    position:relative; border:1px solid rgba(255,255,255,0.07);">
+        <div style="background:rgba(255,255,255,0.028); border-radius:3px; overflow:hidden;
+                    position:relative; border:1px solid rgba(255,255,255,0.045);">
           <canvas id="wc-canvas" style="width:100%; height:100%; display:block;"></canvas>
           <div id="wc-empty" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
                                      color:#444; font-size:0.4em; text-align:center;
@@ -619,8 +683,8 @@
       <h2 style="font-size:1.12em;margin-bottom:0.15em;">PIDS 三力，剛好一一對上 TPACK</h2>
 
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
-                  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
-                  border-radius:10px;padding:10px 14px;margin-bottom:11px;">
+                  background:rgba(255,255,255,0.028);border:1px solid rgba(255,255,255,0.1);
+                  border-radius:3px;padding:10px 14px;margin-bottom:11px;">
         <div style="display:flex;align-items:center;justify-content:center;gap:8px;">
           <img src="images/icon_tk.png" alt="" style="width:32px;height:32px;object-fit:contain;">
           <span style="font-size:0.3em;color:#999;">T 技術</span>
@@ -990,7 +1054,7 @@
           </div>
         </div>
         <div style="background:rgba(206,147,216,0.10); border:1px solid rgba(206,147,216,0.3);
-                    border-radius:10px; padding:16px 18px; text-align:center;">
+                    border-radius:3px; padding:16px 18px; text-align:center;">
           <div style="font-size:0.42em; color:var(--purple); font-weight:700; margin-bottom:8px;">
             做完長什麼樣 — 真實成品
           </div>
@@ -1018,11 +1082,11 @@
       <h2 style="font-size:1.15em;margin-bottom:0.15em;">同一個畢氏定理，兩種呈現</h2>
       <p class="note-sm" style="margin:0 0 8px;">① 先拖<span style="color:var(--accent2);">揭露滑桿</span>把課本靜態圖換成動態教材　② 再拖<span style="color:var(--accent);">邊長滑桿</span>看關係怎麼動</p>
 
-      <div style="position:relative; height:286px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.12);">
-        <div id="viz-before" style="position:absolute;inset:0;background:rgba(255,255,255,0.04);
+      <div style="position:relative; height:286px; border-radius:3px; overflow:hidden; border:1px solid rgba(255,255,255,0.12);">
+        <div id="viz-before" style="position:absolute;inset:0;background:rgba(255,255,255,0.028);
              display:flex;align-items:center;justify-content:center;gap:20px;padding:14px;box-sizing:border-box;">
           <img src="images/ex_textbook.png" alt="課本靜態圖"
-               style="height:238px;border-radius:8px;object-fit:cover;opacity:0.85;">
+               style="height:238px;border-radius:2px;object-fit:cover;opacity:0.85;">
           <div style="max-width:250px;">
             <div style="font-size:0.44em;color:var(--warn);font-weight:700;margin-bottom:8px;">課本靜態圖</div>
             <div style="font-size:0.34em;color:#999;line-height:1.9;">
@@ -1111,7 +1175,7 @@
                 fill="rgba(255,183,77,0.14)" stroke="#ffb74d" stroke-width="1.4"/>
           <text x="84" y="70" fill="#999" font-size="8.5" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">雲端</text>
           <line x1="104" y1="48" x2="126" y2="48" stroke="#7b8794" stroke-width="1.4" marker-end="url(#ah)"/>
-          <rect x="130" y="30" width="52" height="36" rx="4" fill="rgba(255,255,255,0.07)" stroke="#888" stroke-width="1.3"/>
+          <rect x="130" y="30" width="52" height="36" rx="4" fill="rgba(255,255,255,0.045)" stroke="#888" stroke-width="1.3"/>
           <line x1="138" y1="41" x2="174" y2="41" stroke="#aaa" stroke-width="2.4"/>
           <line x1="138" y1="48" x2="174" y2="48" stroke="#aaa" stroke-width="2.4"/>
           <line x1="138" y1="55" x2="160" y2="55" stroke="#aaa" stroke-width="2.4"/>
@@ -1350,7 +1414,7 @@
       <h2>設計原理：機制即評量</h2>
       <div class="vs-grid">
         <div class="vs-col left-col">
-          <div class="vs-label left"><img src="images/icon_detach.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 8px rgba(79,195,247,0.5));">✗ 外掛式</div>
+          <div class="vs-label left"><img src="images/icon_detach.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 4px rgba(79,195,247,0.23));">✗ 外掛式</div>
           <ul>
             <li>答完題 → 才給遊戲獎勵</li>
             <li>數學是門票，遊戲是糖果</li>
@@ -1360,7 +1424,7 @@
         </div>
         <div class="vs-center">VS</div>
         <div class="vs-col right-col">
-          <div class="vs-label right"><img src="images/icon_embed.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 8px rgba(79,195,247,0.5));">✓ 內建式</div>
+          <div class="vs-label right"><img src="images/icon_embed.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 4px rgba(79,195,247,0.23));">✓ 內建式</div>
           <ul>
             <li>遊戲的「操作動詞」＝ 數學行為本身</li>
             <li>報座標才能攻擊、解不等式才能出招</li>
@@ -1500,7 +1564,7 @@
       <h2>一個檢驗：拿掉數學，還玩得下去嗎？</h2>
       <div class="conclusion-grid">
         <div class="conclusion-card caution">
-          <div class="cc-title"><img src="images/icon_detach.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 8px rgba(79,195,247,0.5));">還玩得下去</div>
+          <div class="cc-title"><img src="images/icon_detach.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 4px rgba(79,195,247,0.23));">還玩得下去</div>
           <ul>
             <li>數學只是遊戲的「門票」</li>
             <li>換成成語、單字也照樣跑</li>
@@ -1509,7 +1573,7 @@
           </ul>
         </div>
         <div class="conclusion-card positive">
-          <div class="cc-title"><img src="images/icon_embed.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 8px rgba(79,195,247,0.5));">直接不存在</div>
+          <div class="cc-title"><img src="images/icon_embed.png" alt="" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 4px rgba(79,195,247,0.23));">直接不存在</div>
           <ul>
             <li>軍艦棋拿掉「報座標」→ 遊戲沒了</li>
             <li>格鬥場拿掉「解不等式」→ 沒招可出</li>
@@ -1813,7 +1877,7 @@
         <div class="big">
           <img src="images/icon_output.png" alt=""
                style="width:130px;height:130px;object-fit:contain;
-                      filter:drop-shadow(0 0 24px rgba(79,195,247,0.7));">
+                      filter:drop-shadow(0 0 12px rgba(79,195,247,0.32));">
         </div>
         <h1 style="color:var(--accent2); font-size:1.5em;">工具會一直換<br>但「知道學生卡在哪」不會</h1>
         <p class="tagline" style="margin-top:1em;">
@@ -1951,366 +2015,339 @@
   Reveal.on('slidechanged', renderQRs);
 </script>
 
-<!-- === Firebase：即時文字雲 === -->
+<!-- === Supabase：研習互動（文字雲／複選投票／數位力自評）=== -->
 <script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
-  import {
-    getFirestore, collection, addDoc, onSnapshot,
-    serverTimestamp, query, orderBy
-  } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAYQhNavPSce17XtvDC5xnXyl9iUhW9KjA",
-    authDomain: "teacherstudy-109ef.firebaseapp.com",
-    projectId: "teacherstudy-109ef",
-    storageBucket: "teacherstudy-109ef.firebasestorage.app",
-    messagingSenderId: "196599230156",
-    appId: "1:196599230156:web:cfe55d364df3ae1b9d5c69"
-  };
-  const app = initializeApp(firebaseConfig);
-  const fdb = getFirestore(app);
-  // ※ 集合名稱需在 Firestore 規則白名單內，否則自動退回本機模式
-  const wordsRef = collection(fdb, 'tcmath_wordcloud');
+  // anon key 設計上就是要放前端，實際權限完全由 RLS 控制
+  const SUPABASE_URL  = 'https://xxbjykdheracbfmwpxwm.supabase.co';
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh4Ymp5a2RoZXJhY2JmbXdweHdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5NjU0ODEsImV4cCI6MjA5MTU0MTQ4MX0.b6YJX3ztLHR0ImUuC1jbfCXH8si2eRulu39KNAb5Ves';
+  const WORKSHOP_CODE = 'math-20260826';   // 換一場研習只要改這一行
 
-  const COLORS = ['#4fc3f7','#e8643a','#ffb74d','#81c784','#ce93d8','#80deea','#f48fb1'];
-  const LS_KEY = 'tcmath_wc_local';
-  let wcData = [];
-  let useLocal = false;
-
-  function localWords() {
-    try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); } catch(e) { return []; }
-  }
-  function pushLocal(word) {
-    const arr = localWords(); arr.push(word);
-    try { localStorage.setItem(LS_KEY, JSON.stringify(arr)); } catch(e) {}
-    return arr;
-  }
-  function setMode(text, color) {
-    const el = document.getElementById('wc-mode');
-    if (el) { el.textContent = text; el.style.color = color; }
-  }
-  function goLocal() {
-    if (useLocal) return;
-    useLocal = true;
-    setMode('本機模式', '#ffb74d');
-    const tip = document.getElementById('wc-empty');
-    if (tip) tip.innerHTML = '雲端未開通，已切換<strong style="color:#ffb74d;">本機模式</strong><br>這台電腦輸入的詞仍會顯示';
-    render(localWords());
-  }
-
-  function render(words) {
-    const counts = {};
-    words.forEach(w => counts[w] = (counts[w] || 0) + 1);
-    wcData = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-
-    const t = document.getElementById('wc-total');
-    const u = document.getElementById('wc-unique');
-    if (t) t.textContent = words.length;
-    if (u) u.textContent = wcData.length;
-
-    const listEl = document.getElementById('wc-list');
-    if (listEl) {
-      listEl.innerHTML = wcData.slice(0, 12).map(([w, c]) =>
-        `<div style="display:flex;justify-content:space-between;padding:4px 0;
-                     border-bottom:1px solid rgba(255,255,255,0.06);">
-          <span>${w}</span><span style="color:var(--accent);font-weight:700;">${c}</span>
-        </div>`
-      ).join('') || '<div style="color:#555;padding:8px 0;">尚無資料</div>';
-    }
-    const empty = document.getElementById('wc-empty');
-    if (empty) empty.style.display = wcData.length > 0 ? 'none' : '';
-    drawWordCloud();
-  }
-
-  window.wcSubmit = async function() {
-    const input = document.getElementById('wc-input');
-    const word = input.value.trim();
-    if (!word) return;
-    const btn = document.getElementById('wc-btn');
-    btn.disabled = true;
-    if (useLocal) {
-      render(pushLocal(word));
-      input.value = '';
-      btn.disabled = false;
-      return;
-    }
-    try {
-      await addDoc(wordsRef, { word, created_at: serverTimestamp() });
-      input.value = '';
-    } catch(e) {
-      console.warn('雲端寫入失敗，切換本機模式：', e.code || e.message);
-      goLocal();
-      render(pushLocal(word));
-      input.value = '';
-    } finally { btn.disabled = false; }
-  };
-
-  document.getElementById('wc-input')?.addEventListener('keypress', e => {
-    if (e.key === 'Enter') window.wcSubmit();
+  const sb = createClient(SUPABASE_URL, SUPABASE_ANON, {
+    realtime: { params: { eventsPerSecond: 5 } }
   });
-  document.getElementById('wc-btn')?.addEventListener('click', window.wcSubmit);
 
-  onSnapshot(query(wordsRef, orderBy('created_at', 'asc')),
-    snap => {
-      if (useLocal) return;
-      setMode('雲端同步', '#81c784');
-      const words = [];
-      snap.forEach(doc => words.push(doc.data().word));
-      render(words);
-    },
-    err => {
-      console.warn('雲端訂閱失敗，切換本機模式：', err.code || err.message);
-      goLocal();
-    }
-  );
+  // 匿名識別碼：同一個瀏覽器維持同一組，用來取「每人最新一筆」
+  const PID_KEY = 'tcmath_pid';
+  let pid = localStorage.getItem(PID_KEY);
+  if (!pid) { pid = 'p_' + Math.random().toString(36).slice(2, 10); localStorage.setItem(PID_KEY, pid); }
 
-  function drawWordCloud() {
-    const canvas = document.getElementById('wc-canvas');
-    if (!canvas || typeof WordCloud === 'undefined') return;
-    const rect = canvas.getBoundingClientRect();
-    if (rect.width < 10 || rect.height < 10) return;
-    canvas.width = rect.width;
-    canvas.height = rect.height;
-    if (wcData.length === 0) return;
-    const maxCount = wcData[0][1];
-    WordCloud(canvas, {
-      list: wcData.map(([w, c]) => [w, Math.max(18, Math.round((c / maxCount) * 76))]),
-      gridSize: 6,
-      weightFactor: 1,
-      fontFamily: '"Microsoft JhengHei", "Noto Sans TC", sans-serif',
-      color: () => COLORS[Math.floor(Math.random() * COLORS.length)],
-      backgroundColor: 'transparent',
-      rotateRatio: 0.3,
-      shuffle: true,
+  /* ---------- 共用：送出、讀取、訂閱 ---------- */
+
+  async function send(kind, slideId, payload) {
+    const { error } = await sb.from('responses').insert({
+      workshop_code: WORKSHOP_CODE, kind, slide_id: slideId, participant: pid, payload
     });
+    if (error) throw error;
   }
 
-  Reveal.on('slidechanged', e => {
-    if (e.currentSlide?.id === 'slide-wordcloud') setTimeout(drawWordCloud, 150);
-  });
-</script>
-
-<!-- === Firebase：複選投票 === -->
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
-  import {
-    getFirestore, doc, setDoc, onSnapshot, serverTimestamp
-  } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyAYQhNavPSce17XtvDC5xnXyl9iUhW9KjA",
-    authDomain: "teacherstudy-109ef.firebaseapp.com",
-    projectId: "teacherstudy-109ef",
-    storageBucket: "teacherstudy-109ef.firebasestorage.app",
-    messagingSenderId: "196599230156",
-    appId: "1:196599230156:web:cfe55d364df3ae1b9d5c69"
-  };
-  const app = initializeApp(firebaseConfig, 'pollApp');
-  const fdb = getFirestore(app);
-
-  const OPTIONS = [
-    { id: 'a', label: '做一頁滑桿／拖拉的動態教材' },
-    { id: 'b', label: '把一個單元做成課堂遊戲' },
-    { id: 'c', label: '用 AI 出一份非選題與評分規準' },
-    { id: 'd', label: '把現有講義做成 A／B／C 分級版' },
-    { id: 'e', label: '用 IRS 收一次全班的迷思' },
-    { id: 'f', label: '先把教室的大屏和平板摸熟' },
-  ];
-  const pollRef = doc(fdb, 'tcmath_poll', 'results');
-
-  const userId = 'user_' + Math.random().toString(36).slice(2, 9);
-  const mine = new Set();
-
-  const POLL_LS = 'tcmath_poll_local';
-  let pollLocal = false;
-
-  function setPollMode(text, color) {
-    const el = document.getElementById('poll-mode');
-    if (el) { el.textContent = text; el.style.color = color; }
-  }
-  function localVotes() {
-    try { return JSON.parse(localStorage.getItem(POLL_LS) || '{}'); } catch(e) { return {}; }
-  }
-  function saveLocal() {
-    // 本機模式只有這台電腦，固定用同一個 key，避免重整後累積出假人數
-    const v = { me: [...mine] };
-    try { localStorage.setItem(POLL_LS, JSON.stringify(v)); } catch(e) {}
-    return v;
-  }
-  function goPollLocal() {
-    if (pollLocal) return;
-    pollLocal = true;
-    setPollMode('本機模式', '#ffb74d');
-    paint(localVotes());
+  async function fetchAll(kind, slideId) {
+    const { data, error } = await sb.from('responses')
+      .select('participant,payload,created_at')
+      .eq('workshop_code', WORKSHOP_CODE).eq('kind', kind).eq('slide_id', slideId)
+      .order('created_at', { ascending: true });
+    if (error) throw error;
+    return data || [];
   }
 
-  const container = document.getElementById('poll-options');
-  if (container) {
+  // 只留每個 participant 的最新一筆（responses 是只進不改，靠這個取代 update）
+  function latestPerParticipant(rows) {
+    const m = new Map();
+    rows.forEach(r => m.set(r.participant, r));
+    return [...m.values()];
+  }
+
+  function subscribe(kind, slideId, onInsert) {
+    return sb.channel('rt_' + kind + '_' + slideId)
+      .on('postgres_changes',
+          { event: 'INSERT', schema: 'public', table: 'responses',
+            filter: 'workshop_code=eq.' + WORKSHOP_CODE },
+          payload => {
+            const r = payload.new;
+            if (r.kind === kind && r.slide_id === slideId) onInsert(r);
+          })
+      .subscribe();
+  }
+
+  /* ================= 一、破冰文字雲 ================= */
+  (function initWordcloud() {
+    const SLIDE = 'intro';
+    const LS = 'tcmath_wc_local';
+    const COLORS = ['#4fc3f7','#e8643a','#ffb74d','#81c784','#ce93d8','#80deea','#f48fb1'];
+    const input = document.getElementById('wc-input');
+    const btn   = document.getElementById('wc-btn');
+    if (!input || !btn) return;
+
+    let words = [];
+    let local = false;
+
+    const localWords = () => { try { return JSON.parse(localStorage.getItem(LS) || '[]'); } catch (e) { return []; } };
+    const setMode = (t, c) => { const el = document.getElementById('wc-mode'); if (el) { el.textContent = t; el.style.color = c; } };
+
+    function goLocal(err) {
+      if (local) return;
+      local = true;
+      console.warn('文字雲改用本機模式：', (err && err.message) || err);
+      setMode('本機模式', '#ffb74d');
+      const tip = document.getElementById('wc-empty');
+      if (tip) tip.innerHTML = '雲端未連上，已切換<strong style="color:#ffb74d;">本機模式</strong><br>這台電腦輸入的詞仍會顯示';
+      words = localWords();
+      render();
+    }
+
+    function render() {
+      const counts = {};
+      words.forEach(w => counts[w] = (counts[w] || 0) + 1);
+      const data = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+
+      const t = document.getElementById('wc-total'), u = document.getElementById('wc-unique');
+      if (t) t.textContent = words.length;
+      if (u) u.textContent = data.length;
+
+      const listEl = document.getElementById('wc-list');
+      if (listEl) {
+        listEl.innerHTML = data.slice(0, 12).map(([w, c]) =>
+          '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.028);">' +
+          '<span>' + w + '</span><span style="color:var(--accent);font-weight:700;">' + c + '</span></div>'
+        ).join('') || '<div style="color:#555;padding:8px 0;">尚無資料</div>';
+      }
+      const empty = document.getElementById('wc-empty');
+      if (empty) empty.style.display = data.length ? 'none' : '';
+      window.__wcData = data;
+      draw(data);
+    }
+
+    function draw(data) {
+      const canvas = document.getElementById('wc-canvas');
+      if (!canvas || typeof WordCloud === 'undefined') return;
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width < 10 || rect.height < 10) return;
+      canvas.width = rect.width; canvas.height = rect.height;
+      if (!data || !data.length) return;
+      const max = data[0][1];
+      WordCloud(canvas, {
+        list: data.map(([w, c]) => [w, Math.max(18, Math.round((c / max) * 76))]),
+        gridSize: 6, weightFactor: 1,
+        fontFamily: '"Noto Sans TC","Microsoft JhengHei",sans-serif',
+        color: () => COLORS[Math.floor(Math.random() * COLORS.length)],
+        backgroundColor: 'transparent', rotateRatio: 0.3, shuffle: true
+      });
+    }
+
+    let pullTimer = null;
+    async function pull() {
+      const rows = await fetchAll('wordcloud', SLIDE);
+      words = rows.map(r => r.payload && r.payload.word).filter(Boolean);
+      render();
+    }
+    function pullSoon() {           // realtime 進來時節流重讀，避免連續刷
+      clearTimeout(pullTimer);
+      pullTimer = setTimeout(() => pull().catch(e => console.warn('重讀失敗', e)), 250);
+    }
+
+    async function submit() {
+      const word = input.value.trim();
+      if (!word) return;
+      btn.disabled = true;
+      try {
+        if (local) throw new Error('local');
+        await send('wordcloud', SLIDE, { word: word });
+        input.value = '';
+        await pull();               // 不等 realtime，送出後直接重讀
+      } catch (e) {
+        if (!local) goLocal(e);
+        words.push(word);
+        try { localStorage.setItem(LS, JSON.stringify(words)); } catch (err) {}
+        input.value = '';
+        render();
+      } finally { btn.disabled = false; }
+    }
+    input.addEventListener('keypress', e => { if (e.key === 'Enter') submit(); });
+    btn.addEventListener('click', submit);
+
+    (async () => {
+      try {
+        const rows = await fetchAll('wordcloud', SLIDE);   // 文字雲要全部，不去重
+        words = rows.map(r => r.payload && r.payload.word).filter(Boolean);
+        setMode('雲端同步', '#81c784');
+        render();
+        subscribe('wordcloud', SLIDE, () => pullSoon());
+      } catch (e) { goLocal(e); }
+    })();
+
+    Reveal.on('slidechanged', e => {
+      if (e.currentSlide && e.currentSlide.id === 'slide-wordcloud')
+        setTimeout(() => draw(window.__wcData), 150);
+    });
+  })();
+
+  /* ================= 二、複選投票 ================= */
+  (function initPoll() {
+    const SLIDE = 'plan';
+    const LS = 'tcmath_poll_local';
+    const OPTIONS = [
+      { id: 'a', label: '做一頁滑桿／拖拉的動態教材' },
+      { id: 'b', label: '把一個單元做成課堂遊戲' },
+      { id: 'c', label: '用 AI 出一份非選題與評分規準' },
+      { id: 'd', label: '把現有講義做成 A／B／C 分級版' },
+      { id: 'e', label: '用 IRS 收一次全班的迷思' },
+      { id: 'f', label: '先把教室的大屏和平板摸熟' }
+    ];
+    const container = document.getElementById('poll-options');
+    if (!container) return;
+
+    const mine = new Set();
+    let rows = [];
+    let local = false;
+
+    const setMode = (t, c) => { const el = document.getElementById('poll-mode'); if (el) { el.textContent = t; el.style.color = c; } };
+
+    function goLocal(err) {
+      if (local) return;
+      local = true;
+      console.warn('投票改用本機模式：', (err && err.message) || err);
+      setMode('本機模式', '#ffb74d');
+      paint();
+    }
+
     OPTIONS.forEach(opt => {
       const btn = document.createElement('button');
-      btn.id = `poll-btn-${opt.id}`;
-      btn.innerHTML = `
-        <div style="display:flex;align-items:center;gap:12px;">
-          <span style="flex:0 0 22px;height:22px;border-radius:5px;border:2px solid rgba(255,255,255,0.3);
-                       display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;"
-                id="poll-check-${opt.id}"></span>
-          <span style="flex:1;text-align:left;">${opt.label}</span>
-          <span style="flex:0 0 116px;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;">
-            <div id="poll-bar-${opt.id}" style="height:100%;width:0;background:var(--accent2);border-radius:4px;transition:width 0.4s;"></div>
-          </span>
-          <span id="poll-pct-${opt.id}" style="flex:0 0 42px;text-align:right;font-size:0.75em;color:#888;">0%</span>
-        </div>
-      `;
-      btn.style.cssText = `width:100%;padding:10px 15px;background:rgba(255,255,255,0.06);
-        border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;
-        font-size:0.42em;cursor:pointer;font-family:inherit;text-align:left;transition:border-color 0.18s;`;
+      btn.id = 'poll-btn-' + opt.id;
+      btn.innerHTML =
+        '<div style="display:flex;align-items:center;gap:12px;">' +
+        '<span style="flex:0 0 22px;height:22px;border-radius:4px;border:2px solid rgba(255,255,255,0.3);' +
+        'display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;" id="poll-check-' + opt.id + '"></span>' +
+        '<span style="flex:1;text-align:left;">' + opt.label + '</span>' +
+        '<span style="flex:0 0 116px;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;">' +
+        '<div id="poll-bar-' + opt.id + '" style="height:100%;width:0;background:var(--accent2);border-radius:4px;transition:width 0.4s;"></div></span>' +
+        '<span id="poll-pct-' + opt.id + '" style="flex:0 0 42px;text-align:right;font-size:0.75em;color:#888;">0%</span>' +
+        '</div>';
+      btn.style.cssText = 'width:100%;padding:10px 15px;background:rgba(255,255,255,0.033);' +
+        'border:1px solid rgba(255,255,255,0.1);border-radius:4px;color:#fff;' +
+        'font-size:0.42em;cursor:pointer;font-family:inherit;text-align:left;transition:border-color 0.18s;';
       btn.onclick = () => toggle(opt.id);
       container.appendChild(btn);
     });
-  }
 
-  async function toggle(optId) {
-    mine.has(optId) ? mine.delete(optId) : mine.add(optId);
-    const mineEl = document.getElementById('poll-mine');
-    if (mineEl) mineEl.textContent = mine.size;
-
-    if (pollLocal) { paint(saveLocal()); return; }
-    try {
-      const data = {};
-      data[`votes.${userId}`] = [...mine];
-      data.updated_at = serverTimestamp();
-      await setDoc(pollRef, data, { merge: true });
-    } catch(e) {
-      console.warn('投票雲端寫入失敗，切換本機模式：', e.code || e.message);
-      goPollLocal();
-      paint(saveLocal());
+    async function toggle(id) {
+      mine.has(id) ? mine.delete(id) : mine.add(id);
+      const el = document.getElementById('poll-mine');
+      if (el) el.textContent = mine.size;
+      const opts = [...mine];
+      rows = rows.filter(r => r.participant !== pid).concat([{ participant: pid, payload: { options: opts } }]);
+      paint();
+      if (local) { try { localStorage.setItem(LS, JSON.stringify(opts)); } catch (e) {} return; }
+      try { await send('poll', SLIDE, { options: opts }); await pullPoll(); }
+      catch (e) { goLocal(e); try { localStorage.setItem(LS, JSON.stringify(opts)); } catch (err) {} }
     }
-  }
 
-  function paint(votes) {
-    const counts = {};
-    OPTIONS.forEach(o => counts[o.id] = 0);
-    let voters = 0;
-    Object.values(votes).forEach(v => {
-      const arr = Array.isArray(v) ? v : [v];   // 相容舊的單選資料
-      if (arr.length) voters++;
-      arr.forEach(id => { if (counts[id] !== undefined) counts[id]++; });
-    });
-
-    const totalEl = document.getElementById('poll-total');
-    if (totalEl) totalEl.textContent = voters;
-
-    OPTIONS.forEach(opt => {
-      const pct = voters > 0 ? Math.round((counts[opt.id] / voters) * 100) : 0;
-      const bar = document.getElementById(`poll-bar-${opt.id}`);
-      const pctEl = document.getElementById(`poll-pct-${opt.id}`);
-      const btn = document.getElementById(`poll-btn-${opt.id}`);
-      const check = document.getElementById(`poll-check-${opt.id}`);
-      if (bar) bar.style.width = pct + '%';
-      if (pctEl) pctEl.textContent = pct + '%';
-      const on = mine.has(opt.id);
-      if (check) {
-        check.textContent = on ? '✓' : '';
-        check.style.background = on ? 'var(--accent2)' : 'transparent';
-        check.style.borderColor = on ? 'var(--accent2)' : 'rgba(255,255,255,0.3)';
-        check.style.color = '#0d1117';
-      }
-      if (btn) btn.style.borderColor = on ? 'var(--accent2)' : 'rgba(255,255,255,0.12)';
-    });
-  }
-
-  onSnapshot(pollRef,
-    snap => {
-      if (pollLocal) return;
-      setPollMode('雲端同步', '#81c784');
-      paint((snap.data() || {}).votes || {});
-    },
-    err => {
-      console.warn('投票雲端訂閱失敗，切換本機模式：', err.code || err.message);
-      goPollLocal();
+    function paint() {
+      const counts = {}; OPTIONS.forEach(o => counts[o.id] = 0);
+      let voters = 0;
+      latestPerParticipant(rows).forEach(r => {
+        const arr = (r.payload && r.payload.options) || [];
+        if (arr.length) voters++;
+        arr.forEach(id => { if (counts[id] !== undefined) counts[id]++; });
+      });
+      const totalEl = document.getElementById('poll-total');
+      if (totalEl) totalEl.textContent = voters;
+      OPTIONS.forEach(opt => {
+        const pct = voters ? Math.round((counts[opt.id] / voters) * 100) : 0;
+        const bar = document.getElementById('poll-bar-' + opt.id);
+        const pctEl = document.getElementById('poll-pct-' + opt.id);
+        const btn = document.getElementById('poll-btn-' + opt.id);
+        const chk = document.getElementById('poll-check-' + opt.id);
+        if (bar) bar.style.width = pct + '%';
+        if (pctEl) pctEl.textContent = pct + '%';
+        const on = mine.has(opt.id);
+        if (chk) {
+          chk.textContent = on ? '✓' : '';
+          chk.style.background = on ? 'var(--accent2)' : 'transparent';
+          chk.style.borderColor = on ? 'var(--accent2)' : 'rgba(255,255,255,0.3)';
+          chk.style.color = '#0d1117';
+        }
+        if (btn) btn.style.borderColor = on ? 'var(--accent2)' : 'rgba(255,255,255,0.1)';
+      });
     }
-  );
-</script>
 
-<!-- === Firebase：數位力自評 === -->
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
-  import {
-    getFirestore, collection, addDoc, serverTimestamp
-  } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
+    let pollTimer = null;
+    async function pullPoll() { rows = await fetchAll('poll', SLIDE); paint(); }
+    function pullPollSoon() {
+      clearTimeout(pollTimer);
+      pollTimer = setTimeout(() => pullPoll().catch(e => console.warn('投票重讀失敗', e)), 250);
+    }
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAYQhNavPSce17XtvDC5xnXyl9iUhW9KjA",
-    authDomain: "teacherstudy-109ef.firebaseapp.com",
-    projectId: "teacherstudy-109ef",
-    storageBucket: "teacherstudy-109ef.firebasestorage.app",
-    messagingSenderId: "196599230156",
-    appId: "1:196599230156:web:cfe55d364df3ae1b9d5c69"
-  };
-  const app = initializeApp(firebaseConfig, 'scApp');
-  const fdb = getFirestore(app);
-  const scRef = collection(fdb, 'tcmath_selfcheck');
-
-  const cells = [...document.querySelectorAll('.sc-cell')];
-  const scoreEl = document.getElementById('sc-score');
-  const adviceEl = document.getElementById('sc-advice');
-  const btn = document.getElementById('sc-submit');
-  const msgEl = document.getElementById('sc-msg');
-  if (!cells.length || !btn) throw new Error('self-check slide absent');
-
-  const ADVICE = [
-    '先從「工具運用」那三格開始 —— 硬體熟了，其他才推得動。',
-    '先從「工具運用」那三格開始 —— 硬體熟了，其他才推得動。',
-    '先從「工具運用」那三格開始 —— 硬體熟了，其他才推得動。',
-    '地基有了。下一步把「教材設計」那排補起來，今天第三段就是在講這個。',
-    '地基有了。下一步把「教材設計」那排補起來，今天第三段就是在講這個。',
-    '地基有了。下一步把「教材設計」那排補起來，今天第三段就是在講這個。',
-    '已經很穩。今天請重點看「數據反饋」那排 —— 遊戲與非選批改都在留痕。',
-    '已經很穩。今天請重點看「數據反饋」那排 —— 遊戲與非選批改都在留痕。',
-    '已經很穩。今天請重點看「數據反饋」那排 —— 遊戲與非選批改都在留痕。',
-    '九格全滿 —— 今天麻煩你多給旁邊的夥伴一些建議。'
-  ];
-
-  function picked() {
-    return cells.filter(c => c.classList.contains('on')).map(c => c.dataset.k);
-  }
-  function refresh() {
-    const n = picked().length;
-    if (scoreEl) scoreEl.textContent = n;
-    if (adviceEl) adviceEl.textContent = ADVICE[n];
-    btn.disabled = false;
-    btn.textContent = '送出自評';
-  }
-
-  cells.forEach(c => c.addEventListener('click', () => {
-    c.classList.toggle('on');
-    refresh();
-  }));
-
-  btn.addEventListener('click', async () => {
-    const items = picked();
-    const payload = { score: items.length, items, created_at: serverTimestamp() };
-    btn.disabled = true;
-    btn.textContent = '送出中…';
-    try {
-      await addDoc(scRef, payload);
-      btn.textContent = '已送出 ✓';
-      if (msgEl) { msgEl.textContent = '收到了，謝謝！'; msgEl.style.color = '#81c784'; }
-    } catch(e) {
-      console.warn('自評雲端寫入失敗，改存本機：', e.code || e.message);
+    (async () => {
       try {
-        const key = 'tcmath_selfcheck_local';
-        const arr = JSON.parse(localStorage.getItem(key) || '[]');
-        arr.push({ ...payload, created_at: null });
-        localStorage.setItem(key, JSON.stringify(arr));
-      } catch(err) {}
-      btn.textContent = '已記錄 ✓';
-      if (msgEl) { msgEl.textContent = '本機模式（雲端未開通）'; msgEl.style.color = '#ffb74d'; }
-    }
-  });
+        rows = await fetchAll('poll', SLIDE);
+        const me = latestPerParticipant(rows).find(r => r.participant === pid);
+        ((me && me.payload && me.payload.options) || []).forEach(id => mine.add(id));
+        const el = document.getElementById('poll-mine');
+        if (el) el.textContent = mine.size;
+        setMode('雲端同步', '#81c784');
+        paint();
+        subscribe('poll', SLIDE, () => pullPollSoon());
+      } catch (e) { goLocal(e); }
+    })();
+  })();
 
-  refresh();
+  /* ================= 三、數位力自評 ================= */
+  (function initSelfCheck() {
+    const SLIDE = 'digital-power';
+    const cells = [...document.querySelectorAll('.sc-cell')];
+    const btn = document.getElementById('sc-submit');
+    if (!cells.length || !btn) return;
+    const scoreEl = document.getElementById('sc-score');
+    const adviceEl = document.getElementById('sc-advice');
+    const msgEl = document.getElementById('sc-msg');
+
+    const ADVICE = [
+      '先從「工具運用」那三格開始 —— 硬體熟了，其他才推得動。',
+      '先從「工具運用」那三格開始 —— 硬體熟了，其他才推得動。',
+      '先從「工具運用」那三格開始 —— 硬體熟了，其他才推得動。',
+      '地基有了。下一步把「教材設計」那排補起來，今天第三段就是在講這個。',
+      '地基有了。下一步把「教材設計」那排補起來，今天第三段就是在講這個。',
+      '地基有了。下一步把「教材設計」那排補起來，今天第三段就是在講這個。',
+      '已經很穩。今天請重點看「數據反饋」那排 —— 遊戲與非選批改都在留痕。',
+      '已經很穩。今天請重點看「數據反饋」那排 —— 遊戲與非選批改都在留痕。',
+      '已經很穩。今天請重點看「數據反饋」那排 —— 遊戲與非選批改都在留痕。',
+      '九格全滿 —— 今天麻煩你多給旁邊的夥伴一些建議。'
+    ];
+    const picked = () => cells.filter(c => c.classList.contains('on')).map(c => c.dataset.k);
+
+    function refresh() {
+      const n = picked().length;
+      if (scoreEl) scoreEl.textContent = n;
+      if (adviceEl) adviceEl.textContent = ADVICE[n];
+      btn.disabled = false;
+      btn.textContent = '送出自評';
+    }
+    cells.forEach(c => c.addEventListener('click', () => { c.classList.toggle('on'); refresh(); }));
+
+    btn.addEventListener('click', async () => {
+      const items = picked();
+      btn.disabled = true; btn.textContent = '送出中…';
+      try {
+        await send('selfcheck', SLIDE, { score: items.length, items: items });
+        btn.textContent = '已送出 ✓';
+        if (msgEl) { msgEl.textContent = '收到了，謝謝！'; msgEl.style.color = '#81c784'; }
+      } catch (e) {
+        console.warn('自評改存本機：', (e && e.message) || e);
+        try {
+          const key = 'tcmath_selfcheck_local';
+          const arr = JSON.parse(localStorage.getItem(key) || '[]');
+          arr.push({ score: items.length, items: items });
+          localStorage.setItem(key, JSON.stringify(arr));
+        } catch (err) {}
+        btn.textContent = '已記錄 ✓';
+        if (msgEl) { msgEl.textContent = '本機模式（雲端未連上）'; msgEl.style.color = '#ffb74d'; }
+      }
+    });
+    refresh();
+  })();
 </script>
+
 
 
 </body>

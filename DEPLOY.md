@@ -1,7 +1,7 @@
 # 部署與待辦
 
-> 簡報本體已完成並通過驗證（42 頁、零版面溢出、互動元件可運作）。
-> 以下兩件事**需要你點頭**才能做，因為都會動到對外的服務。
+> 簡報本體已完成並通過驗證（43 頁、零版面溢出、互動元件實測寫入雲端成功）。
+> 只剩**發布 GitHub Pages** 需要你點頭 —— 那會建立一個公開 repo。
 
 ---
 
@@ -27,63 +27,46 @@ gh api repos/mathruffian-dot/taichung-math-agent-workshop/pages --method POST -f
 
 ---
 
-## 二、Firestore 權限（⚠️ 目前互動元件走的是降級模式）
+## 二、互動後端：Supabase（已接好，實測通過）
 
-### 現況
+三個互動已從 Firebase 改接到 **Supabase `my-teaching-tools`**（ref `xxbjykdheracbfmwpxwm`）。
+架構說明在上層專案的 `SUPABASE架構.md`，schema 在 `supabase/schema.sql`。
 
-實測 `teacherstudy-109ef` 這個 Firebase 專案，**線上規則目前拒絕所有前端讀寫**：
-
-| 測試的集合 | 讀 | 寫 |
+| 互動 | kind | slide_id |
 |---|---|---|
-| `tcmath_wordcloud`（本簡報用） | DENIED | DENIED |
-| `tcmath_poll`（本簡報用） | DENIED | DENIED |
-| `tcmath_selfcheck`（本簡報用） | DENIED | DENIED |
-| `wordcloud_words`（既有工具用） | DENIED | DENIED |
-| `irs_responses`（既有工具用） | DENIED | DENIED |
+| 破冰文字雲 | `wordcloud` | `intro` |
+| 複選投票 | `poll` | `plan` |
+| 數位力自評 | `selfcheck` | `digital-power` |
 
-值得注意的是：連 `wordcloud_words`、`irs_responses` 這些**在本機 `G:\我的雲端硬碟\2026database\firestore.rules` 白名單裡的集合也被拒**。
+換一場研習只要改 `index.html` 裡這一行：
 
-代表**線上規則和本機那份檔案不一致** —— 可能是規則被改過、或那份檔案從未部署。
-其他也吃這個 Firebase 專案的工具（教師研習資料庫、既有文字雲頁面）**可能也是壞的**，值得一起確認。
-
-### 目前的處理：自動降級
-
-簡報不會因此開天窗。文字雲、投票、自評三個元件偵測到雲端不通時，都會自動切成**本機模式**：
-
-- 狀態標示會從「連線中…」變成 **本機模式**（橘字）
-- 輸入的詞／投的票／自評結果存在 localStorage，畫面照常運作
-- 講者可以正常示範，只是**沒辦法全班同時投稿、你也收不到全場的自評分布**
-
-### 要恢復全班即時互動
-
-需要在 Firestore 規則加上這三個集合，然後部署：
-
-```
-    // 2026 臺中數學科研習簡報
-    match /tcmath_wordcloud/{document} {
-      allow read, write: if true;
-    }
-    match /tcmath_poll/{document} {
-      allow read, write: if true;
-    }
-    match /tcmath_selfcheck/{document} {
-      allow read, create: if true;
-      allow update, delete: if false;
-    }
+```js
+const WORKSHOP_CODE = 'math-20260826';
 ```
 
-三個集合分別對應：破冰文字雲、複選投票、**數位力自評送出**（只允許新增，不允許改別人的）。
+### 實測結果（2026-08-25）
 
-⚠️ **部署前務必先確認線上規則的真實內容**（Firebase Console → Firestore → 規則）。
-直接把本機那份檔案推上去，有可能會覆蓋掉線上比較新的設定。
+三個互動都實際寫入並讀回成功，狀態顯示「雲端同步」。資料長這樣：
 
-確認後的部署指令：
-
-```bash
-cd "G:/我的雲端硬碟/2026database" && npx firebase-tools deploy --only firestore:rules --project teacherstudy-109ef
+```
+wordcloud  intro          {"word": "GeoGebra"}
+poll       plan           {"options": ["a", "c"]}
+selfcheck  digital-power  {"items": ["t1","t2","m2"], "score": 3}
 ```
 
----
+投票會寫多筆（每次點擊一筆完整選擇），讀取時取每人最新一筆 —— 這是刻意的設計，
+`responses` 沒有 update/delete 權限，資料只進不改。
+
+### 仍保留本機降級
+
+雲端連不上時三個互動都會自動切「本機模式」（橘字標示），畫面照常運作，
+只是沒有跨裝置同步。現場不會開天窗。
+
+### ⚠️ 研習當天務必先確認
+
+Supabase 免費方案**閒置會自動暫停**（2026-08-25 就發生過，兩個專案同時 INACTIVE、
+DNS 直接解析不到）。當天先開一次簡報，看文字雲那頁是否顯示「雲端同步」；
+若顯示「本機模式」就去 Supabase 後台手動恢復，約 1 分鐘可用。
 
 ## 三、現場備案（建議先準備）
 
@@ -91,10 +74,11 @@ cd "G:/我的雲端硬碟/2026database" && npx firebase-tools deploy --only fire
 
 | Demo | 備案 |
 |---|---|
-| 教材網頁（八下整冊、二次函數） | 事先在瀏覽器開好分頁，不要現場才載入 |
-| 三款遊戲 | 事先各開一間房，確認 Firebase 那側正常 |
+| 教材網頁（全六冊複習簡報） | 六個網址事先開好分頁，不要現場才載入 |
+| 三款遊戲 | 事先各開一間房。遊戲跑在另一個 Firebase 專案（my-teaching-tools.web.app），與簡報互動的 Supabase 無關 |
 | 會考題庫站 | 題庫站含全部詳解，**別投影到學生看得到的畫面** |
-| 文字雲／投票 | 已有本機模式降級，最壞情況也能講 |
+| 文字雲／投票／自評 | 已有本機模式降級，最壞情況也能講 |
+| Canva 備用資料 | TPACK、SAMR、範例簡報三個連結，需要細講才點 |
 
 ---
 
@@ -102,10 +86,10 @@ cd "G:/我的雲端硬碟/2026database" && npx firebase-tools deploy --only fire
 
 ```
 taichung-math-agent-workshop/
-├── index.html          # 簡報本體（42 頁，單檔）
+├── index.html          # 簡報本體（43 頁，單檔，含 Supabase 互動）
 ├── build_icons.py      # 圖標總表裁切去背腳本（已執行完，留作紀錄）
 ├── DEPLOY.md           # 本檔
-└── images/             # 6 張底圖 + 11 個圖標
+└── images/             # 6 張底圖 + 3 張遊戲橫幅 + 課本圖 + TPACK 圖 + 25 個扁平化圖示
 ```
 
 本機預覽：
@@ -115,3 +99,19 @@ cd "G:/我的雲端硬碟/2026研習/2026數學科研習/taichung-math-agent-wor
 ```
 
 然後開 `http://localhost:8765/`（改過檔案要加 `?v=2` 之類的參數避開快取）。
+
+---
+
+## 視覺設計筆記
+
+為了不讓簡報看起來像生成式工具的預設輸出，做了這些收斂：
+
+- **幾何銳利化**：卡片圓角 12px → 2～3px，不再是「氣泡」
+- **光效收斂**：所有 drop-shadow 的半徑與濃度各砍一半
+- **底色壓低**：半透明白底 0.05 → 0.03，頂線 4px → 2px
+- **表格去色塊**：th 拿掉藍底，改細線 + 字距
+- **引用框去底色**：只留左側 2px 強調線
+- **字型**：拉丁字母與數字改用 Inter，中文走 PingFang TC／微軟正黑
+- **版面識別**：標題左側 3px 豎線、左下角場次代碼、極淡背景網格（0.018 透明度）
+
+配色沿用原本的橘＋青，沒有更動。
