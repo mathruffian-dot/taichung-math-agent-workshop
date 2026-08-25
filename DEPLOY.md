@@ -37,6 +37,7 @@ gh api repos/mathruffian-dot/taichung-math-agent-workshop/pages --method POST -f
 |---|---|---|
 | `tcmath_wordcloud`（本簡報用） | DENIED | DENIED |
 | `tcmath_poll`（本簡報用） | DENIED | DENIED |
+| `tcmath_selfcheck`（本簡報用） | DENIED | DENIED |
 | `wordcloud_words`（既有工具用） | DENIED | DENIED |
 | `irs_responses`（既有工具用） | DENIED | DENIED |
 
@@ -47,15 +48,15 @@ gh api repos/mathruffian-dot/taichung-math-agent-workshop/pages --method POST -f
 
 ### 目前的處理：自動降級
 
-簡報不會因此開天窗。文字雲與投票偵測到雲端不通時，會自動切成**本機模式**：
+簡報不會因此開天窗。文字雲、投票、自評三個元件偵測到雲端不通時，都會自動切成**本機模式**：
 
-- 畫面右上角的狀態會從「連線中…」變成 **本機模式**（橘字）
-- 輸入的詞／投的票存在 localStorage，畫面照常運作
-- 講者可以正常示範，只是**沒辦法全班同時投稿**
+- 狀態標示會從「連線中…」變成 **本機模式**（橘字）
+- 輸入的詞／投的票／自評結果存在 localStorage，畫面照常運作
+- 講者可以正常示範，只是**沒辦法全班同時投稿、你也收不到全場的自評分布**
 
 ### 要恢復全班即時互動
 
-需要在 Firestore 規則加上這兩個集合，然後部署：
+需要在 Firestore 規則加上這三個集合，然後部署：
 
 ```
     // 2026 臺中數學科研習簡報
@@ -65,7 +66,13 @@ gh api repos/mathruffian-dot/taichung-math-agent-workshop/pages --method POST -f
     match /tcmath_poll/{document} {
       allow read, write: if true;
     }
+    match /tcmath_selfcheck/{document} {
+      allow read, create: if true;
+      allow update, delete: if false;
+    }
 ```
+
+三個集合分別對應：破冰文字雲、複選投票、**數位力自評送出**（只允許新增，不允許改別人的）。
 
 ⚠️ **部署前務必先確認線上規則的真實內容**（Firebase Console → Firestore → 規則）。
 直接把本機那份檔案推上去，有可能會覆蓋掉線上比較新的設定。

@@ -177,9 +177,9 @@
     /* === SAMR 階梯 === */
     .samr-ladder { display: flex; flex-direction: column; gap: 8px; margin-top: 0.6em; }
     .samr-step {
-      display: grid; grid-template-columns: 54px 118px 1fr;
-      align-items: center; gap: 14px;
-      border-radius: 8px; padding: 12px 16px;
+      display: grid; grid-template-columns: 46px 44px 116px 1fr;
+      align-items: center; gap: 13px;
+      border-radius: 8px; padding: 11px 16px;
       font-size: 0.4em;
     }
     .samr-step .s-letter { font-size: 1.8em; font-weight: 900; text-align: center; line-height: 1; }
@@ -207,6 +207,8 @@
       color: var(--accent2); font-family: 'Consolas', monospace; font-size: 0.86em;
       word-break: break-all;
     }
+    .demo-info .d-url a { color: inherit; text-decoration: none; }
+    .demo-info .d-url a:hover { color: #fff; text-decoration: underline; }
     .qr-wrap {
       background: #fff; border-radius: 10px; padding: 10px;
       display: flex; align-items: center; justify-content: center;
@@ -252,6 +254,80 @@
     .lead { font-size: 0.58em; color: #ddd; line-height: 1.85; margin-top: 0.4em; }
     .note-sm { font-size: 0.34em; color: #777; margin-top: 0.7em; line-height: 1.6; }
 
+    /* === 流程圖示 === */
+    .flow-step img {
+      width: 46px; height: 46px; object-fit: contain;
+      display: block; margin: 0 auto 8px;
+      filter: drop-shadow(0 0 8px rgba(79,195,247,0.55));
+    }
+
+    /* === 範例圖（帶說明浮層）=== */
+    .example-fig {
+      margin-top: 0.7em; border-radius: 10px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12); position: relative;
+    }
+    .example-fig img { display: block; width: 100%; object-fit: cover; }
+    .example-fig .cap {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.55) 60%, transparent);
+      color: #ddd; font-size: 0.3em; padding: 20px 16px 9px; line-height: 1.6;
+    }
+    .example-fig .cap b { color: var(--accent2); }
+
+    /* === TPACK 三圓 === */
+    .tpack-wrap { display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: center; margin-top: 0.5em; }
+    .tpack-wrap .venn { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+    .tpack-wrap .venn img { display: block; width: 100%; height: 250px; object-fit: cover; }
+
+    /* === SAMR 圖示 === */
+    .samr-step .s-icon img {
+      width: 40px; height: 40px; object-fit: contain; display: block; margin: 0 auto;
+      filter: drop-shadow(0 0 8px rgba(79,195,247,0.5));
+    }
+
+    /* === 自評九宮格（可勾選）=== */
+    .sc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: 0.4em; }
+    .sc-cell {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 11px 9px; cursor: pointer; text-align: center;
+      transition: background 0.18s, border-color 0.18s; user-select: none;
+    }
+    .sc-cell:hover { border-color: rgba(79,195,247,0.5); }
+    .sc-cell.on { background: rgba(79,195,247,0.18); border-color: var(--accent2); }
+    .sc-cell .sc-box {
+      width: 17px; height: 17px; border-radius: 4px; border: 2px solid rgba(255,255,255,0.35);
+      margin: 0 auto 6px; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: #0d1117; font-weight: 900;
+    }
+    .sc-cell.on .sc-box { background: var(--accent2); border-color: var(--accent2); }
+    .sc-cell .sc-t { font-size: 0.33em; color: #ddd; font-weight: 700; line-height: 1.4; }
+    .sc-cell .sc-d { font-size: 0.27em; color: #777; margin-top: 3px; line-height: 1.4; }
+    .sc-cat { font-size: 0.3em; color: var(--accent2); font-weight: 700; margin: 8px 0 2px; }
+
+    .btn-primary {
+      background: var(--accent2); color: #0d1117; border: none; border-radius: 8px;
+      padding: 9px 22px; font-weight: 700; font-size: 0.36em; cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-primary:disabled { opacity: 0.5; cursor: default; }
+
+    /* === 連結清單 === */
+    .link-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 0.5em; }
+    .link-item {
+      background: rgba(255,255,255,0.05); border-left: 3px solid var(--accent2);
+      border-radius: 6px; padding: 9px 12px; font-size: 0.32em; line-height: 1.5;
+    }
+    .link-item a { color: var(--accent2); text-decoration: none; font-family: 'Consolas', monospace; }
+    .link-item a:hover { text-decoration: underline; color: #fff; }
+    .link-item .li-name { color: #ddd; font-weight: 700; display: block; margin-bottom: 2px; }
+    .link-item .li-sub { color: #777; font-size: 0.9em; }
+
+    .qr-mini { background: #fff; border-radius: 6px; padding: 5px; display: inline-block; }
+    .qr-mini img, .qr-mini canvas { display: block; width: 80px; height: 80px; }
+    .qr-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 0.5em; }
+    .qr-cell { text-align: center; }
+    .qr-cell .qr-label { font-size: 0.27em; color: #999; margin-top: 4px; }
+
     /* === LIVE 動畫 === */
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
   </style>
@@ -277,15 +353,15 @@
     <section>
       <h2>今天走這條路</h2>
       <div class="flow">
-        <div class="flow-step"><span class="fs-num">1</span><span class="fs-title">硬體</span>你手上已經有什麼</div>
+        <div class="flow-step"><img src="images/icon_hw.png" alt=""><span class="fs-title">① 硬體</span>你手上已經有什麼</div>
         <div class="flow-arrow">▶</div>
-        <div class="flow-step"><span class="fs-num">2</span><span class="fs-title">心法</span>PIDS 與 SAMR</div>
+        <div class="flow-step"><img src="images/icon_mind.png" alt=""><span class="fs-title">② 心法</span>TPACK · PIDS · SAMR</div>
         <div class="flow-arrow">▶</div>
-        <div class="flow-step"><span class="fs-num">3</span><span class="fs-title">教材網頁</span>做出課本沒有的</div>
+        <div class="flow-step"><img src="images/icon_page.png" alt=""><span class="fs-title">③ 教材網頁</span>做出課本沒有的</div>
         <div class="flow-arrow">▶</div>
-        <div class="flow-step"><span class="fs-num">4</span><span class="fs-title">遊戲</span>玩的過程就是評量</div>
+        <div class="flow-step"><img src="images/icon_game.png" alt=""><span class="fs-title">④ 遊戲</span>玩的過程就是評量</div>
         <div class="flow-arrow">▶</div>
-        <div class="flow-step"><span class="fs-num">5</span><span class="fs-title">會考非選</span>出題與批改</div>
+        <div class="flow-step"><img src="images/icon_exam.png" alt=""><span class="fs-title">⑤ 會考非選</span>出題與批改</div>
       </div>
       <div class="quote-box" style="margin-top:1.1em;">
         今天不談「怎麼用某個軟體」。<br>
@@ -333,7 +409,7 @@
           <div id="wc-empty" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
                                      color:#444; font-size:0.4em; text-align:center;
                                      pointer-events:none; line-height:2;">
-            輸入第一個答案<br>文字雲就會出現 ✨
+            輸入第一個答案<br>文字雲就會出現
           </div>
         </div>
       </div>
@@ -447,9 +523,48 @@
       </div>
     </section>
 
-    <!-- ============ 9. PIDS ============ -->
+    <!-- ============ 9. TPACK ============ -->
     <section>
-      <h2>數位教學心法：PIDS 三力</h2>
+      <h2>先講一個框架：TPACK</h2>
+      <div class="tpack-wrap">
+        <div>
+          <div class="adv-grid g3" style="margin-top:0;">
+            <div class="adv-card" style="padding:14px 10px;">
+              <div class="adv-icon"><img src="images/icon_tk.png" alt="技術"></div>
+              <div class="adv-title" style="font-size:0.44em;">TK 技術</div>
+              <div class="adv-desc" style="font-size:0.31em;">大屏、平板<br>軟體、AI 工具</div>
+            </div>
+            <div class="adv-card" style="padding:14px 10px; border-top-color:var(--warn);">
+              <div class="adv-icon"><img src="images/icon_pk.png" alt="教學法"></div>
+              <div class="adv-title" style="font-size:0.44em; color:var(--warn);">PK 教學法</div>
+              <div class="adv-desc" style="font-size:0.31em;">怎麼教<br>怎麼評量、怎麼帶班</div>
+            </div>
+            <div class="adv-card" style="padding:14px 10px; border-top-color:var(--success);">
+              <div class="adv-icon"><img src="images/icon_ck.png" alt="學科內容"></div>
+              <div class="adv-title" style="font-size:0.44em; color:var(--success);">CK 學科內容</div>
+              <div class="adv-desc" style="font-size:0.31em;">數學本身<br>你最強的那一塊</div>
+            </div>
+          </div>
+          <div class="warn-box" style="margin-top:12px;">
+            <div class="wb-title">最常犯的錯：只顧著 T</div>
+            <strong>為了數位而數位、為了 AI 而 AI</strong> —— 課上得很炫，
+            但學生沒學到數學，也沒有適合的教法撐著。
+          </div>
+        </div>
+        <div class="venn">
+          <img src="images/tpack_venn.png" alt="TPACK 三圓交集">
+        </div>
+      </div>
+      <div class="quote-box" style="margin-top:0.7em; font-size:0.46em;">
+        三個圈的<span style="color:var(--accent);font-weight:700;">交集</span>才是 TPACK。
+        把 T 換成 AI，就是這幾年在講的 <span style="color:var(--accent2);font-weight:700;">AIPACK</span> ——
+        框架沒變，換的只是工具。
+      </div>
+    </section>
+
+    <!-- ============ 10. PIDS ============ -->
+    <section>
+      <h2>那 T 要怎麼練？PIDS 三力</h2>
       <div class="adv-grid g3">
         <div class="adv-card">
           <div class="adv-icon"><img src="images/icon_digital.png" alt="數位力"></div>
@@ -467,41 +582,48 @@
           <div class="adv-desc">把抽象概念具象化<br><span style="color:#777;">難度最高，也是數學科的主戰場</span></div>
         </div>
       </div>
-      <div class="warn-box">
-        <div class="wb-title">TPACK 的老提醒</div>
-        技術 (T) × 教法 (P) × 學科內容 (C) 要三者交集。
-        最常犯的錯是 <strong>為了數位而數位、為了 AI 而 AI</strong> —— 只秀工具，丟掉數學本身。
+      <div class="ok-box">
+        <div class="wb-title">三力的順序是有意義的</div>
+        <strong>數位力</strong>是地基（工具要熟）→ <strong>互動力</strong>是骨架（課堂要動起來）→
+        <strong>視覺力</strong>是最難也最值錢的一層。今天後面三段的 Demo，全部落在<strong style="color:#ddd;">視覺力</strong>上。
       </div>
     </section>
 
     <!-- ============ 10. 數位力自評 ============ -->
     <section>
-      <h2>數位力自評：九個格子，現在就打分</h2>
-      <table>
-        <tr><th style="width:140px;">面向</th><th>細項 1</th><th>細項 2</th><th>細項 3</th></tr>
-        <tr>
-          <td class="hl2">工具運用</td>
-          <td>基礎操作<br><span style="color:#777;">大屏／平板</span></td>
-          <td>工具整合<br><span style="color:#777;">軟硬體串接</span></td>
-          <td>技術排除<br><span style="color:#777;">連線或設備故障</span></td>
-        </tr>
-        <tr>
-          <td class="hl2">教材設計</td>
-          <td>教材數位轉化<br><span style="color:#777;">講義→簡報／動畫</span></td>
-          <td>多媒體整合<br><span style="color:#777;">各類素材</span></td>
-          <td>創新教學設計<br><span style="color:#777;">結合班級特性</span></td>
-        </tr>
-        <tr>
-          <td class="hl2">數據反饋</td>
-          <td>即時反饋應用<br><span style="color:#777;">投票／測驗</span></td>
-          <td>學習數據分析<br><span style="color:#777;">解讀後台</span></td>
-          <td>個性化調整<br><span style="color:#777;">依數據差異化</span></td>
-        </tr>
-      </table>
-      <p class="lead" style="margin-top:0.8em;">
-        每格 1–5 分。<span style="color:var(--accent);font-weight:700;">先找出你最低的那一格</span> ——
-        今天的內容，就從那裡開始用。
-      </p>
+      <h2 style="font-size:1.15em;margin-bottom:0.1em;">數位力自評：做得到的就打勾</h2>
+      <p class="note-sm" style="margin:0 0 6px;">九個項目，點一下就勾。勾完按送出，我這邊會收到全場的分布。</p>
+
+      <div class="sc-cat">工具運用</div>
+      <div class="sc-grid">
+        <div class="sc-cell" data-k="t1"><div class="sc-box">✓</div><div class="sc-t">基礎操作</div><div class="sc-d">大屏／平板開得起來、接得上</div></div>
+        <div class="sc-cell" data-k="t2"><div class="sc-box">✓</div><div class="sc-t">工具整合</div><div class="sc-d">軟硬體串得起來用</div></div>
+        <div class="sc-cell" data-k="t3"><div class="sc-box">✓</div><div class="sc-t">技術排除</div><div class="sc-d">連線／設備出問題能自己救</div></div>
+      </div>
+
+      <div class="sc-cat">教材設計</div>
+      <div class="sc-grid">
+        <div class="sc-cell" data-k="m1"><div class="sc-box">✓</div><div class="sc-t">教材數位轉化</div><div class="sc-d">講義變簡報、變動畫</div></div>
+        <div class="sc-cell" data-k="m2"><div class="sc-box">✓</div><div class="sc-t">多媒體整合</div><div class="sc-d">影音、圖表、互動素材混用</div></div>
+        <div class="sc-cell" data-k="m3"><div class="sc-box">✓</div><div class="sc-t">創新教學設計</div><div class="sc-d">依自己班的特性改過</div></div>
+      </div>
+
+      <div class="sc-cat">數據反饋</div>
+      <div class="sc-grid">
+        <div class="sc-cell" data-k="d1"><div class="sc-box">✓</div><div class="sc-t">即時反饋應用</div><div class="sc-d">課堂投票／即時測驗</div></div>
+        <div class="sc-cell" data-k="d2"><div class="sc-box">✓</div><div class="sc-t">學習數據分析</div><div class="sc-d">看得懂後台數據在說什麼</div></div>
+        <div class="sc-cell" data-k="d3"><div class="sc-box">✓</div><div class="sc-t">個性化調整</div><div class="sc-d">依數據調整下一節課</div></div>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:center;gap:20px;margin-top:14px;">
+        <div style="font-size:0.44em;color:#ccc;">
+          你的數位力：<span id="sc-score" style="color:var(--accent);font-weight:800;font-size:1.5em;">0</span>
+          <span style="color:#666;"> / 9</span>
+        </div>
+        <button id="sc-submit" class="btn-primary">送出自評</button>
+        <span id="sc-msg" style="font-size:0.32em;color:#777;"></span>
+      </div>
+      <p id="sc-advice" class="note-sm" style="text-align:center;min-height:1.4em;">先看看自己空著的是哪一格 —— 今天的內容就從那裡開始用。</p>
     </section>
 
     <!-- ============ 11. SAMR ============ -->
@@ -509,21 +631,25 @@
       <h2>SAMR：判斷一個新工具值不值得學</h2>
       <div class="samr-ladder">
         <div class="samr-step s1">
+          <div class="s-icon"><img src="images/icon_s.png" alt=""></div>
           <div class="s-letter">S</div>
           <div class="s-name">替代<br><span style="font-size:0.7em;opacity:0.7;">Substitution</span></div>
           <div class="s-ex">換工具、功能沒變　例：紙本課本 → 電子書</div>
         </div>
         <div class="samr-step s2">
+          <div class="s-icon"><img src="images/icon_a.png" alt=""></div>
           <div class="s-letter">A</div>
           <div class="s-name">改良<br><span style="font-size:0.7em;opacity:0.7;">Augmentation</span></div>
           <div class="s-ex">有替代且增強　例：IRS 取代舉手，害羞的學生也願意作答</div>
         </div>
         <div class="samr-step s3">
+          <div class="s-icon"><img src="images/icon_m.png" alt=""></div>
           <div class="s-letter">M</div>
           <div class="s-name">改造<br><span style="font-size:0.7em;opacity:0.7;">Modification</span></div>
           <div class="s-ex">科技改變了任務設計　例：自製畢氏定理滑桿網頁 —— 以前做不到</div>
         </div>
         <div class="samr-step s4">
+          <div class="s-icon"><img src="images/icon_r.png" alt=""></div>
           <div class="s-letter">R</div>
           <div class="s-name">重新定義<br><span style="font-size:0.7em;opacity:0.7;">Redefinition</span></div>
           <div class="s-ex">創造前所未有的任務　例：學生手寫解題拍照 → AI 批改並診斷迷思</div>
@@ -587,8 +713,12 @@
           </ul>
         </div>
       </div>
-      <div class="quote-box" style="margin-top:0.9em; font-size:0.55em;">
-        口訣：<span style="color:var(--accent);font-weight:700;">簡報字多就少講話，要多講話簡報就只放圖。</span>
+      <div class="example-fig">
+        <img src="images/ex_dualcoding.png" alt="雙重編碼範例" style="height:136px;">
+        <div class="cap">
+          <b>左：滿滿文字＋老師一直講 → 兩股文字資訊打架。　右：一張圖表＋幾個關鍵字，細節用講的。</b><br>
+          口訣：簡報字多就少講話，要多講話簡報就只放圖。
+        </div>
       </div>
     </section>
 
@@ -613,8 +743,12 @@
           <td><span style="color:var(--success);font-weight:700;">主動增加</span> —— 多畫一張圖永遠值得</td>
         </tr>
       </table>
-      <div class="quote-box" style="margin-top:0.9em;">
-        視覺力的第一步永遠是<span style="color:var(--accent);font-weight:700;">做減法</span>，不是做加法。
+      <div class="example-fig">
+        <img src="images/ex_cognitive.png" alt="認知負荷範例" style="height:130px;">
+        <div class="cap">
+          <b>左：整頁投出來，螢光筆畫滿 → 外在負荷爆表。　右：只留當下這一題，其他全部暗掉。</b><br>
+          視覺力的第一步永遠是做減法，不是做加法。
+        </div>
       </div>
     </section>
 
@@ -622,61 +756,132 @@
     <section>
       <h2>視覺力（三）：明天就能用的白板四招</h2>
       <div class="adv-grid">
-        <div class="adv-card" style="text-align:left; padding:18px;">
+        <div class="adv-card" style="text-align:left; padding:12px 14px;">
           <div class="adv-title" style="font-size:0.55em;">① 只留當下那一題</div>
           <div class="adv-desc" style="font-size:0.38em;">講考卷時用<strong style="color:#ddd;">放大或截圖</strong>，把周圍的題目全部清掉。整頁投出來是最常見的錯。</div>
         </div>
-        <div class="adv-card" style="text-align:left; padding:18px; border-top-color:var(--warn);">
+        <div class="adv-card" style="text-align:left; padding:12px 14px; border-top-color:var(--warn);">
           <div class="adv-title" style="font-size:0.55em; color:var(--warn);">② 用鐳射筆，不用螢光筆</div>
           <div class="adv-desc" style="font-size:0.38em;">畫完幾秒<strong style="color:#ddd;">自動消失</strong>，牽引視線又不留雜訊。螢光筆畫多了自己變成干擾。</div>
         </div>
-        <div class="adv-card" style="text-align:left; padding:18px; border-top-color:var(--success);">
+        <div class="adv-card" style="text-align:left; padding:12px 14px; border-top-color:var(--success);">
           <div class="adv-title" style="font-size:0.55em; color:var(--success);">③ 用形狀框住運算順序</div>
           <div class="adv-desc" style="font-size:0.38em;">四則運算用紅框藍框把步驟框起來，<strong style="color:#ddd;">用視覺確立優先級</strong>，比講三次有效。</div>
         </div>
-        <div class="adv-card" style="text-align:left; padding:18px; border-top-color:var(--accent);">
+        <div class="adv-card" style="text-align:left; padding:12px 14px; border-top-color:var(--accent);">
           <div class="adv-title" style="font-size:0.55em; color:var(--accent);">④ 手貼著螢幕移動</div>
           <div class="adv-desc" style="font-size:0.38em;">學生的眼睛會<strong style="color:#ddd;">追隨老師的手</strong>。用滑鼠遠端寫，聚光效果差非常多。</div>
         </div>
       </div>
+      <div class="example-fig">
+        <img src="images/ex_whiteboard.png" alt="白板演示範例" style="height:122px;">
+        <div class="cap">
+          <b>畫面上只剩那一題、鐳射筆的光跡幾秒後自己消失、手貼著螢幕走。</b>
+          三件事都在做同一件事 —— 幫學生的眼睛決定要看哪裡。
+        </div>
+      </div>
     </section>
 
-    <!-- ============ 16. VIZ 滑桿對比 ============ -->
+    <!-- ============ 範例簡報：課本文字怎麼變成一頁 ============ -->
+    <section>
+      <h2 style="font-size:1.15em;">課本那一大段文字，怎麼變成一頁</h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:center; margin-top:0.4em;">
+        <div class="adv-grid g3" style="grid-template-columns:1fr; gap:9px; margin-top:0;">
+          <div class="adv-card" style="display:grid; grid-template-columns:52px 1fr; gap:12px; align-items:center; text-align:left; padding:11px 13px;">
+            <div class="adv-icon" style="margin:0;"><img src="images/icon_v1.png" alt="" style="width:48px;height:48px;"></div>
+            <div>
+              <div class="adv-title" style="font-size:0.44em; margin-bottom:3px;">① 訊息區塊化</div>
+              <div class="adv-desc" style="font-size:0.3em;">用 AI 抓關鍵字，把長段落拆成條列的重點與步驟</div>
+            </div>
+          </div>
+          <div class="adv-card" style="display:grid; grid-template-columns:52px 1fr; gap:12px; align-items:center; text-align:left; padding:11px 13px; border-top-color:var(--warn);">
+            <div class="adv-icon" style="margin:0;"><img src="images/icon_v2.png" alt="" style="width:48px;height:48px;"></div>
+            <div>
+              <div class="adv-title" style="font-size:0.44em; margin-bottom:3px; color:var(--warn);">② 重點結構化</div>
+              <div class="adv-desc" style="font-size:0.3em;">設標題層級、調邏輯順序，用對比色標出真正的重點</div>
+            </div>
+          </div>
+          <div class="adv-card" style="display:grid; grid-template-columns:52px 1fr; gap:12px; align-items:center; text-align:left; padding:11px 13px; border-top-color:var(--accent);">
+            <div class="adv-icon" style="margin:0;"><img src="images/icon_v3.png" alt="" style="width:48px;height:48px;"></div>
+            <div>
+              <div class="adv-title" style="font-size:0.44em; margin-bottom:3px; color:var(--accent);">③ 內容視覺化</div>
+              <div class="adv-desc" style="font-size:0.3em;">加圖表與扁平化圖示、箭頭引導，配合動畫逐步出現</div>
+            </div>
+          </div>
+        </div>
+        <div class="example-fig" style="margin-top:0;">
+          <img src="images/ex_deck.png" alt="範例簡報" style="height:252px;">
+          <div class="cap"><b>做完長這樣：一張大圖 ＋ 三個關鍵字，其餘用講的。</b></div>
+        </div>
+      </div>
+      <div class="warn-box" style="margin-top:10px;">
+        <div class="wb-title">但是 —— 絕不要直接用 AI 生的簡報</div>
+        AI 生的簡報模板味重、雜訊多。<strong>讓它幫你擬大綱可以，最後的視覺化一定要自己動手改。</strong>
+        今天你看到的這份簡報，也是這樣一頁一頁調出來的。
+      </div>
+    </section>
+
+    <!-- ============ VIZ 滑桿對比 ============ -->
     <section id="slide-viz">
-      <h2>同一個概念，兩種呈現</h2>
-      <p class="note-sm" style="margin-top:0;margin-bottom:8px;">← 拖動下方滑桿，把課本的靜態圖換成動態教材 →</p>
-      <div style="position:relative; height:330px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.12);">
+      <h2 style="font-size:1.15em;margin-bottom:0.15em;">同一個畢氏定理，兩種呈現</h2>
+      <p class="note-sm" style="margin:0 0 8px;">① 先拖<span style="color:var(--accent2);">揭露滑桿</span>把課本靜態圖換成動態教材　② 再拖<span style="color:var(--accent);">邊長滑桿</span>看關係怎麼動</p>
+
+      <div style="position:relative; height:286px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.12);">
         <div id="viz-before" style="position:absolute;inset:0;background:rgba(255,255,255,0.04);
-             display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
-          <div style="font-size:0.5em;color:var(--warn);font-weight:700;">課本靜態圖</div>
-          <div style="font-family:'Consolas',monospace;font-size:0.44em;color:#999;line-height:2.2;text-align:center;">
-            a² + b² = c²<br>
-            <span style="font-size:0.8em;">（附一張畫好的直角三角形）</span>
-          </div>
-          <div style="font-size:0.36em;color:#777;max-width:420px;text-align:center;line-height:1.8;">
-            學生看到的是「一個結果」。<br>三角形為什麼一定要直角？邊長變了會怎樣？<br>圖上看不出來。
+             display:flex;align-items:center;justify-content:center;gap:20px;padding:14px;box-sizing:border-box;">
+          <img src="images/ex_textbook.png" alt="課本靜態圖"
+               style="height:238px;border-radius:8px;object-fit:cover;opacity:0.85;">
+          <div style="max-width:250px;">
+            <div style="font-size:0.44em;color:var(--warn);font-weight:700;margin-bottom:8px;">課本靜態圖</div>
+            <div style="font-size:0.34em;color:#999;line-height:1.9;">
+              學生看到的是<strong style="color:#ccc;">一個結果</strong>。<br><br>
+              邊長變了會怎樣？<br>
+              為什麼非得是直角？<br>
+              —— 圖上看不出來。
+            </div>
           </div>
         </div>
-        <div id="viz-after" style="position:absolute;inset:0;background:rgba(79,195,247,0.08);
+
+        <div id="viz-after" style="position:absolute;inset:0;background:rgba(79,195,247,0.07);
              clip-path:inset(0 100% 0 0);
-             display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
-          <div style="font-size:0.5em;color:var(--accent2);font-weight:700;">滑桿動態教材</div>
-          <div style="font-family:'Consolas',monospace;font-size:0.44em;color:var(--accent2);line-height:2.2;text-align:center;">
-            拖動 a、b → 兩個小正方形面積即時變<br>
-            <span style="font-size:0.8em;">大正方形面積永遠等於兩者之和</span>
-          </div>
-          <div style="font-size:0.36em;color:#bbb;max-width:420px;text-align:center;line-height:1.8;">
-            學生看到的是「一個關係」。<br>把角拉成非直角，等式立刻不成立 ——<br><strong style="color:#ddd;">為什麼要直角，用眼睛就看懂了。</strong>
+             display:flex;align-items:center;justify-content:center;gap:14px;padding:10px;box-sizing:border-box;">
+          <canvas id="pyth-canvas" width="440" height="266" style="height:266px;"></canvas>
+          <div style="min-width:172px;">
+            <div style="font-size:0.44em;color:var(--accent2);font-weight:700;margin-bottom:8px;">動態教材</div>
+            <div style="font-family:'Consolas',monospace;font-size:0.36em;line-height:2.1;">
+              <div><span style="color:#4fc3f7;">a² =</span> <span id="pyth-a2" style="color:#fff;">9</span></div>
+              <div><span style="color:#e8643a;">b² =</span> <span id="pyth-b2" style="color:#fff;">16</span></div>
+              <div style="border-top:1px solid rgba(255,255,255,0.15);margin-top:5px;padding-top:5px;">
+                <span style="color:#81c784;">c² =</span> <span id="pyth-c2" style="color:#fff;font-weight:700;">25</span>
+              </div>
+            </div>
+            <div style="font-size:0.3em;color:#888;line-height:1.7;margin-top:8px;">
+              兩個小正方形<br>永遠拼得滿大的那個
+            </div>
           </div>
         </div>
+
         <div id="viz-divider" style="position:absolute;top:0;left:0;width:3px;height:100%;
           background:linear-gradient(to bottom,transparent,#4fc3f7,transparent);
           box-shadow:0 0 12px #4fc3f7;pointer-events:none;"></div>
       </div>
-      <input id="viz-slider" type="range" min="0" max="100" value="0"
-        style="display:block;width:100%;box-sizing:border-box;margin:16px 0 0;
-               accent-color:var(--accent2);cursor:pointer;">
-      <p class="note-sm">人的眼睛對「會動的東西」極度敏感。這就是視覺力最直接的槓桿。</p>
+
+      <div style="display:flex;align-items:center;gap:10px;margin-top:10px;">
+        <span style="font-size:0.3em;color:var(--accent2);white-space:nowrap;width:64px;">揭露 →</span>
+        <input id="viz-slider" type="range" min="0" max="100" value="0"
+          style="flex:1;min-width:0;accent-color:var(--accent2);cursor:pointer;">
+      </div>
+
+      <div id="pyth-controls" style="display:flex;align-items:center;gap:14px;margin-top:8px;opacity:0.25;transition:opacity 0.3s;">
+        <span style="font-size:0.3em;color:#4fc3f7;white-space:nowrap;width:64px;">a = <span id="pyth-av">3</span></span>
+        <input id="pyth-a" type="range" min="1" max="8" step="1" value="3"
+          style="flex:1;min-width:0;accent-color:#4fc3f7;cursor:pointer;">
+        <span style="font-size:0.3em;color:#e8643a;white-space:nowrap;width:64px;">b = <span id="pyth-bv">4</span></span>
+        <input id="pyth-b" type="range" min="1" max="8" step="1" value="4"
+          style="flex:1;min-width:0;accent-color:#e8643a;cursor:pointer;">
+      </div>
+
+      <p class="note-sm" style="margin-top:8px;">這一頁本身就是範例 —— 眼睛對會動的東西極度敏感，這是視覺力最直接的槓桿。</p>
     </section>
 
     <!-- ============ 17. 章節二 ============ -->
@@ -751,28 +956,6 @@
       </div>
     </section>
 
-    <!-- ============ 20. 一桌三櫃 ============ -->
-    <section>
-      <h2>一桌三櫃法：Agent 的工作環境</h2>
-      <div class="code-block" style="font-size:0.4em;">
-你的專案（<span class="kw">一桌</span>）
-├── <span class="kw">專案資料夾</span>　　　　所有檔案都在這，一個資料夾 = 一個專案
-├── <span class="kw">CLAUDE.md</span>　　　　 告訴 Agent：我是誰、要做什麼、怎麼做
-├── <span class="kw">筆記庫</span>（第二大腦）　課本、題庫、學生迷思清單
-└── <span class="kw">GitHub</span>　　　　　　 版本控制 ＋ 學校和家裡兩台電腦同步
-      </div>
-      <div class="demo-box" style="grid-template-columns:1fr; margin-top:0.9em;">
-        <div class="demo-info">
-          <strong style="color:var(--accent2);">數學老師的一桌三櫃長這樣：</strong><br>
-          一桌 = 「115上_八年級數學」資料夾　·　藍圖 = 我教哪個版本、進度到哪、班級屬性、出題比例<br>
-          筆記庫 = 課本／習作／題庫 PDF、歷屆會考題　·　GitHub = 學校電腦和家裡電腦同一份教材
-        </div>
-      </div>
-      <div class="quote-box" style="margin-top:0.8em; font-size:0.5em;">
-        口訣：<span style="color:var(--accent);font-weight:700;">全域放「我是誰」，專案放「我要做什麼」。</span>
-      </div>
-    </section>
-
     <!-- ============ 21. 三個 Demo 預告 ============ -->
     <section>
       <h2>接下來，三個現場 Demo</h2>
@@ -828,21 +1011,50 @@
 
     <!-- ============ 23. Demo：八下整冊 ============ -->
     <section>
-      <h2><span class="pill p-blue">DEMO 1-1</span> 八下整冊視覺化簡報</h2>
-      <div class="demo-box">
-        <div class="demo-info">
-          整本八下做成<strong style="color:var(--accent2);">拖拉互動的 HTML 簡報</strong>：數列與級數、函數、三角形的基本性質、平行與四邊形。<br><br>
-          <strong style="color:#ddd;">現場看什麼：</strong><br>
-          · 每個概念都能拖、能拉、能即時看到變化<br>
-          · 不是投影片翻頁，是可以「玩」的教材<br>
-          · 同一份掛在網路上，學生回家也開得起來
-          <div class="d-url">mathruffian-dot.github.io/math-8-2-visual-deck/</div>
+      <h2 style="font-size:1.12em;margin-bottom:0.1em;"><span class="pill p-blue">DEMO 1-1</span> 國中數學全六冊，互動複習簡報</h2>
+      <p class="note-sm" style="margin:0 0 4px;">
+        <strong style="color:#ccc;">364 頁、約 169 頁互動</strong>，涵蓋國中三年全部課程，依 108 課綱逐條查核、超綱為零。
+        同一套引擎、六個網址 —— 點網址現場開，QR 給老師掃回去。
+      </p>
+      <div class="link-list">
+        <div class="link-item">
+          <span class="li-name">第一冊（七上）· 60 頁</span>
+          <span class="li-sub">整數／分數的運算、一元一次方程式</span><br>
+          <a href="https://math809-review1.pages.dev" target="_blank" rel="noopener">math809-review1.pages.dev</a>
         </div>
-        <div class="qr-wrap" data-url="https://mathruffian-dot.github.io/math-8-2-visual-deck/"></div>
+        <div class="link-item">
+          <span class="li-name">第二冊（七下）· 85 頁</span>
+          <span class="li-sub">聯立方程式、直角坐標、比例式、不等式、統計</span><br>
+          <a href="https://math809-review2.pages.dev" target="_blank" rel="noopener">math809-review2.pages.dev</a>
+        </div>
+        <div class="link-item">
+          <span class="li-name">第三冊（八上）· 71 頁</span>
+          <span class="li-sub">乘法公式、平方根與畢氏定理、因式分解</span><br>
+          <a href="https://math809-review3.pages.dev" target="_blank" rel="noopener">math809-review3.pages.dev</a>
+        </div>
+        <div class="link-item">
+          <span class="li-name">第四冊（八下）· 67 頁</span>
+          <span class="li-sub">數列與級數、函數、三角形性質、平行與四邊形</span><br>
+          <a href="https://math809-review.pages.dev" target="_blank" rel="noopener">math809-review.pages.dev</a>
+        </div>
+        <div class="link-item">
+          <span class="li-name">第五冊（九上）· 42 頁</span>
+          <span class="li-sub">相似形、圓、幾何與證明</span><br>
+          <a href="https://math809-review5.pages.dev" target="_blank" rel="noopener">math809-review5.pages.dev</a>
+        </div>
+        <div class="link-item">
+          <span class="li-name">第六冊（九下）· 39 頁</span>
+          <span class="li-sub">二次函數、統計與機率、立體圖形</span><br>
+          <a href="https://math809-review6.pages.dev" target="_blank" rel="noopener">math809-review6.pages.dev</a>
+        </div>
       </div>
-      <div class="ok-box">
-        <div class="wb-title">給輔導團夥伴的延伸</div>
-        同一套引擎做了<strong>六冊、364 頁、約 169 頁互動</strong>，涵蓋國中三年全部課程，依 108 課綱逐條查核、超綱為零。
+      <div class="qr-row">
+        <div class="qr-cell"><div class="qr-mini" data-url="https://math809-review1.pages.dev"></div><div class="qr-label">七上</div></div>
+        <div class="qr-cell"><div class="qr-mini" data-url="https://math809-review2.pages.dev"></div><div class="qr-label">七下</div></div>
+        <div class="qr-cell"><div class="qr-mini" data-url="https://math809-review3.pages.dev"></div><div class="qr-label">八上</div></div>
+        <div class="qr-cell"><div class="qr-mini" data-url="https://math809-review.pages.dev"></div><div class="qr-label">八下</div></div>
+        <div class="qr-cell"><div class="qr-mini" data-url="https://math809-review5.pages.dev"></div><div class="qr-label">九上</div></div>
+        <div class="qr-cell"><div class="qr-mini" data-url="https://math809-review6.pages.dev"></div><div class="qr-label">九下</div></div>
       </div>
     </section>
 
@@ -857,7 +1069,7 @@
           · 拖 a、h、k，拋物線當場變形 —— 開口、頂點、平移一次看懂<br>
           · 全班同時投稿，答案即時匯進老師的畫面<br>
           · 這一頁就是 SAMR 的 <span class="hl">R（重新定義）</span>：以前的課堂做不到這件事
-          <div class="d-url">mathruffian-dot.github.io/quadratic-function-graph/</div>
+          <div class="d-url"><a href="https://mathruffian-dot.github.io/quadratic-function-graph/" target="_blank" rel="noopener">mathruffian-dot.github.io/quadratic-function-graph/</a></div>
         </div>
         <div class="qr-wrap" data-url="https://mathruffian-dot.github.io/quadratic-function-graph/"></div>
       </div>
@@ -939,7 +1151,7 @@
           · <strong style="color:#ddd;">方程式掃射</strong> — 寫 ax+by=c 或 y=mx+k，<span class="hl">每命中一格 +8</span>，每局限 3 次<br>
           &nbsp;&nbsp;<span style="color:#777;">（禁水平／垂直線，逼學生真的用斜直線）</span><br>
           · 格式錯誤 −2，防亂猜
-          <div class="d-url">my-teaching-tools.web.app/games/battleship/</div>
+          <div class="d-url"><a href="https://my-teaching-tools.web.app/games/battleship/" target="_blank" rel="noopener">my-teaching-tools.web.app/games/battleship/</a></div>
         </div>
         <div class="qr-wrap" data-url="https://my-teaching-tools.web.app/games/battleship/"></div>
       </div>
@@ -965,7 +1177,7 @@
           · 兩邊同除 —— <span class="hl">含變號判斷</span><br><br>
           解對 → 傷害 = 24 − ⌊秒數/8⌋（下限 12），<strong style="color:#ddd;">含變號題再 +6</strong><br>
           解錯 → <strong style="color:var(--warn);">自己扣 12 血</strong>
-          <div class="d-url">my-teaching-tools.web.app/games/linear-inequality-fighter/</div>
+          <div class="d-url"><a href="https://my-teaching-tools.web.app/games/linear-inequality-fighter/" target="_blank" rel="noopener">my-teaching-tools.web.app/games/linear-inequality-fighter/</a></div>
         </div>
         <div class="qr-wrap" data-url="https://my-teaching-tools.web.app/games/linear-inequality-fighter/"></div>
       </div>
@@ -984,7 +1196,7 @@
           <strong style="color:var(--accent2);">全班共玩一場</strong>，老師主持、限時自動推進。<br><br>
           全班各輸入 1 個數（1–50）→ 系統剔除 1–2 個極端值 → 三輪猜「剔除後的中位數」。<br><br>
           <strong style="color:#ddd;">關鍵在三輪的表徵不一樣：</strong>
-          <div class="d-url">my-teaching-tools.web.app/games/median-detective/</div>
+          <div class="d-url"><a href="https://my-teaching-tools.web.app/games/median-detective/" target="_blank" rel="noopener">my-teaching-tools.web.app/games/median-detective/</a></div>
         </div>
         <div class="qr-wrap" data-url="https://my-teaching-tools.web.app/games/median-detective/"></div>
       </div>
@@ -1049,7 +1261,7 @@
       <h2>一個檢驗：拿掉數學，還玩得下去嗎？</h2>
       <div class="conclusion-grid">
         <div class="conclusion-card caution">
-          <div class="cc-title">還玩得下去 ⚠️</div>
+          <div class="cc-title">還玩得下去 ※</div>
           <ul>
             <li>數學只是遊戲的「門票」</li>
             <li>換成成語、單字也照樣跑</li>
@@ -1152,15 +1364,30 @@
 　↓
 學生自己查：級分、評語、紅筆圖、參考答案
       </div>
-      <div class="demo-box" style="margin-top:0.8em;">
-        <div class="demo-info">
-          <strong style="color:var(--accent2);">現場可以掃的兩個站：</strong><br>
-          · 學生作答站 —— 各卷入口，可以一班一個網址<br>
-          · 題庫＋出卷＋非選覆核站 —— <strong style="color:var(--warn);">老師專用，含全部詳解</strong>
-          <div class="d-url">math809-quiz.pages.dev</div>
+      <div style="display:grid; grid-template-columns:1fr 200px; gap:16px; align-items:center; margin-top:8px;">
+        <div class="link-list" style="grid-template-columns:1fr; gap:7px; margin-top:0;">
+          <div class="link-item">
+            <span class="li-name">最近一次 · 非選練習卷 第 1~2 冊（0813）</span>
+            <a href="https://math809-quiz.pages.dev/q/b1b2-essay-0813-909/" target="_blank" rel="noopener">math809-quiz.pages.dev/q/b1b2-essay-0813-909/</a>
+          </div>
+          <div class="link-item">
+            <span class="li-name">前一次 · 會考數學複習卷 非選（0723）</span>
+            <a href="https://math809-quiz.pages.dev/q/0723/" target="_blank" rel="noopener">math809-quiz.pages.dev/q/0723/</a>
+          </div>
+          <div class="link-item" style="border-left-color:var(--warn);">
+            <span class="li-name">歷屆非選總卷 · 103–115 年</span>
+            <a href="https://math809-quiz.pages.dev/q/essay-all/" target="_blank" rel="noopener">math809-quiz.pages.dev/q/essay-all/</a>
+          </div>
         </div>
-        <div class="qr-wrap" data-url="https://math809-quiz.pages.dev"></div>
+        <div class="qr-row" style="margin-top:0;">
+          <div class="qr-cell"><div class="qr-mini" data-url="https://math809-quiz.pages.dev/q/b1b2-essay-0813-909/"></div><div class="qr-label">0813 非選</div></div>
+          <div class="qr-cell"><div class="qr-mini" data-url="https://math809-quiz.pages.dev/q/0723/"></div><div class="qr-label">0723 非選</div></div>
+        </div>
       </div>
+      <p class="note-sm" style="margin-top:7px;">
+        ※ 老師端的題庫／出卷／非選覆核站在 <span style="color:var(--warn);">math809-bank.pages.dev</span> ——
+        <strong style="color:#bbb;">含全部詳解，別投影到學生看得到的畫面。</strong>
+      </p>
     </section>
 
     <!-- ============ 37. 三層給分 ============ -->
@@ -1228,42 +1455,70 @@
 
     <!-- ============ 39. 投票 ============ -->
     <section id="slide-poll">
-      <h2>回去以後，你最想先做哪一個？</h2>
-      <div id="poll-options" style="display:flex; flex-direction:column; gap:12px; margin-top:0.8em;"></div>
-      <div style="font-size:0.36em; color:#666; text-align:center; margin-top:0.9em;">
-        已投票：<span id="poll-total" style="color:var(--accent);font-weight:700;">0</span> 人
+      <h2 style="font-size:1.15em;margin-bottom:0.1em;">回去以後，你打算做哪些？</h2>
+      <p class="note-sm" style="margin:0 0 6px;">可以複選，再點一次可以取消。選你這學期真的做得完的。</p>
+      <div id="poll-options" style="display:flex; flex-direction:column; gap:9px; margin-top:0.4em;"></div>
+      <div style="font-size:0.36em; color:#666; text-align:center; margin-top:0.8em;">
+        已作答：<span id="poll-total" style="color:var(--accent);font-weight:700;">0</span> 人
+        <span style="margin:0 6px;color:#444;">·</span>
+        你選了 <span id="poll-mine" style="color:var(--accent2);font-weight:700;">0</span> 項
         <span id="poll-mode" style="margin-left:8px; color:#555;">連線中…</span>
       </div>
-      <p class="note-sm" style="text-align:center;">沒有標準答案 —— 選你這學期真的做得完的那一個。</p>
     </section>
 
-    <!-- ============ 40. 四條紅線 ============ -->
+    <!-- ============ AI 素養 ============ -->
     <section>
-      <h2>四條線，不要越過</h2>
+      <h2 style="font-size:1.15em;margin-bottom:0.1em;">AI 素養：你要守的，和你要教的</h2>
+      <p class="note-sm" style="margin:0 0 6px;">前兩件是老師自己的界線，後兩件是要交到學生手上的能力。</p>
       <div class="adv-grid g4">
-        <div class="adv-card" style="border-top-color:var(--warn);">
-          <div class="adv-icon"><img src="images/icon_rl1.png" alt=""></div>
-          <div class="adv-title" style="color:var(--warn);">不直接用 AI 生的簡報</div>
-          <div class="adv-desc">模板味重、雜訊多。<br>AI 可以擬大綱，<strong style="color:#ddd;">視覺化一定要人改</strong></div>
+        <div class="adv-card" style="border-top-color:var(--warn); padding:14px 11px;">
+          <div class="adv-icon"><img src="images/icon_lit1.png" alt=""></div>
+          <div class="adv-title" style="color:var(--warn); font-size:0.42em;">AI 產出的只是初版</div>
+          <div class="adv-desc" style="font-size:0.3em;">教材、題目、簡報 —— AI 給的<strong style="color:#ddd;">全部是草稿</strong>。
+            一定要再修一輪才進教室，不能原封不動拿去用。</div>
         </div>
-        <div class="adv-card" style="border-top-color:var(--warn);">
-          <div class="adv-icon"><img src="images/icon_rl2.png" alt=""></div>
-          <div class="adv-title" style="color:var(--warn);">產出一律人審</div>
-          <div class="adv-desc">尤其測驗題。<br><strong style="color:#ddd;">不能未經確認就印給學生</strong></div>
+        <div class="adv-card" style="border-top-color:var(--warn); padding:14px 11px;">
+          <div class="adv-icon"><img src="images/icon_lit2.png" alt=""></div>
+          <div class="adv-title" style="color:var(--warn); font-size:0.42em;">老師是最後一關</div>
+          <div class="adv-desc" style="font-size:0.3em;">尤其<strong style="color:#ddd;">測驗題與評分</strong>。
+            專業審查不能外包 —— 給幾分、算不算對，責任在你不在模型。</div>
         </div>
-        <div class="adv-card" style="border-top-color:var(--warn);">
-          <div class="adv-icon"><img src="images/icon_rl3.png" alt=""></div>
-          <div class="adv-title" style="color:var(--warn);">AI 助教禁給答案</div>
-          <div class="adv-desc">行為指示要寫死。<br>學生一直要答案，<strong style="color:#ddd;">要溫和但堅定地擋</strong></div>
+        <div class="adv-card" style="padding:14px 11px;">
+          <div class="adv-icon"><img src="images/icon_lit3.png" alt=""></div>
+          <div class="adv-title" style="font-size:0.42em;">教學生「不要照單全收」</div>
+          <div class="adv-desc" style="font-size:0.3em;">AI 會錯、會編。學生要學會<strong style="color:#ddd;">查證與質疑</strong>，
+            學習單裡就要留「你哪裡不同意它」的欄位。</div>
         </div>
-        <div class="adv-card" style="border-top-color:var(--warn);">
-          <div class="adv-icon"><img src="images/icon_rl4.png" alt=""></div>
-          <div class="adv-title" style="color:var(--warn);">虛實合一</div>
-          <div class="adv-desc">給學生 AI 工具時，<br><strong style="color:#ddd;">標配是紙本學習單</strong></div>
+        <div class="adv-card" style="padding:14px 11px;">
+          <div class="adv-icon"><img src="images/icon_lit4.png" alt=""></div>
+          <div class="adv-title" style="font-size:0.42em;">留下思考的痕跡</div>
+          <div class="adv-desc" style="font-size:0.3em;">重點不是答案對不對，是<strong style="color:#ddd;">怎麼問、怎麼改</strong>。
+            對話歷程要留，那才是評量的依據。</div>
         </div>
       </div>
-      <div class="quote-box" style="margin-top:0.9em;">
-        這四條不是保守，是<span style="color:var(--accent);font-weight:700;">讓你敢放手用</span>的前提。
+
+      <table style="margin-top:10px;">
+        <tr><th style="width:150px;">學生現在的狀態</th><th style="width:130px;">AI 扮演什麼</th><th>你要做的事</th></tr>
+        <tr>
+          <td style="color:var(--warn);font-weight:700;">沒有基本能力</td>
+          <td>大腦外包</td>
+          <td>先擋住 —— 教規範、給提問框架、配紙本學習單</td>
+        </tr>
+        <tr>
+          <td class="hl2">正在建立能力</td>
+          <td>共學鷹架</td>
+          <td>讓 AI 引導但<strong style="color:#ddd;">不給答案</strong>，逼他自己走完那一步</td>
+        </tr>
+        <tr>
+          <td style="color:var(--success);font-weight:700;">已經有能力</td>
+          <td>能力放大器</td>
+          <td>放手讓他做更難的事 —— 這時 AI 才真的有價值</td>
+        </tr>
+      </table>
+
+      <div class="quote-box" style="margin-top:9px; font-size:0.46em;">
+        <span style="color:var(--accent);font-weight:700;">基本能力越強，AI 才是越強大的放大器；沒有基本能力，AI 只是大腦的代工。</span>
+        這句話對學生成立，對我們自己也一樣。
       </div>
     </section>
 
@@ -1301,8 +1556,9 @@
       </div>
       <div class="ok-box">
         <div class="wb-title">共同的第一步</div>
-        回去<strong>開一個資料夾</strong>，寫一份 <code style="color:var(--accent2);">CLAUDE.md</code> 告訴 Agent 你教什麼、教哪一版、班級長什麼樣。
-        —— 一桌三櫃的「一桌」，就從這裡開始。
+        <strong>挑一個你這學期一定會教到的單元</strong>，只做一頁 —— 一個滑桿、一個拖拉、或一組分級提示。
+        做完把網址掛上去，下次上到那個單元直接用。
+        <strong style="color:#ddd;">一頁就好，不要一次想做一整冊。</strong>
       </div>
     </section>
 
@@ -1344,26 +1600,103 @@
     plugins: []
   });
 
-  /* === VIZ 滑桿 === */
+  /* === VIZ：揭露滑桿 ＋ 畢氏定理動態圖 === */
   (function(){
     const slider = document.getElementById('viz-slider');
-    if (!slider) return;
+    const canvas = document.getElementById('pyth-canvas');
+    if (!slider || !canvas) return;
+    const ctx = canvas.getContext('2d');
+    const aIn = document.getElementById('pyth-a');
+    const bIn = document.getElementById('pyth-b');
+    const controls = document.getElementById('pyth-controls');
+
+    function drawPyth() {
+      const a = +aIn.value, b = +bIn.value;
+      const c = Math.sqrt(a*a + b*b);
+      const W = canvas.width, H = canvas.height, P = 16;
+
+      // 數學座標範圍：三個正方形全部涵蓋進來
+      const minX = -b, maxX = a + b;
+      const minY = -a, maxY = a + b;
+      const scale = Math.min((W - 2*P) / (maxX - minX), (H - 2*P) / (maxY - minY));
+      const offX = P + ((W - 2*P) - (maxX - minX) * scale) / 2;
+      const offY = P + ((H - 2*P) - (maxY - minY) * scale) / 2;
+      const T = (x, y) => [offX + (x - minX) * scale, offY + (maxY - y) * scale];
+
+      ctx.clearRect(0, 0, W, H);
+
+      function poly(pts, fill, stroke) {
+        ctx.beginPath();
+        pts.forEach((p, i) => {
+          const [cx, cy] = T(p[0], p[1]);
+          i === 0 ? ctx.moveTo(cx, cy) : ctx.lineTo(cx, cy);
+        });
+        ctx.closePath();
+        ctx.fillStyle = fill; ctx.fill();
+        ctx.strokeStyle = stroke; ctx.lineWidth = 2; ctx.stroke();
+      }
+      function label(text, x, y, color, size) {
+        const [cx, cy] = T(x, y);
+        ctx.fillStyle = color;
+        ctx.font = '700 ' + (size || 13) + 'px Consolas, monospace';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(text, cx, cy);
+      }
+
+      // c 邊正方形（斜邊外側）：u = (b, a)，長度剛好是 c
+      poly([[a,0],[0,b],[b,b+a],[a+b,a]], 'rgba(129,199,132,0.22)', '#81c784');
+      // a 邊正方形（x 軸下方）
+      poly([[0,0],[a,0],[a,-a],[0,-a]], 'rgba(79,195,247,0.25)', '#4fc3f7');
+      // b 邊正方形（y 軸左方）
+      poly([[0,0],[0,b],[-b,b],[-b,0]], 'rgba(232,100,58,0.25)', '#e8643a');
+
+      // 三角形本體
+      poly([[0,0],[a,0],[0,b]], 'rgba(255,255,255,0.10)', '#ffffff');
+
+      // 直角記號
+      const m = Math.min(a, b) * 0.16;
+      ctx.beginPath();
+      let p1 = T(m, 0), p2 = T(m, m), p3 = T(0, m);
+      ctx.moveTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.lineTo(p3[0], p3[1]);
+      ctx.strokeStyle = 'rgba(255,255,255,0.75)'; ctx.lineWidth = 1.5; ctx.stroke();
+
+      // 面積數字
+      label(a*a, a/2, -a/2, '#4fc3f7', Math.max(11, Math.min(17, a*3)));
+      label(b*b, -b/2, b/2, '#e8643a', Math.max(11, Math.min(17, b*3)));
+      label((a*a + b*b), (a+b)/2, (a+b)/2, '#81c784', Math.max(12, Math.min(19, c*2.6)));
+
+      document.getElementById('pyth-av').textContent = a;
+      document.getElementById('pyth-bv').textContent = b;
+      document.getElementById('pyth-a2').textContent = a*a;
+      document.getElementById('pyth-b2').textContent = b*b;
+      document.getElementById('pyth-c2').textContent = a*a + b*b;
+    }
+
     slider.addEventListener('input', function() {
       const v = +this.value;
       document.getElementById('viz-after').style.clipPath = `inset(0 ${100-v}% 0 0)`;
       document.getElementById('viz-divider').style.left = v + '%';
+      controls.style.opacity = v > 40 ? '1' : '0.25';
+    });
+    aIn.addEventListener('input', drawPyth);
+    bIn.addEventListener('input', drawPyth);
+
+    drawPyth();
+    Reveal.on('slidechanged', e => {
+      if (e.currentSlide?.id === 'slide-viz') setTimeout(drawPyth, 100);
     });
   })();
 
   /* === QR Code 生成 === */
   function renderQRs() {
-    document.querySelectorAll('.qr-wrap[data-url]').forEach(el => {
+    document.querySelectorAll('.qr-wrap[data-url], .qr-mini[data-url]').forEach(el => {
       if (el.dataset.done) return;
+      const size = el.classList.contains('qr-mini') ? 80 : 148;
       el.innerHTML = '';
       try {
         new QRCode(el, {
           text: el.dataset.url,
-          width: 148, height: 148,
+          width: size, height: size,
           colorDark: '#0d1117', colorLight: '#ffffff',
           correctLevel: QRCode.CorrectLevel.M
         });
@@ -1393,7 +1726,7 @@
   };
   const app = initializeApp(firebaseConfig);
   const fdb = getFirestore(app);
-  // ⚠️ 集合名稱需在 Firestore 規則白名單內，否則自動退回本機模式
+  // ※ 集合名稱需在 Firestore 規則白名單內，否則自動退回本機模式
   const wordsRef = collection(fdb, 'tcmath_wordcloud');
 
   const COLORS = ['#4fc3f7','#e8643a','#ffb74d','#81c784','#ce93d8','#80deea','#f48fb1'];
@@ -1418,7 +1751,7 @@
     useLocal = true;
     setMode('本機模式', '#ffb74d');
     const tip = document.getElementById('wc-empty');
-    if (tip) tip.innerHTML = '雲端未開通，已切換<strong style="color:#ffb74d;">本機模式</strong><br>這台電腦輸入的詞仍會顯示 ✨';
+    if (tip) tip.innerHTML = '雲端未開通，已切換<strong style="color:#ffb74d;">本機模式</strong><br>這台電腦輸入的詞仍會顯示';
     render(localWords());
   }
 
@@ -1514,7 +1847,7 @@
   });
 </script>
 
-<!-- === Firebase：單選投票 === -->
+<!-- === Firebase：複選投票 === -->
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
   import {
@@ -1536,37 +1869,14 @@
     { id: 'a', label: '做一頁滑桿／拖拉的動態教材' },
     { id: 'b', label: '把一個單元做成課堂遊戲' },
     { id: 'c', label: '用 AI 出一份非選題與評分規準' },
-    { id: 'd', label: '先把教室的大屏和平板摸熟' },
+    { id: 'd', label: '把現有講義做成 A／B／C 分級版' },
+    { id: 'e', label: '用 IRS 收一次全班的迷思' },
+    { id: 'f', label: '先把教室的大屏和平板摸熟' },
   ];
   const pollRef = doc(fdb, 'tcmath_poll', 'results');
 
   const userId = 'user_' + Math.random().toString(36).slice(2, 9);
-  let myVote = null;
-
-  const container = document.getElementById('poll-options');
-  if (container) {
-    OPTIONS.forEach(opt => {
-      const btn = document.createElement('button');
-      btn.id = `poll-btn-${opt.id}`;
-      btn.innerHTML = `
-        <div style="display:flex;align-items:center;gap:12px;">
-          <span style="flex:0 0 24px;height:24px;border-radius:50%;border:2px solid rgba(255,255,255,0.3);
-                       display:flex;align-items:center;justify-content:center;font-size:12px;"
-                id="poll-check-${opt.id}"></span>
-          <span style="flex:1;text-align:left;">${opt.label}</span>
-          <span style="flex:0 0 120px;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;">
-            <div id="poll-bar-${opt.id}" style="height:100%;width:0;background:var(--accent2);border-radius:4px;transition:width 0.4s;"></div>
-          </span>
-          <span id="poll-pct-${opt.id}" style="flex:0 0 40px;text-align:right;font-size:0.75em;color:#888;">0%</span>
-        </div>
-      `;
-      btn.style.cssText = `width:100%;padding:12px 16px;background:rgba(255,255,255,0.06);
-        border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;
-        font-size:0.44em;cursor:pointer;font-family:inherit;text-align:left;`;
-      btn.onclick = () => vote(opt.id);
-      container.appendChild(btn);
-    });
-  }
+  const mine = new Set();
 
   const POLL_LS = 'tcmath_poll_local';
   let pollLocal = false;
@@ -1578,6 +1888,12 @@
   function localVotes() {
     try { return JSON.parse(localStorage.getItem(POLL_LS) || '{}'); } catch(e) { return {}; }
   }
+  function saveLocal() {
+    // 本機模式只有這台電腦，固定用同一個 key，避免重整後累積出假人數
+    const v = { me: [...mine] };
+    try { localStorage.setItem(POLL_LS, JSON.stringify(v)); } catch(e) {}
+    return v;
+  }
   function goPollLocal() {
     if (pollLocal) return;
     pollLocal = true;
@@ -1585,49 +1901,79 @@
     paint(localVotes());
   }
 
-  function paint(votes) {
-    const counts = {};
-    OPTIONS.forEach(o => counts[o.id] = 0);
-    Object.values(votes).forEach(v => { if (counts[v] !== undefined) counts[v]++; });
-    const total = Object.values(counts).reduce((a, b) => a + b, 0);
-
-    const totalEl = document.getElementById('poll-total');
-    if (totalEl) totalEl.textContent = total;
+  const container = document.getElementById('poll-options');
+  if (container) {
     OPTIONS.forEach(opt => {
-      const pct = total > 0 ? Math.round((counts[opt.id] / total) * 100) : 0;
-      const bar = document.getElementById(`poll-bar-${opt.id}`);
-      const pctEl = document.getElementById(`poll-pct-${opt.id}`);
-      if (bar) bar.style.width = pct + '%';
-      if (pctEl) pctEl.textContent = pct + '%';
-      const check = document.getElementById(`poll-check-${opt.id}`);
-      if (check && myVote === opt.id) {
-        check.textContent = '✓';
-        check.style.background = 'var(--accent2)';
-        check.style.borderColor = 'var(--accent2)';
-      }
+      const btn = document.createElement('button');
+      btn.id = `poll-btn-${opt.id}`;
+      btn.innerHTML = `
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="flex:0 0 22px;height:22px;border-radius:5px;border:2px solid rgba(255,255,255,0.3);
+                       display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;"
+                id="poll-check-${opt.id}"></span>
+          <span style="flex:1;text-align:left;">${opt.label}</span>
+          <span style="flex:0 0 116px;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;">
+            <div id="poll-bar-${opt.id}" style="height:100%;width:0;background:var(--accent2);border-radius:4px;transition:width 0.4s;"></div>
+          </span>
+          <span id="poll-pct-${opt.id}" style="flex:0 0 42px;text-align:right;font-size:0.75em;color:#888;">0%</span>
+        </div>
+      `;
+      btn.style.cssText = `width:100%;padding:10px 15px;background:rgba(255,255,255,0.06);
+        border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;
+        font-size:0.42em;cursor:pointer;font-family:inherit;text-align:left;transition:border-color 0.18s;`;
+      btn.onclick = () => toggle(opt.id);
+      container.appendChild(btn);
     });
   }
 
-  async function vote(optId) {
-    myVote = optId;
-    if (pollLocal) {
-      const v = localVotes(); v[userId] = optId;
-      try { localStorage.setItem(POLL_LS, JSON.stringify(v)); } catch(e) {}
-      paint(v);
-      return;
-    }
+  async function toggle(optId) {
+    mine.has(optId) ? mine.delete(optId) : mine.add(optId);
+    const mineEl = document.getElementById('poll-mine');
+    if (mineEl) mineEl.textContent = mine.size;
+
+    if (pollLocal) { paint(saveLocal()); return; }
     try {
       const data = {};
-      data[`votes.${userId}`] = optId;
+      data[`votes.${userId}`] = [...mine];
       data.updated_at = serverTimestamp();
       await setDoc(pollRef, data, { merge: true });
     } catch(e) {
       console.warn('投票雲端寫入失敗，切換本機模式：', e.code || e.message);
       goPollLocal();
-      const v = localVotes(); v[userId] = optId;
-      try { localStorage.setItem(POLL_LS, JSON.stringify(v)); } catch(err) {}
-      paint(v);
+      paint(saveLocal());
     }
+  }
+
+  function paint(votes) {
+    const counts = {};
+    OPTIONS.forEach(o => counts[o.id] = 0);
+    let voters = 0;
+    Object.values(votes).forEach(v => {
+      const arr = Array.isArray(v) ? v : [v];   // 相容舊的單選資料
+      if (arr.length) voters++;
+      arr.forEach(id => { if (counts[id] !== undefined) counts[id]++; });
+    });
+
+    const totalEl = document.getElementById('poll-total');
+    if (totalEl) totalEl.textContent = voters;
+
+    OPTIONS.forEach(opt => {
+      const pct = voters > 0 ? Math.round((counts[opt.id] / voters) * 100) : 0;
+      const bar = document.getElementById(`poll-bar-${opt.id}`);
+      const pctEl = document.getElementById(`poll-pct-${opt.id}`);
+      const btn = document.getElementById(`poll-btn-${opt.id}`);
+      const check = document.getElementById(`poll-check-${opt.id}`);
+      if (bar) bar.style.width = pct + '%';
+      if (pctEl) pctEl.textContent = pct + '%';
+      const on = mine.has(opt.id);
+      if (check) {
+        check.textContent = on ? '✓' : '';
+        check.style.background = on ? 'var(--accent2)' : 'transparent';
+        check.style.borderColor = on ? 'var(--accent2)' : 'rgba(255,255,255,0.3)';
+        check.style.color = '#0d1117';
+      }
+      if (btn) btn.style.borderColor = on ? 'var(--accent2)' : 'rgba(255,255,255,0.12)';
+    });
   }
 
   onSnapshot(pollRef,
@@ -1642,6 +1988,87 @@
     }
   );
 </script>
+
+<!-- === Firebase：數位力自評 === -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
+  import {
+    getFirestore, collection, addDoc, serverTimestamp
+  } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAYQhNavPSce17XtvDC5xnXyl9iUhW9KjA",
+    authDomain: "teacherstudy-109ef.firebaseapp.com",
+    projectId: "teacherstudy-109ef",
+    storageBucket: "teacherstudy-109ef.firebasestorage.app",
+    messagingSenderId: "196599230156",
+    appId: "1:196599230156:web:cfe55d364df3ae1b9d5c69"
+  };
+  const app = initializeApp(firebaseConfig, 'scApp');
+  const fdb = getFirestore(app);
+  const scRef = collection(fdb, 'tcmath_selfcheck');
+
+  const cells = [...document.querySelectorAll('.sc-cell')];
+  const scoreEl = document.getElementById('sc-score');
+  const adviceEl = document.getElementById('sc-advice');
+  const btn = document.getElementById('sc-submit');
+  const msgEl = document.getElementById('sc-msg');
+  if (!cells.length || !btn) throw new Error('self-check slide absent');
+
+  const ADVICE = [
+    '先從「工具運用」那三格開始 —— 硬體熟了，其他才推得動。',
+    '先從「工具運用」那三格開始 —— 硬體熟了，其他才推得動。',
+    '先從「工具運用」那三格開始 —— 硬體熟了，其他才推得動。',
+    '地基有了。下一步把「教材設計」那排補起來，今天第三段就是在講這個。',
+    '地基有了。下一步把「教材設計」那排補起來，今天第三段就是在講這個。',
+    '地基有了。下一步把「教材設計」那排補起來，今天第三段就是在講這個。',
+    '已經很穩。今天請重點看「數據反饋」那排 —— 遊戲與非選批改都在留痕。',
+    '已經很穩。今天請重點看「數據反饋」那排 —— 遊戲與非選批改都在留痕。',
+    '已經很穩。今天請重點看「數據反饋」那排 —— 遊戲與非選批改都在留痕。',
+    '九格全滿 —— 今天麻煩你多給旁邊的夥伴一些建議。'
+  ];
+
+  function picked() {
+    return cells.filter(c => c.classList.contains('on')).map(c => c.dataset.k);
+  }
+  function refresh() {
+    const n = picked().length;
+    if (scoreEl) scoreEl.textContent = n;
+    if (adviceEl) adviceEl.textContent = ADVICE[n];
+    btn.disabled = false;
+    btn.textContent = '送出自評';
+  }
+
+  cells.forEach(c => c.addEventListener('click', () => {
+    c.classList.toggle('on');
+    refresh();
+  }));
+
+  btn.addEventListener('click', async () => {
+    const items = picked();
+    const payload = { score: items.length, items, created_at: serverTimestamp() };
+    btn.disabled = true;
+    btn.textContent = '送出中…';
+    try {
+      await addDoc(scRef, payload);
+      btn.textContent = '已送出 ✓';
+      if (msgEl) { msgEl.textContent = '收到了，謝謝！'; msgEl.style.color = '#81c784'; }
+    } catch(e) {
+      console.warn('自評雲端寫入失敗，改存本機：', e.code || e.message);
+      try {
+        const key = 'tcmath_selfcheck_local';
+        const arr = JSON.parse(localStorage.getItem(key) || '[]');
+        arr.push({ ...payload, created_at: null });
+        localStorage.setItem(key, JSON.stringify(arr));
+      } catch(err) {}
+      btn.textContent = '已記錄 ✓';
+      if (msgEl) { msgEl.textContent = '本機模式（雲端未開通）'; msgEl.style.color = '#ffb74d'; }
+    }
+  });
+
+  refresh();
+</script>
+
 
 </body>
 </html>
