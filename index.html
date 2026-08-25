@@ -616,41 +616,47 @@
 
     <!-- ============ 10. PIDS ============ -->
     <section>
-      <h2 style="font-size:1.15em;margin-bottom:0.15em;">接著上一頁：那個 T，要怎麼練？</h2>
+      <h2 style="font-size:1.12em;margin-bottom:0.15em;">PIDS 三力，剛好一一對上 TPACK</h2>
 
-      <div style="display:flex;align-items:center;justify-content:center;gap:14px;
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
                   background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
-                  border-radius:10px;padding:10px 16px;margin-bottom:12px;">
-        <div style="display:flex;align-items:center;gap:9px;opacity:0.4;">
-          <img src="images/icon_pk.png" alt="" style="width:30px;height:30px;object-fit:contain;">
-          <img src="images/icon_ck.png" alt="" style="width:30px;height:30px;object-fit:contain;">
-          <span style="font-size:0.3em;color:#888;">P、C 是你本來就有的</span>
+                  border-radius:10px;padding:10px 14px;margin-bottom:11px;">
+        <div style="display:flex;align-items:center;justify-content:center;gap:8px;">
+          <img src="images/icon_tk.png" alt="" style="width:32px;height:32px;object-fit:contain;">
+          <span style="font-size:0.3em;color:#999;">T 技術</span>
+          <span style="color:var(--accent);font-size:0.34em;font-weight:900;">↔</span>
+          <span style="font-size:0.32em;color:var(--accent2);font-weight:700;">數位力</span>
         </div>
-        <span style="color:#444;font-size:0.5em;">｜</span>
-        <div style="display:flex;align-items:center;gap:9px;">
-          <img src="images/icon_tk.png" alt="" style="width:38px;height:38px;object-fit:contain;
-               filter:drop-shadow(0 0 10px rgba(79,195,247,0.7));">
-          <span style="font-size:0.34em;color:var(--accent2);font-weight:700;">T 技術</span>
+        <div style="display:flex;align-items:center;justify-content:center;gap:8px;
+                    border-left:1px solid rgba(255,255,255,0.1);border-right:1px solid rgba(255,255,255,0.1);">
+          <img src="images/icon_pk.png" alt="" style="width:32px;height:32px;object-fit:contain;">
+          <span style="font-size:0.3em;color:#999;">P 教學法</span>
+          <span style="color:var(--accent);font-size:0.34em;font-weight:900;">↔</span>
+          <span style="font-size:0.32em;color:var(--warn);font-weight:700;">互動力</span>
         </div>
-        <span style="color:var(--accent);font-size:0.44em;font-weight:900;">→ 拆成三力 →</span>
-        <span style="font-size:0.32em;color:#ddd;">數位力　互動力　視覺力</span>
+        <div style="display:flex;align-items:center;justify-content:center;gap:8px;">
+          <img src="images/icon_ck.png" alt="" style="width:32px;height:32px;object-fit:contain;">
+          <span style="font-size:0.3em;color:#999;">C 內容</span>
+          <span style="color:var(--accent);font-size:0.34em;font-weight:900;">↔</span>
+          <span style="font-size:0.32em;color:var(--accent);font-weight:700;">視覺力</span>
+        </div>
       </div>
 
       <div class="adv-grid g3">
         <div class="adv-card">
           <div class="adv-icon"><img src="images/icon_digital.png" alt="數位力"></div>
-          <div class="adv-title">數位力 D</div>
-          <div class="adv-desc">用工具提升效率<br><span style="color:#777;">最基礎的底層能力</span></div>
+          <div class="adv-title">數位力 <span style="color:#666;font-size:0.8em;">← T</span></div>
+          <div class="adv-desc">工具要熟：大屏、平板、軟體<br><span style="color:#777;">技術這一塊的實作面</span></div>
         </div>
         <div class="adv-card" style="border-top-color:var(--warn);">
           <div class="adv-icon"><img src="images/icon_interact.png" alt="互動力"></div>
-          <div class="adv-title" style="color:var(--warn);">互動力 I</div>
-          <div class="adv-desc">設計互動環節<br><span style="color:#777;">讓學生免於口頭回答的壓力</span></div>
+          <div class="adv-title" style="color:var(--warn);">互動力 <span style="color:#666;font-size:0.8em;">← P</span></div>
+          <div class="adv-desc">怎麼讓全班動起來<br><span style="color:#777;">這就是教學法在課堂的樣子</span></div>
         </div>
         <div class="adv-card" style="border-top-color:var(--accent);">
           <div class="adv-icon"><img src="images/icon_visual.png" alt="視覺力"></div>
-          <div class="adv-title" style="color:var(--accent);">視覺力 P</div>
-          <div class="adv-desc">把抽象概念具象化<br><span style="color:#777;">難度最高，也是數學科的主戰場</span></div>
+          <div class="adv-title" style="color:var(--accent);">視覺力 <span style="color:#666;font-size:0.8em;">← C</span></div>
+          <div class="adv-desc">把數學概念變得看得見<br><span style="color:#777;">學科內容能不能被理解</span></div>
         </div>
       </div>
       <div class="ok-box">
@@ -797,8 +803,8 @@
           <div class="mini-deck" style="height:186px;">
             <div class="mini-badge good">✓ 搭配</div>
             <div class="md-head">畢氏定理</div>
-            <!-- 3-4-5 直角三角形，三邊各配一個真正的正方形 -->
-            <svg viewBox="-8 -8 210 118" style="width:100%;height:96px;display:block;margin:4px 0 2px;">
+            <!-- 3-4-5 直角三角形，三邊各配一個真正的正方形；關鍵字一起畫在右側 -->
+            <svg viewBox="-10 -10 274 128" style="width:100%;height:100px;display:block;margin:5px 0 0;">
               <!-- c² 斜邊正方形 (邊長 50) -->
               <polygon points="70,70 40,30 80,0 110,40" fill="rgba(129,199,132,0.26)" stroke="#81c784" stroke-width="1.5"/>
               <!-- b² 左側正方形 (邊長 40) -->
@@ -807,17 +813,22 @@
               <rect x="40" y="70" width="30" height="30" fill="rgba(79,195,247,0.28)" stroke="#4fc3f7" stroke-width="1.5"/>
               <!-- 三角形本體 -->
               <polygon points="40,70 70,70 40,30" fill="rgba(255,255,255,0.12)" stroke="#fff" stroke-width="1.6"/>
-              <!-- 直角記號 -->
               <polyline points="46,70 46,64 40,64" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="1.2"/>
-              <text x="55" y="88" fill="#4fc3f7" font-size="11" text-anchor="middle" font-family="Consolas,monospace">a²</text>
-              <text x="20" y="54" fill="#e8643a" font-size="11" text-anchor="middle" font-family="Consolas,monospace">b²</text>
-              <text x="75" y="38" fill="#81c784" font-size="11" text-anchor="middle" font-family="Consolas,monospace">c²</text>
-              <text x="132" y="44" fill="#4fc3f7" font-size="12" font-family="Consolas,monospace">a² + b²</text>
-              <text x="132" y="61" fill="#81c784" font-size="12" font-family="Consolas,monospace">= c²</text>
+              <text x="55" y="89" fill="#4fc3f7" font-size="12" text-anchor="middle" font-family="Consolas,monospace">a²</text>
+              <text x="20" y="55" fill="#e8643a" font-size="12" text-anchor="middle" font-family="Consolas,monospace">b²</text>
+              <text x="76" y="37" fill="#81c784" font-size="12" text-anchor="middle" font-family="Consolas,monospace">c²</text>
+
+              <!-- 右側：關鍵字（投影片上只留這幾個字）-->
+              <text x="196" y="16" fill="#fff" font-size="15" text-anchor="middle" font-family="Consolas,monospace">a² + b² = c²</text>
+              <g>
+                <rect x="140" y="30" width="112" height="22" rx="5" fill="rgba(79,195,247,0.2)" stroke="rgba(79,195,247,0.5)" stroke-width="1.2"/>
+                <text x="196" y="45" fill="#4fc3f7" font-size="13" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">兩股</text>
+                <rect x="140" y="58" width="112" height="22" rx="5" fill="rgba(79,195,247,0.2)" stroke="rgba(79,195,247,0.5)" stroke-width="1.2"/>
+                <text x="196" y="73" fill="#4fc3f7" font-size="13" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">斜邊</text>
+                <rect x="140" y="86" width="112" height="22" rx="5" fill="rgba(79,195,247,0.2)" stroke="rgba(79,195,247,0.5)" stroke-width="1.2"/>
+                <text x="196" y="101" fill="#4fc3f7" font-size="13" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">直角</text>
+              </g>
             </svg>
-            <div>
-              <span class="mini-key">兩股</span><span class="mini-key">斜邊</span><span class="mini-key">直角</span>
-            </div>
           </div>
           <div class="mini-cap">
             <b>一張圖 ＋ 三個關鍵字，細節用講的</b><br>
@@ -833,9 +844,10 @@
 
     <!-- ============ 14. 認知負荷 ============ -->
     <section>
-      <h2>視覺力（二）：三種負荷，三種做法</h2>
+      <h2 style="font-size:1.12em;margin-bottom:0.1em;">視覺力（二）：三種認知負荷</h2>
+      <p class="note-sm" style="margin:0 0 6px;">學生腦袋的負擔分三種，處理方式完全不同 —— 不是全部都要減少。</p>
       <table>
-        <tr><th style="width:130px;">負荷類型</th><th style="width:230px;">是什麼</th><th>數學科怎麼處理</th></tr>
+        <tr><th style="width:130px;">負荷類型</th><th style="width:250px;">是什麼</th><th>數學科怎麼處理</th></tr>
         <tr>
           <td class="hl2">內在負荷</td>
           <td>內容本身的難度<br><span style="color:#777;">如：因式分解就是難</span></td>
@@ -852,11 +864,23 @@
           <td><span style="color:var(--success);font-weight:700;">主動增加</span> —— 多畫一張圖永遠值得</td>
         </tr>
       </table>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:10px;">
+      <div class="ok-box">
+        <div class="wb-title">最容易搞混的一點</div>
+        很多人以為「認知負荷理論 = 東西要少」。不是 ——
+        <strong>該減的只有外在負荷（雜訊）</strong>，本質負荷（好圖表、好範例）反而要主動加。
+      </div>
+    </section>
+
+    <!-- ============ 視覺力（三）：做減法 ============ -->
+    <section>
+      <h2 style="font-size:1.12em;margin-bottom:0.1em;">視覺力（三）：做減法長什麼樣</h2>
+      <p class="note-sm" style="margin:0 0 8px;">同一份考卷、同一台大屏，差別只在有沒有把雜訊拿掉。</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
         <div>
-          <div class="mini-deck" style="height:132px;padding:10px 12px;">
+          <div class="mini-deck" style="height:150px;padding:11px 13px;">
             <div class="mini-badge bad">✗ 外在負荷爆表</div>
-            <svg viewBox="0 0 250 108" style="width:100%;height:108px;display:block;">
+            <svg viewBox="0 0 250 108" style="width:100%;height:118px;display:block;margin-top:6px;">
               <g opacity="0.55">
                 <rect x="4"  y="6"  width="112" height="26" rx="3" fill="rgba(255,255,255,0.10)"/>
                 <rect x="126" y="6"  width="112" height="26" rx="3" fill="rgba(255,255,255,0.10)"/>
@@ -882,9 +906,9 @@
         </div>
 
         <div>
-          <div class="mini-deck" style="height:132px;padding:10px 12px;">
+          <div class="mini-deck" style="height:150px;padding:11px 13px;">
             <div class="mini-badge good">✓ 只留這一題</div>
-            <svg viewBox="0 0 250 108" style="width:100%;height:108px;display:block;">
+            <svg viewBox="0 0 250 108" style="width:100%;height:118px;display:block;margin-top:6px;">
               <g opacity="0.07">
                 <rect x="4"  y="6"  width="112" height="20" rx="3" fill="#fff"/>
                 <rect x="126" y="6"  width="112" height="20" rx="3" fill="#fff"/>
@@ -902,14 +926,15 @@
         </div>
       </div>
 
-      <div class="quote-box" style="margin-top:9px; font-size:0.48em;">
-        視覺力的第一步永遠是<span style="color:var(--accent);font-weight:700;">做減法</span>，不是做加法。
+      <div class="quote-box" style="margin-top:11px; font-size:0.5em;">
+        減掉的是<span style="color:var(--warn);font-weight:700;">雜訊</span>，
+        不是<span style="color:var(--success);font-weight:700;">內容</span>。
       </div>
     </section>
 
     <!-- ============ 15. 白板四招 ============ -->
     <section>
-      <h2>視覺力（三）：明天就能用的白板四招</h2>
+      <h2 style="font-size:1.12em;">視覺力（四）：明天就能用的白板四招</h2>
       <div class="adv-grid">
         <div class="adv-card" style="text-align:left; padding:12px 14px;">
           <div class="adv-title" style="font-size:0.55em;">① 只留當下那一題</div>
@@ -924,14 +949,14 @@
           <div class="adv-desc" style="font-size:0.38em;">四則運算用紅框藍框把步驟框起來，<strong style="color:#ddd;">用視覺確立優先級</strong>，比講三次有效。</div>
         </div>
         <div class="adv-card" style="text-align:left; padding:12px 14px; border-top-color:var(--accent);">
-          <div class="adv-title" style="font-size:0.55em; color:var(--accent);">④ 手貼著螢幕移動</div>
-          <div class="adv-desc" style="font-size:0.38em;">學生的眼睛會<strong style="color:#ddd;">追隨老師的手</strong>。用滑鼠遠端寫，聚光效果差非常多。</div>
+          <div class="adv-title" style="font-size:0.55em; color:var(--accent);">④ 站到大屏前用手寫</div>
+          <div class="adv-desc" style="font-size:0.38em;">學生的眼睛會<strong style="color:#ddd;">追著老師的手走</strong>。同樣的內容，坐在電腦前用滑鼠操作，聚光效果差非常多。</div>
         </div>
       </div>
       <div class="example-fig">
         <img src="images/ex_whiteboard.png" alt="白板演示範例" style="height:122px;">
         <div class="cap">
-          <b>畫面上只剩那一題、鐳射筆的光跡幾秒後自己消失、手貼著螢幕走。</b>
+          <b>畫面上只剩那一題、鐳射筆的光跡幾秒後自己消失、老師站在大屏前用手寫。</b>
           三件事都在做同一件事 —— 幫學生的眼睛決定要看哪裡。
         </div>
       </div>
@@ -1238,7 +1263,7 @@
 
     <!-- ============ 23. Demo：八下整冊 ============ -->
     <section>
-      <h2 style="font-size:1.12em;margin-bottom:0.1em;"><span class="pill p-blue">DEMO 1-1</span> 國中數學全六冊，互動複習簡報</h2>
+      <h2 style="font-size:1.12em;margin-bottom:0.1em;"><span class="pill p-blue">DEMO 1</span> 國中數學全六冊，互動複習簡報</h2>
       <p class="note-sm" style="margin:0 0 4px;">
         <strong style="color:#ccc;">364 頁、約 169 頁互動</strong>，涵蓋國中三年全部課程，依 108 課綱逐條查核、超綱為零。
         同一套引擎、六個網址 —— 點網址現場開，QR 給老師掃回去。
@@ -1286,45 +1311,7 @@
     </section>
 
     <!-- ============ 24. Demo：二次函數 ============ -->
-    <section>
-      <h2 style="font-size:1.1em;margin-bottom:0.1em;"><span class="pill p-blue">DEMO 1-2</span> 一個單元，做兩種數位教材</h2>
-      <p class="note-sm" style="margin:0 0 6px;">
-        以<strong style="color:#ccc;">一元一次不等式</strong>為例 —— 同一個單元，教的時候用一種、練的時候用另一種。
-      </p>
-
-      <svg viewBox="0 0 560 74" style="width:100%;height:74px;display:block;margin:2px 0 8px;">
-        <rect x="6" y="10" width="150" height="54" rx="8" fill="rgba(79,195,247,0.14)" stroke="#4fc3f7" stroke-width="1.6"/>
-        <text x="81" y="32" fill="#4fc3f7" font-size="12" font-weight="700" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">互動教材網頁</text>
-        <text x="81" y="50" fill="#9fd4ea" font-size="9.5" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">課堂上「教」的時候用</text>
-
-        <line x1="160" y1="37" x2="228" y2="37" stroke="#666" stroke-width="1.4" stroke-dasharray="4 3"/>
-        <text x="194" y="30" fill="#888" font-size="9" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">同一個</text>
-        <text x="194" y="52" fill="#e8643a" font-size="10" font-weight="700" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">迷思：移項變號</text>
-
-        <rect x="232" y="10" width="150" height="54" rx="8" fill="rgba(232,100,58,0.14)" stroke="#e8643a" stroke-width="1.6"/>
-        <text x="307" y="32" fill="#e8643a" font-size="12" font-weight="700" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">不等式格鬥場</text>
-        <text x="307" y="50" fill="#eaa88f" font-size="9.5" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">課堂上「練」的時候用</text>
-
-        <line x1="386" y1="37" x2="418" y2="37" stroke="#666" stroke-width="1.4"/>
-        <polygon points="418,33 426,37 418,41" fill="#666"/>
-        <rect x="430" y="14" width="124" height="46" rx="7" fill="rgba(129,199,132,0.12)" stroke="#81c784" stroke-width="1.4"/>
-        <text x="492" y="33" fill="#81c784" font-size="10.5" font-weight="700" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">後台看得到</text>
-        <text x="492" y="49" fill="#a8d5aa" font-size="9" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">誰卡在變號那一步</text>
-      </svg>
-
-      <div class="demo-box" style="grid-template-columns:1fr 168px;">
-        <div class="demo-info" style="font-size:0.4em;">
-          <strong style="color:var(--accent2);">現在先看教材網頁這一半</strong> —— 翰林 1 下 4-2「解不等式及其應用」，做成 12 頁互動。<br>
-          · 解題步驟一步一步拖，<strong style="color:#ddd;">同除負數的時候不等號會當場翻過來</strong><br>
-          · 這一步是紙本畫不出來的：學生只能背「要變號」，看不到為什麼<br>
-          · 等一下 Part 3 會看到同一個單元的遊戲版
-          <div class="d-url"><a href="https://mathruffian-dot.github.io/ch4-2-inequality-slides/" target="_blank" rel="noopener">mathruffian-dot.github.io/ch4-2-inequality-slides/</a></div>
-        </div>
-        <div class="qr-wrap" data-url="https://mathruffian-dot.github.io/ch4-2-inequality-slides/"></div>
-      </div>
-    </section>
-
-    <!-- ============ 25. 怎麼做出來的 ============ -->
+<!-- ============ 25. 怎麼做出來的 ============ -->
     <section>
       <h2>這些頁面，實際上怎麼長出來的</h2>
       <div class="code-block">
@@ -1417,7 +1404,7 @@
     <!-- ============ 29. Demo：不等式格鬥場 ============ -->
     <section>
       <h2 style="font-size:1.12em;margin-bottom:0.1em;"><span class="pill p-orange">DEMO 2-2</span> 不等式格鬥場
-        <span style="font-size:0.42em;color:#777;font-weight:400;">— 就是剛剛那個單元</span></h2>
+        </h2>
       <div class="game-banner"><img src="images/game_fighter.png" alt="不等式格鬥場"></div>
       <div class="demo-box">
         <div class="demo-info">
