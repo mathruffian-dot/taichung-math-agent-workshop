@@ -1,29 +1,27 @@
 # 部署與待辦
 
-> 簡報本體已完成並通過驗證（43 頁、零版面溢出、互動元件實測寫入雲端成功）。
-> 只剩**發布 GitHub Pages** 需要你點頭 —— 那會建立一個公開 repo。
+> 簡報已發布上線，43 頁、零版面溢出、互動元件實測寫入雲端成功。
+> 這份文件記錄部署資訊、現場備案與視覺設計筆記。
 
 ---
 
-## 一、發布到 GitHub Pages（未執行）
+## 一、已發布 ✅
 
-本機 git 已初始化並 commit 完成，但**建立公開 repo 的動作被權限規則擋下**。
+| | |
+|---|---|
+| **簡報網址** | https://mathruffian-dot.github.io/taichung-math-agent-workshop/ |
+| **原始碼** | https://github.com/mathruffian-dot/taichung-math-agent-workshop（public） |
+| 發布日期 | 2026-08-25 |
 
-要發布，執行：
+repo 必須是 public，GitHub Pages 免費版才會生效。
+
+之後改了簡報要更新線上版，就是一般的 git 流程：
 
 ```bash
-cd "G:/我的雲端硬碟/2026研習/2026數學科研習/taichung-math-agent-workshop" && gh repo create mathruffian-dot/taichung-math-agent-workshop --public --source=. --push --description "2026 臺中數學科研習：數位教學與 AI Agent（Reveal.js 互動簡報）"
+cd "G:/我的雲端硬碟/2026研習/2026數學科研習/taichung-math-agent-workshop" && git add -A && git commit -m "修改說明" && git push
 ```
 
-然後開啟 Pages：
-
-```bash
-gh api repos/mathruffian-dot/taichung-math-agent-workshop/pages --method POST -f "source[branch]=master" -f "source[path]=/"
-```
-
-完成後網址是 `https://mathruffian-dot.github.io/taichung-math-agent-workshop/`（首次約 1–3 分鐘生效）。
-
-> repo 必須是 **public**，GitHub Pages 免費版才會生效。
+推上去後約 1 分鐘生效。
 
 ---
 
